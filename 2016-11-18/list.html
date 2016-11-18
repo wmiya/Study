@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>公司信息</title>
+    <style>
+    body,
+    ul,
+    li,
+    h2 {
+        margin: 0;
+        padding: 0;
+    }
+    
+    ul {
+        list-style: none;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    .wrap {
+        display: flex;
+        padding: 40px 10px;
+        box-sizing: border-box;
+    }
+    
+    .left {
+        width: 30%;
+        height: 380px;
+        border-right: 1px solid #B3B3B3;
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        padding-right: 36px;
+        box-sizing: border-box;
+    }
+    
+    .left h2 {
+        width: 160px;
+        font: 24px/20px Arial;
+        font-weight: bold;
+        text-align: left;
+        margin-bottom: 40px;
+    }
+    
+    .nav {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    
+    .nav .nav_i {
+        display: block;
+        width: 160px;
+        height: 30px;
+        background: #ccc;
+        text-align: center;
+        margin-bottom: 20px;
+        font: 14px/30px Arial;
+        cursor: pointer;
+    }
+    
+    .nav .nav_i.active {
+        background: #78B7FF;
+        color: #fff;
+    }
+    
+    .right {
+        padding-left: 36px;
+        box-sizing: border-box;
+    }
+    
+    .info {
+        width: 100%;
+        height: 40px;
+        font: 20px/40px Arail;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    
+    .list {
+        width: 600px;
+    }
+    
+    .head {
+        font: 18px/20px Arial;
+        height: 20px;
+        font-weight: bold;
+        color: #65BAFF;
+        margin-bottom: 20px;
+    }
+    
+    .content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 14px;
+    }
+    
+    .content ul li {
+        margin: 4px;
+    }
+    
+    .other {
+        font-size: 14px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="left">
+            <h2>招贤纳士</h2>
+            <nav class="nav">
+                <!-- <span class="nav_i active">社会招聘</span>
+                <span class="nav_i">校园招聘</span> -->
+            </nav>
+        </div>
+        <div class="right">
+            <div class="info"><img src="img/shzp.gif" alt=""></div>
+            <div class="list">
+                <h2 class="head">{{zw}}</h2>
+                <div class="content">
+                    <ul class="l">
+                        <li>招聘公司：{{gs}}>></li>
+                        <li>职位性质：{{gz}}</li>
+                        <li>工作经验：{{jy}}</li>
+                        <li>招聘人数：{{rs}}人</li>
+                        <li>发布日期：{{sj}}</li>
+                    </ul>
+                    <ul class="r">
+                        <li>公司性质：{{xz}}</li>
+                        <li>工作地点：{{dd}}</li>
+                        <li>学历要求：{{xl}}</li>
+                        <li>薪资待遇：{{dy}}</li>
+                        <li>招聘类型：{{lx}}</li>
+                    </ul>
+                </div>
+                <div class="other">
+                    <!-- <dl>
+                        <dt>岗位要求：</dt>
+                        <dd>1.计算机或相关专业本科以上学历；</dd>
+                        <dd>2.从事软件测试工作3年及以上；</dd>
+                        <dd>3.具备良好的沟通能力和快速学习能力；</dd>
+                        <dd>4.精通测试策略和方法、测试用例设计；</dd>
+                        <dd>5.熟悉DB2、AIX等平台的基本操作；</dd>
+                        <dd>6.具备2年以上金融IT行业经验，特别是有金融行业相关业务的测试或者开发工作经验者优先。</dd>
+                    </dl>
+                    <dl>
+                      <dt>工作职责：</dt>
+                      <dd>从事计算机软件的测试工作。</dd>
+                    </dl> -->
+                </div>
+                <p class="email">有意者请投递简历至 {{email}}</p>
+            </div>
+        </div>
+    </div>
+    <script src="data.js"></script>
+   <script>
+   	window.onload=function(){
+   		var hash=window.location.hash.substr(1).split("=")[1]||1;
+   		var lx=getVal('s')||'sh';
+   		leftList()
+   		rightImg()
+   		rightHead()
+   		rightContent()
+   		rightOther()
+   		Email()
+		//--------------------------------------------------
+		//生成左边导航栏。
+		function leftList(){
+			var nav=document.querySelector(".left .nav")
+			var childs=nav.children;
+			data.list.forEach((item,i)=>{
+				var span=document.createElement("span")
+			
+				span.innerHTML=item.text;
+				span.className="nav_i";
+				span.onclick=function(){
+				//当点击每个span的时候。让他回到index页，也就是回到主页
+					window.location="index.html?s="+item.lx;
+				}
+				nav.appendChild(span);
+				//判断哈希值给当前加样式,如果当前的哈希值和职业上显示一直
+				data.list.forEach((item,i) => {
+					if (item.lx == lx) {//如果当前的哈希值等于定义中的哈希值
+	                     childs[i].className = 'nav_i active';//就给当前的加上class名字
+	                 }
+            	})
+			})
+		}
+		//--------------------------------------------------
+		//生成右边图片
+		function rightImg(){
+			var img=document.querySelector(".info img");
+			//img.src=data[lx].img;//把
+			
+		}
+		//--------------------------------------------------
+		//生成右边头部
+		function rightHead(){
+			var head=document.querySelector(".right .head")
+			/*将头部内容替换。根据数组里lx对应的是社会还是校园，下面对应的哈希值变化，
+			 * 因为默认哈希值是1,而js默认从0开始计数。所有减去1.对应data的内容
+			*/
+			head.innerHTML=head.innerHTML.replace(/{{zw}}/,data[lx].text[hash-1].zw);
+			
+		}
+		//--------------------------------------------------
+		//生成右边内容区域
+		
+		function rightContent(){
+			var content=document.querySelector(".content");
+			var d=data[lx].text[hash-1];
+			//这里d就是根据data的类型判断当前是校园还是社会。对应的text内容里面的哈希值减一，因为从0开始计数
+			var _html=content.innerHTML;//为了添加内容方便所以声明个变脸储存
+			_html=_html .replace(/{{gs}}/,d.gs)
+						.replace(/{{gz}}/,d.gz)
+						.replace(/{{jy}}/,d.jy)
+						.replace(/{{rs}}/,d.rs)
+						.replace(/{{sj}}/,data.date(d.sj,1))
+						//注意。这里多一个1是为了显示2016-11-16的格式
+						.replace(/{{xz}}/,d.xz)
+						.replace(/{{dd}}/,d.dd)
+						.replace(/{{xl}}/,d.xl)
+						.replace(/{{dy}}/,d.dy)
+						.replace(/{{lx}}/,d.lx)
+				content.innerHTML=	_html;	
+		}
+		
+		//--------------------------------------------------
+		//生成other里面的内容
+		function rightOther(){
+			var Other=document.querySelector(".right .other")
+			//console.log(Other)
+			data[lx].text[hash-1].info.forEach((item,i)=>{
+				var dl=document.createElement("dl")
+				var dt=document.createElement("dt");
+				dt.innerHTML=item.t;
+				dl.appendChild(dt);
+			    item.l.forEach((item,i)=>{
+					var dd=document.createElement("dd");
+					dd.innerHTML=item;
+					dt.appendChild(dd);
+				})
+				Other.appendChild(dl)
+			})
+		}
+		
+		//--------------------------------------------------
+		//生成下面邮箱
+		function Email(){
+			var email=document.querySelector(".email")
+			//console.log(email)
+			email.innerHTML=email.innerHTML.replace(/{{email}}/,data.email);
+			
+		}
+		
+		
+		function getVal(key){
+			var search=window.location.search.substr(1);//截取除S之外的search值
+			//substr（star，length）
+			//substring(star,end)
+			if(!search){
+				return false;
+			}
+			var val;
+			if(search.indexOf("&")!=-1){
+				//如果当前有and符号的 话
+				var arr=search.split('&');
+				arr.forEach((item,i)=>{
+					var arr=item.split("=");
+					if(key==arr[0]){
+						val=arr[1]
+					}
+				})
+				
+			}else{
+				var arr=search.split('=');
+				if(Key==arr[0]){
+					val=arr[1]
+				}
+			}
+			return val;
+		}
+		
+		
+		
+   	}
+   </script>
+</body>
+
+</html>

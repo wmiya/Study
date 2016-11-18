@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>拖拽</title>
+		<style>
+			#list{
+				width: 630px;
+				border: 5px solid #000;
+				margin: 30px auto;
+				childst-style: none;
+				height:440px ;
+				padding: 0;
+				position: relative;
+				list-style: none;
+				
+				
+			}
+			#list li{
+				width: 200px;
+				padding: 5px;
+				height: 200px;
+				float: left;
+				
+			}
+			img{
+				width: 200px;
+				height: 200px;
+			}
+			/*input{
+				
+				text-achildsgn: center;
+			}*/
+		</style>
+	</head>
+	<body>
+		<input type="button" value="随机排序" id="btn"/>
+		<ul id="list">
+			
+		</ul>
+		<script>
+		var arr=[
+			"img/1.jpg",
+			"img/2.jpg",
+			"img/3.jpg",
+			"img/4.jpg",
+			"img/5.jpg",
+			"img/6.jpg"
+		
+		]
+		//-------------------------------------------
+		//生成结构
+			window.onload=function(){
+				var list=document.getElementById("list");
+				var btn=document.getElementById("btn");
+				var lis=list.children;
+				//console.log(childs)
+				var listInner='';
+				for(var i=0;i<arr.length;i++){
+					listInner+='<li><img src='+arr[i]+'></li>'
+				}
+				list.innerHTML=listInner;
+				
+				for(var i=0;i<lis.length;i++){
+					lis[i].style.left=lis[i].offsetLeft+"px";
+					lis[i].style.top=lis[i].offsetTop+"px";
+				}
+				for(var i=0;i<lis.length;i++){
+					lis[i].style.position="absolute";
+					//arr[i]=lis[i];
+				//console.log(arr[i])
+				}
+		//-------------------------------------------
+		//布局转换
+				
+				for(var i=0;i<lis.length;i++){
+					lis[i].index=i;
+					lis[i].addEventListener("mousedown",fnDonw);
+						function fnDonw(e){
+							var now=this.index;
+							var disX=e.pageX-lis[now].offsetLeft;
+							var disY=e.pageY-lis[now].offsetTop;
+							lis[now].addEventListener("mousemove",fnMove)
+							lis[now].addEventListener("mouseup",fnUp)
+							
+							function fnMove(e){
+								//当前lis的位置
+								var l=e.pageX-disX;
+								var t=e.pageY-disY;
+								
+								//console.log(l,t,r,b)
+//范围限制						
+//-----------------------------------------------------------------------	
+								if(t<0){
+									t=0;
+								}else if(t>list.offsetHeight-lis[now].offsetHeight){
+									t=list.offsetHeight-lis[now].offsetHeight
+								}
+								if(l<0){
+									l=0;
+								}else if(l>list.offsetWidth-lis[now].offsetWidth){
+									l=list.offsetWidth-lis[now].offsetWidth;
+								}
+								lis[now].style.left=l+"px";
+								lis[now].style.top=t+"px";
+							}
+//碰撞检测
+//-	------------------------------------------------------------------
+
+							function fnUp(){
+								lis[now].removeEventListener("mousemove",fnMove)
+								lis[now].removeEventListener("mouseup",fnUp)
+							}
+							e.preventDefault();
+//----------------------------------------------------------------
+	/*判断鼠标在移动的时候来计算当前的移动的li中心点的位置和其他li中心点的距离左比较。
+	 当鼠标抬起的时候。将2个li替换。*/
+							
+							
+//-	------------------------------------------------------------------			
+							
+							
+						
+					
+				
+//随机排序
+//-	------------------------------------------------------------------					
+//					btn.onclick=function(){
+//					listInner='';
+//					arr.sort(function(){
+//						return Math.random()-.5;
+//					})
+//					for(var i=0;i<arr.length;i++){
+//						listInner+='<li><img src='+arr[i]+'></li>'
+//					}
+//					list.innerHTML=listInner;
+//					
+//				}
+				}	
+			}
+		}
+		</script>
+	</body>
+</html>

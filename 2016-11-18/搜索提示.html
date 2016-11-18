@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        input{
+            width: 100%;
+            height: 30px;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            display: none;
+        }
+        li{
+            list-style: none;
+            background-color: #009999;
+            margin-top: 3px;
+            line-height: 30px;
+            width: 100%;
+        }
+        a{
+            text-decoration: none;
+            color:white;
+            display: block;
+            width: 100%;
+        }
+        a:hover,.hover{
+            background-color: #00FF99;
+        }
+        #box{
+            width: 500px;
+            margin: 100px auto 0;
+        }
+        .select{
+            background-color: #60625b;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <input type="text" id="s"/>
+    <ul id="list">
+        <li><a href="javascript:;">《第七个读者》</a></li>
+        <li><a href="javascript:;">《 心理罪 画像》</a></li>
+        <li><a href="javascript:;">《 心理罪 教化场》</a></li>
+        <li><a href="javascript:;">《 心理罪 暗河》</a></li>
+        <li><a href="javascript:;">《 心理罪 城市之光》</a></li>
+        <li><a href="javascript:;">《地球往事》</a></li>
+        <li><a href="javascript:;">《黑暗森林》</a></li>
+        <li><a href="javascript:;">《死神永生》</a></li>
+        <li><a href="javascript:;">《乡村教师》</a></li>
+        <li><a href="javascript:;">《地球大炮》</a></li>
+    </ul>
+</div>
+<script>
+	(function(){
+		var s=document.getElementById("s")
+		var list=document.getElementById("list")
+		var lis=document.querySelectorAll("#list li")
+		var as=document.querySelectorAll("#list li a")
+		///console.log(as)
+		var n=0;
+//------------------------------------------
+//焦点ul展开（刚才选中的要显示黑色）
+//点选（选中的内容放入输入框，隐藏ul）	
+
+
+		s.onfocus=function(){
+			list.style.display="block";
+			
+		}
+//------------------------------------------
+//ctrl+点击多选不隐藏ul		
+		
+		for(var i=0;i<as.length;i++){
+			as[i].onclick=function(e){
+				for(var i=0;i<as.length;i++){
+					as[i].className=""
+				}
+				if(e.ctrlKey){
+					s.value+=this.innerHTML;
+					this.className="select";
+				}else{
+					s.value=this.innerHTML;
+					this.className="select";
+					list.style.display="none";
+				}
+					
+			}
+		}
+//--------------------------------------------------------------------------------
+//按方向上下键支持循环选中
+			document.onkeydown=function(e){
+				var code=e.keyCode;
+					if(code==40){
+						fn()
+						lis[n].className="select";
+						n++;
+						if(n>9){
+							n=0;
+						}
+					}
+					if(code==38){
+						fn()
+						lis[n].className="select";className="select";
+						n--;
+						if(n<0){
+							n=9;
+						}
+					}
+//--------------------------------------------------------------------------------
+//按方向键可以选择，回车选中（不隐藏ul）				
+				if(code==13){
+					
+					s.value=as[n].innerHTML;
+				}
+//-----------------------------------------------------------------------			
+//ctrl+回车多选	
+			if(code==13&&e.ctrlKey){
+				s.value+=as[n].innerHTML;
+			}
+		}	
+
+	
+	
+	function fn(){
+			for(var i=0;i<lis.length;i++){
+				lis[i].className="";
+			}
+		}
+	})()
+</script>
+</body>
+</html>

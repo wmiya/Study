@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+		#box{
+			width: 80px;
+			height: 80px;
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: url(img/file.png);
+			background-size: 80px 80px ;
+			
+		}
+		
+		
+	</style>
+</head>
+<body>
+	<section id="warp">
+		<div id="box"></div>
+		
+	</section>
+	<script>
+		(function(d){
+			var box=d.getElementById("box")
+			var warp=d.getElementById("warp")
+			box.onmousedown=function(e){
+				var disL=e.pageX-box.offsetLeft;
+				var disT=e.pageY-box.offsetTop;
+				var div=box.cloneNode(true)
+				//box.replaceChild(div,box);替换
+				warp.appendChild(div);
+//				//var disL2=disL;
+//				//var disT2=disT;
+//				var disL2=e.pageX-box.offsetLeft;
+//				var disT2=e.pageY-box.offsetTop;
+				//console.log(disL2,disT2)
+				document.onmousemove=function(e){
+					//div.style.left=
+					box.style.left=e.pageX-disL+"px";
+					//div.style.top=
+					box.style.top=e.pageY-disT+"px";
+					//console.log(div)
+				}
+				document.onmouseup=function(){
+					document.onmousemove="null"
+					warp.removeChild(div)
+					
+				}
+				return false;
+			}
+			
+			
+		})(document)
+	</script>
+</body>
+</html>
