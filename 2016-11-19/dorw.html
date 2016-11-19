@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+			body{
+				background: url(img/lala.jpg) no-repeat;
+				background-size: 1600px 650px;
+			}
+			#canvas{
+				display: block;
+				background: #fff;
+				margin: 50px auto;
+				border-radius: 50px;
+				position: absolute;
+				top: 0;
+				left: 450px;
+				
+			
+			}
+			#colorNav {
+				width: 100px;
+				margin: 0 auto;
+				position: absolute;
+				top:60px;
+				left: 300px;
+			}
+			#colorNav a {
+				display: block;
+				width: 90px;
+				height: 90px;
+				margin-bottom: 5px;
+				border-radius: 30%;
+			
+			}
+			.red {
+				background: red;
+			}
+			.yellow {
+				background: yellow;
+			}
+			.blue {
+				background: blue;
+			}
+			.green {
+				background: green;
+			}
+			#btn {
+				display: block;
+				margin: 0 auto;
+				position: absolute;
+				top:5px;
+				left: 45%;
+				
+			}
+
+	</style>
+	<script>
+		window.onload=function(){
+			var c=document.querySelector("canvas");
+			var crt=c.getContext("2d");
+			var btn=document.querySelector("input");
+			var as=document.querySelectorAll("nav a")
+			//console.log(as)
+			crt.strokeStyle="red";
+			c.onmousedown=function(e){
+				var cRect=c.getBoundingClientRect();
+				var moveX=e.clientX-cRect.left;
+				var moveY=e.clientY-cRect.top;
+				crt.beginPath()
+				crt.moveTo(moveX,moveY)//移动到绘制的新目标点
+				crt.lineWidth=5;
+				//console.log(moveX,moveY)
+				c.onmousemove=function(e){
+					var cRect=c.getBoundingClientRect();
+					var moveX=e.clientX-cRect.left;
+					var moveY=e.clientY-cRect.top;
+					crt.lineTo(moveX,moveY)//新的目标点
+					crt.stroke()
+					crt.closePath()
+				}
+			}
+			c.onmouseup=function(){
+				
+				c.onmousemove=null;
+				
+			}
+			btn.onclick=function(){
+				crt.clearRect(0,0,c.width,c.height)
+			}
+			for(var i=0;i<as.length;i++){
+				as[i].onclick=function(){
+					crt.strokeStyle=this.className;
+					
+				}
+				
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value="清除画布" id="btn">
+	<canvas id="canvas" width="500" height="400"></canvas>
+	<nav id="colorNav">
+		<a href="javascript:;" class="red"></a>
+		<a href="javascript:;" class="yellow"></a>
+		<a href="javascript:;" class="blue"></a>
+		<a href="javascript:;" class="green"></a>
+	</nav>
+</body>
+</html>

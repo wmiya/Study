@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+		
+		body{
+			background:url(lal.jpg) no-repeat;
+			background-size: 100% 100%;
+			width: 100%;
+			height: 650px;
+			margin: 0;
+			
+		}
+			#nva{
+				width: 100%;
+				height: 30px;
+				margin: 0;
+				padding: 0;
+				
+			}
+			#nva li{
+				list-style: none;
+				width: 100px;
+				height: 40px;
+				background: pink;
+				border-radius: 50%;
+				text-align: center;
+				color: #fff;
+				float: left;
+				margin:40px ;
+				border: 5px solid #fff;
+				font: 12px/40px "微软雅黑";
+				transition: 1s;
+				opacity: .5;
+			}
+			#nva li:active{
+				transform:scale(6)  ;
+			}
+		</style>
+		<script>
+			window.onload=function(){
+				var nva=document.getElementById("nva")
+				var al=document.getElementById("al")
+				var lis=nva.children;
+				
+				console.log(lis)
+				for(var i=0;i<lis.length;i++){
+					lis[i].onclick=function(){
+						
+						this.style.opacity=1
+						
+						this.getAttribute("av");
+						al.src='yinpin/'+this.getAttribute("av")+'.mp3';
+						al.play();
+						
+					}
+					
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<ul id="nva">
+			<li av="1 c">A</li>
+			<li av="2 D">B</li>
+			<li av="3 E">C</li>
+			<li av="4 F">D</li>
+			<li av="5 G">E</li>
+			<li av="6 A">F</li>
+			<li av="7 B">G</li>
+		</ul>
+		<audio id="al"></audio>
+		<!--<audio  controls  src="Sting (史汀) - Shape Of My Heart (心的形状).mp3"></audio>-->
+	</body>
+	
+</html>
