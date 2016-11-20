@@ -1,0 +1,142 @@
+	*{
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		box-sizing: border-box;
+	}
+	body{
+		background:url(../img/bady.jpg) no-repeat;
+		background-size:200% auto
+		color: #fff;
+	}
+		#warp{
+			width: 360px;
+			height: 500px;
+			position: relative;
+			margin: 30px auto;
+			background: #000;
+			opacity: .6;
+			border: rgba(0,0,0,1);
+			box-shadow: 0 0 30px #eee;
+		}
+		#play{
+			display: none;
+		}
+	  #warp	.arc{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 50%;
+			padding-bottom: 50%;
+			background-color: #000;
+			background-image: url(../img/bagd.jpg);
+			background-size:200% auto ;
+			background-position: 50% 50%;
+			background-repeat: no-repeat;
+			border-radius: 50%;
+			transition: 1s;
+			transform: translate3d(-50%, -50%, 0);/*位移X,Y,Z*/
+		 }
+	 #warp .tit{
+		 	position: absolute;
+		 	top: 50%;
+			left: 50%;
+			width: 100%;
+			height: 20px;
+			color: #fff;
+			line-height:30px;
+			font: 14px/30px "微软雅黑";
+			text-align: center;
+			transition: 1s;
+			transform: translate3d(-50%,-800%, 0);
+		}
+		 #warp .cons{
+				font-size: 16px;
+		}
+		 #warp .play{
+		 	position: absolute;
+		 	top: 45%;
+		 	left: 45%;
+		 	text-align: center;
+		 	background: #EF5350;
+		 	width: 40px;
+		 	height: 40px;
+		 	border-radius: 50%;
+		 }
+		 #warp .play a{
+		 	background: url(../img/takoff.png) no-repeat 0 11px;
+		 	display: inline-block;
+		 	height: 26px;
+		 	width: 14px;
+		 	
+		 }
+		#warp .contrl{
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			font-size:14px ;
+			text-align: center;
+			
+		}
+		#warp .contrl a{
+			position: relative;
+			width:70px;
+			display: inline-block;
+			text-align: center;
+			font: 14px/40px "微软雅黑";
+			padding-bottom: 60px;
+			display: inline-block;
+			height: 20px;
+			
+		}
+	#warp .contrl a:nth-of-type(1){
+		background: url(../img/left.png) no-repeat;
+	}
+	#warp .contrl a:nth-of-type(2){
+		background: url(../img/dubR.png) no-repeat;
+	}
+	#warp .contrl a:nth-of-type(3){
+		background: url(../img/dubR.png) no-repeat;
+		transform: rotateY(180deg);
+	}
+	#warp .contrl a:nth-of-type(4){
+		background: url(../img/left.png) no-repeat;
+		transform: rotateY(180deg);
+	}
+	#warp .songlist{
+		position: absolute;
+		top: 190px;
+		left: 0;
+		width: 350px;
+		height: 58%;
+		background: #212121;
+		color: #fff;
+		display: none;
+	}
+		.songlist .song{
+			padding-left: 20px;
+			margin-bottom: 8px;
+			height: 44px;
+		}
+        .songlist .song .covar {
+        	background: url(../img/bagd.jpg) no-repeat;
+        	background-position: 50% 50%;
+        	background-size: 100% 100%;
+        	height: 35px;
+        	width: 35px;
+        	float: left;
+        }
+        .songlist .song .RT {
+        	height: 35px;
+        	width: 100px;
+        	float: left;
+        	color: #fff;
+        	margin-left:10px;
+        	font-size: 12px;
+        	font-family: "微软雅黑";
+        }
+        .song .RT .name{
+        	font-size: 14px;
+        	 font-weight:bold
+        } 
