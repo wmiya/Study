@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Document</title>
+<style type="text/css">
+	body,ul {
+		margin: 0;
+	}
+	ul {
+		padding: 0;
+		list-style: none;
+	}
+	#myMusic {
+		width: 300px;
+		height: 500px;
+		margin: 30px auto 0;
+	}
+	#myMusic .canvasWrap {
+		height: 310px;
+		position: relative;
+	}
+	#myMusic canvas {
+		transform: rotateZ(108deg);
+	}
+	#music-play {
+		width: 48px;
+		height: 48px;
+		background: red;
+		border-radius: 50%;
+		position: absolute;
+	}
+	#music-play:before {
+		content: "";
+		position: absolute;
+		left: 15px;
+		top: 10px;
+		transition: .4s;
+	}
+	#myMusic .play-play {
+		left: 122px;
+		top: 122px;
+	}
+	#myMusic .play-play:before {
+		width: 6px;
+		height: 28px;
+		border: 3px solid #fff;
+		border-width: 0 6px 0 6px;
+		
+	}
+	#myMusic .play-pause {
+		left: 270px;
+		top: 250px;
+	}
+	#myMusic .play-pause:before {
+		width: 0px;
+		height: 0px;
+		border: 0px solid #fff;
+		border-width: 14px 0 14px 28px;
+		border-color: transparent transparent transparent #fff;
+	}
+	#music-progress {
+		position: absolute;
+		left: 0;
+		box-sizing: border-box;
+		transition: .3s;
+		display: none;
+	}
+	#myMusic .progress-play {
+		top: 0;
+		border: 6px solid red;
+		width: 300px;
+		height: 300px;
+		border-radius: 50%;
+	}
+	
+	#myMusic .progress-pause {
+		width: 280px;
+		height: 0;
+		top: 300px;
+		border: 4px solid red;
+	}
+	#myMusic .progress-pause span {
+		position: absolute;
+		left: -4px;
+		top: -4px;
+		height: 8px;
+		background: blue;
+	};
+</style>
+</head>
+<body>
+	<div id="myMusic">
+		<div class="canvasWrap">
+			<canvas id="musicC"></canvas>
+			<div id="music-play" class="play-play"></div>
+			<div id="music-progress" class="progress-play"></div>
+		</div>
+		
+		<audio id="myAudio" autoplay="autoplay" src="music/单曲Remix ┃ 爱上这个女声 放进专辑里私藏 夜电播音员.mp3"></audio>
+		
+		<ul>
+			<li au="music/bbc_sherlock_openning.mp3">bbc_sherlock_openning</li>
+			<li au="music/Neptune Illusion Dennis Kuo .mp3">Neptune Illusion Dennis Kuo</li>
+			<li au="music/单曲Remix ┃ 爱上这个女声 放进专辑里私藏 夜电播音员.mp3">爱上这个女声 放进专辑里私藏 夜电播音员</li>
+			<li au="music/爱啦啦.mp3">music/爱啦啦.mp3</li>
+		</ul>
+	</div>
+	
+</body>
+</html>
+<script type="text/javascript">
+	(function() {
+		var music = document.getElementById('myMusic'); 
+	    var canvas = document.getElementById('musicC'); 
+	    var aud = document.getElementById('myAudio');  //音频播放
+	    var lis = music.getElementsByTagName('li');  //音乐列表
+	    var play = document.getElementById('music-play');  //
+	    var progress = document.getElementById('music-progress');
+	    
+	    
+	    var cxt = canvas.getContext('2d');  //画布
+	    var timer = 0;
+	    
+	    canvas.width = 300;
+	    canvas.height = 300;
+	    
+	    
+	    
+	    //如果页面加载时，自动播放音乐，此条代码可省略
+        drawCircle(cxt,'red',Math.PI*2*.9);
+        
+        //如果页面加载时，不会自动播放音乐，此条代码可省略
+        musicStatusChange();
+        //drawRipple ();
+	    canvas.onclick = function () {
+	        this.width = 300;
+	        this.height = 10;
+	        this.style.background = 'red';
+	    }
+	    
+	    for (var i = 0; i < lis.length; i++) {
+	    	lis[i].index = i;
+	        lis[i].onclick = function () {
+	            aud.src = this.getAttribute('au');
+	            musicPauseToPlay ();
+	        }
+	    }
+	    
+	    play.onclick = function () { //播放、暂停切换
+	        if(this.className == 'play-play' ){ //此时是播放， 点击的话暂停
+		        var span = document.createElement('span'); 
+	        	this.className = 'play-pause';
+            	canvas.style.display = 'none';
+            	progress.style.display = 'block';
+	        	span.style.width = (aud.currentTime/aud.duration)*progress.offsetWidth + 'px';
+	        	progress.appendChild(span);       
+	        	progress.className = 'progress-pause';
+	        	aud.pause();
+	        }else{   //此时是暂停， 点击的话播放
+	        	musicPauseToPlay ();
+	        }
+	    }
+	    
+	    
+	    function drawCircle(cxt,color,deg) {  //画圆
+	    	cxt.save();
+			cxt.strokeStyle = color;
+			cxt.beginPath();
+			cxt.lineWidth = 6;
+			cxt.arc(150,150,147,0,deg);
+			cxt.stroke();
+			cxt.restore();
+	    }
+	    function drawProgress() { // 圆形进度条
+	    	var scale = (aud.currentTime/aud.duration).toFixed(3);
+	    	cxt.clearRect(0,0,300,300);
+	    	drawCircle(cxt,'red',Math.PI*2*.9);
+	    	drawCircle(cxt,'blue',Math.PI*2*.9*scale);
+	    	requestAnimationFrame(drawProgress);
+	    }
+	    
+	    function musicStatusChange() { //根据进度画圆形进度条
+	        clearInterval(timer);
+	        if(!aud.ended){
+	        	timer = setInterval(function () {
+	                drawProgress();
+	                if(aud.ended){ //播放结束
+	                	clearInterval(timer);
+	                	canvas.style.display = 'none';
+	                	progress.style.display = 'block';
+	                	play.className = 'play-pause';
+	                	progress.className = 'progress-pause';
+	                	var span = document.createElement('span');
+	                	span.style.width = progress.offsetWidth + 'px';
+	                	progress.appendChild(span);
+	                }
+	            },1000);
+	        }
+	    }
+	    
+	    function musicPauseToPlay () {  //由 暂停  到 播放
+	        aud.currentTime = (aud.currentTime == aud.duration)? 0: aud.currentTime;
+        	play.className = 'play-play';
+        	canvas.style.display = 'block';
+        	progress.className = 'progress-play';
+        	progress.style.display = 'none';
+        	span = progress.children[0];
+        	if(span){
+        		progress.removeChild(span);
+        	}
+        	aud.play();
+        	musicStatusChange();
+	    }
+	    
+	    function drawRipple () { //画波纹图
+	    	
+	    	var audio = document.getElementById('myAudio');
+		    var ctx = new AudioContext();
+		    var audioSrc = ctx.createMediaElementSource(audio);
+		    // we have to connect the MediaElementSource with the analyser 
+		    
+	    	
+			var context = new AudioContext();
+			context.decodeAudioData(//对音频数据进行解码。
+				audioSrc,
+				function(buffer){//解码成功做的操作。
+					var source = context.createBufferSource();//创建音频节点。
+					var analyser = context.createAnalyser(); //创建频谱解析的节点。
+					source.connect(analyser);
+					analyser.connect(context.destination)//链接播放器节点。
+					source.buffer = buffer;//添加音频数据
+					//source.start(0);//播放
+					//创建Uint8Array数组
+					var array = new Uint8Array(analyser.frequencyBinCount)
+					var len = array.length;
+					var arrt=['red','pink','#000','#007D28'];
+						(function(){
+							//把每段音频频率数据更新入数组。
+							analyser.getByteFrequencyData(array);
+							console.log(Math.max.apply(null,array));
+							gc.clearRect(0, 0, 700, 500);
+							for(var i=0;i<len;i++){//绘制长条。
+								gc.beginPath();
+								gc.fillStyle=arrt[1];
+								gc.arc(i*3, height - array[i], r, 0,Math.PI*2);
+							}
+							requestAnimationFrame(arguments.callee);
+							
+//							setInterval(function () {
+//							    analyser.getByteFrequencyData(array);
+//							    console.log(Math.max.apply(null,array));
+//								    gc.clearRect(0, 0, 700, 500);
+//								    
+//								    for(var i=0;i<len;i++){
+//										gc.fillStyle=arrt[1];
+//										if(i%4 == 0){
+//											//console.log(array[i])
+//											gc.beginPath();
+//											gc.arc(i+2, height - array[i],2, 0, Math.PI*2);
+//											gc.fill();
+//										}
+//									}
+//							},50);
+						})();
+						aud.play();
+				},
+				function(error){//解码失败做的操作。
+					console.log(error);
+				}
+			);
+	
+			fr.readAsArrayBuffer(file);
+	    }
+	    
+	})();
+</script>

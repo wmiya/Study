@@ -7,12 +7,9 @@
 </head>
 <body>
 	<div id="warp">
-		<div class="Wai">
-			 <div class="arc" id="backG"></div>
-			 <canvas id="canvas"></canvas>
-		</div>
+		 <div class="arc" ></div>
 		 <!--中间光盘部分-->
-		
+		 <canvas id="canvas" width="360" height="500"></canvas>
 		  <!--音乐标题部分-->
 		 <div class="tit">
 			Instant Crush 
@@ -21,11 +18,12 @@
 		 
 		  <!--中间播放器-->
 		<label for="play" class="play">
-			<a href="#" class="wShow"></a>
- 
+			<a href="#"></a>
 		</label>
 		<!--控制音乐左右部分-->
 		<div class="contrl">
+			<a href="#"></a>
+			<a href="#"></a>
 			<a href="#"></a>
 			<a href="#"></a>
 		</div>
@@ -35,7 +33,7 @@
 				<div class="RT">
 					<p class="name">song 1</p>
 					<p class="author">pink dash</p>
-					<audio  src="Sting (史汀) - Shape Of My Heart (心的形状).mp3" id="audio"></audio>
+					<audio src="Sting (史汀) - Shape Of My Heart (心的形状).mp3"></audio>
 				</div>
 			</li>
 			<li class="song">
@@ -83,35 +81,25 @@
 	(function(){
 		var canvas=document.getElementById("canvas")
 		var cxt=canvas.getContext("2d");
+		var w=cxt.canvas.width/2;
+		var h=cxt.canvas.height/2;
+		var r=cxt.canvas.width/2;
 		var warp=document.getElementById("warp")
 		var ul=warp.querySelector(".songlist")//音乐列表的ul
 		var lis=ul.children;//列表下的音乐
-		var auto=document.getElementById("audio");
-		var btna=document.querySelector(".play a")//播放按钮
-		var backG=document.getElementById("backG")//旋转光盘的外框
-		var contrl=document.querySelector(".contrl")
-		console.log(contrl)
-		
 		/*点击第一首音乐的时候自动播放*/
-		var takOFF=false;
-		btna.onclick=function(){
-			if(this.className=="wShow"){
-				this.className="wAfter";
-				backG.className="";
-				backG.parentNode.className="WaiAfter"
-				ul.style.display="block"
-				this.parentNode.style.transform="translate(130px,-70px)"
-				contrl.style.display="none"
-			}else{
-				this.className="wShow";
-				this.parentNode.style.transform="translate(0px,0px)"
-				backG.className="arc";
-				backG.parentNode.className="Wai"
-				ul.style.display="none";
-				contrl.style.display="block"
-			}
-			takOFF=!takOFF;
+		lis[0].onclick=function(){
+			
+			
 		}
+		cxt.save();
+		cxt.beginPath();
+		cxt.lineWidth=2*w;
+		cxt.strokeStyle=""
+		cxt.arc(180,250,r*2,30,90*Math.PI/180,true)
+		cxt.stroke()
+		cxt.restore()
+		
 		
 		
 	})()

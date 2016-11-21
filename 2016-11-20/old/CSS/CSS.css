@@ -4,17 +4,9 @@
 		list-style: none;
 		box-sizing: border-box;
 	}
-	@keyframes  rotate{
-			0%{
-				transform:rotateZ(0deg);
-			}
-			100%{
-				transform:rotateZ(-360deg);
-			}
-		}
 	body{
-		background:url(../img/sky.jpg) no-repeat;
-		background-size:100% auto;
+		background:#EF5350;
+		background-size:200% auto
 		color: #fff;
 	}
 		#warp{
@@ -22,26 +14,13 @@
 			height: 500px;
 			position: relative;
 			margin: 30px auto;
-			background: rgba(0,0,0,.8);
-			border: rgba(0,0,0,7);
-			box-shadow: 0 0 30px #eee;
-		}
+			background: #212121;
 		
-		#warp .Wai{
-		 	
-			width: 355px;
-			
 		}
-		#warp .WaiAfter{
-			width: 355px;
-			background-color: #000;
-			background-image: url(../img/bagd.jpg);
-			background-size:200% auto ;
-			background-position: 50% 50%;
-			background-repeat: no-repeat;
-			transition: .5;
+		#play{
+			display: none;
 		}
-	    #warp .arc{
+	  #warp	.arc{
 			position: absolute;
 			top: 50%;
 			left: 50%;
@@ -53,12 +32,8 @@
 			background-position: 50% 50%;
 			background-repeat: no-repeat;
 			border-radius: 50%;
-			animation: 5s rotate infinite linear;
-			margin: -90px 0 0 -90px;
-			
-		 }
-		 .hide{
-		 	display: none;
+			transition: 1s;
+			transform: translate3d(-50%, -50%, 0);/*位移X,Y,Z*/
 		 }
 	 #warp .tit{
 		 	position: absolute;
@@ -73,7 +48,6 @@
 			transition: 1s;
 			transform: translate3d(-50%,-800%, 0);
 		}
-		
 		 #warp .cons{
 				font-size: 16px;
 		}
@@ -83,52 +57,17 @@
 		 	left: 45%;
 		 	text-align: center;
 		 	background: #EF5350;
-		 	width: 50px;
-		 	height: 50px;
+		 	width: 40px;
+		 	height: 40px;
 		 	border-radius: 50%;
-		 	text-align: center;
-		 	transition: .5s;
 		 }
 		 #warp .play a{
-		    width: 30px;
-		    height: 30px;
-		   	display: inline-block;
-		   
-			
-		  }
-		.wShow{
-			display: inline-block;
-			content: "";
-			width:15px;
-			height: 25px;
-			border-right: 5px solid #fff;
-			border-left: 5px solid #fff;
-			position: absolute;
-		    top: 50%;
-		    left: 50%;
-		    margin: -15px 0 0 -15px;
-			 transition: .5s;
-			 transform: rotateZ(180)
-		}
-		.wAfter{
-			display: inline-block;
-			content: "";
-			width: 0;
-		    height: 0;
-		    border-top: 15px solid transparent;
-		    border-left: 30px solid #fff;
-		    border-bottom: 15px solid transparent;
-		    position: absolute;
-		    top: 50%;
-		    left: 50%;
-		    margin: -15px 0 0 -11px;
-		    transition:.5s;
-		    transform: rotateZ(-180)
-		    
-		    
-		   
-		   
-		}
+		 	background: url(../img/takoff.png) no-repeat 0 11px;
+		 	display: inline-block;
+		 	height: 26px;
+		 	width: 14px;
+		 	
+		 }
 		#warp .contrl{
 			position: absolute;
 			bottom: 0;
@@ -152,30 +91,31 @@
 	#warp .contrl a:nth-of-type(1){
 		background: url(../img/left.png) no-repeat;
 	}
-	
 	#warp .contrl a:nth-of-type(2){
+		background: url(../img/dubR.png) no-repeat;
+	}
+	#warp .contrl a:nth-of-type(3){
+		background: url(../img/dubR.png) no-repeat;
+		transform: rotateY(180deg);
+	}
+	#warp .contrl a:nth-of-type(4){
 		background: url(../img/left.png) no-repeat;
 		transform: rotateY(180deg);
 	}
 	#warp .songlist{
 		position: absolute;
-		top: 210px;
+		top: 190px;
 		left: 0;
-		width: 360px;
-		/*margin-top: 30px;*/
+		width: 350px;
+		height: 58%;
 		background: #212121;
 		color: #fff;
 		display: none;
-		opacity: .6;
 	}
-	.songlist .song{
+		.songlist .song{
 			padding-left: 20px;
 			margin-bottom: 8px;
-			height: 40px;
-			
-		}
-		.songlist .song:hover{
-			cursor: pointer;
+			height: 44px;
 		}
         .songlist .song .covar {
         	background: url(../img/bagd.jpg) no-repeat;
@@ -198,4 +138,3 @@
         	font-size: 14px;
         	 font-weight:bold
         } 
-        
