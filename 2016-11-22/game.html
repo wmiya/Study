@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width:154px;
+				height: 280px;
+				background: url(images/gaem.jpg) no-repeat;
+				background-size: 100% 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+	</body>
+	<script>
+		(function(){
+			/*1，建立对象。给irtb都加上false
+			 *2、开启定时器，判断。给每个都加上运动的距离
+			 *3、键盘按下的时候给true;
+			 * 4、键盘抬起给false
+			 
+			 * 
+			 * 
+			 * 
+			 * */
+			var box=document.getElementById("box")
+			document.addEventListener("keydown",keyDn)
+			var obj={
+				l:false,
+				t:false,
+				r:false,
+				b:false
+			}
+			setInterval(function(){
+				if(obj.l){
+					box.style.left=box.offsetLeft-5+"px";
+				}
+				if(obj.t){
+					box.style.top=box.offsetTop-5+"px";
+				}
+				if(obj.r){
+					box.style.left=box.offsetLeft+5+"px";
+				}
+				if(obj.b){
+					box.style.top=box.offsetTop+5+"px";
+				}
+				
+				
+			},20)
+			document.addEventListener("keydown",keyDn)
+			function keyDn(e){
+				e.preventDefault();//清楚默认事件
+				var code=e.keyCode;
+				switch (code){
+					case 37:
+					obj.l=true;break;
+					case 38:
+					obj.t=true;break;
+					case 39:
+					obj.r=true;break;
+					case 40:
+					obj.b=true;break;
+					
+				}		
+			}
+				document.addEventListener("keyup",upFn)
+				function upFn(e){
+					var code=e.keyCode;
+					e.preventDefault();
+					switch (code){
+					case 37:
+					obj.l=false;break;
+					case 38:
+					obj.t=false;break;
+					case 39:
+					obj.r=false;break;
+					case 40:
+					obj.b=false;break;
+					
+				}
+					
+			}
+				
+			
+		})()
+	</script>
+</html>
