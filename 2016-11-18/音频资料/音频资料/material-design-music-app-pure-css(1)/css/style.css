@@ -1,0 +1,570 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,100,700);
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+body {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background: #EF5350;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
+
+.infopanel {
+  padding: 2em;
+}
+.infopanel h2 {
+  font-size: 3em;
+  font-weight: 100;
+}
+.infopanel a {
+  color: currentcolor;
+}
+
+.app {
+  position: relative;
+  height: 500px;
+  width: 300px;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 300px;
+      -ms-flex: 0 0 300px;
+          flex: 0 0 300px;
+  background: #222;
+  overflow: hidden;
+}
+.app .songlist {
+  position: absolute;
+  top: 100%;
+  height: 58%;
+  left: 0;
+  background: #212121;
+  color: #fff;
+  width: 100%;
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
+  -webkit-transform: translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0);
+}
+.app .throbber {
+  position: absolute;
+  top: 42%;
+  height: 3em;
+  left: 0;
+  margin-top: -3em;
+  background: rgba(33, 33, 33, 0.4);
+  width: 100%;
+  -webkit-transition: opacity 0.3s 0.4s;
+  transition: opacity 0.3s 0.4s;
+  opacity: 1;
+}
+.app .title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: 100%;
+  height: 2em;
+  line-height: 2em;
+  text-align: center;
+  color: #fff;
+  -webkit-transition: -webkit-transform 0.3s 0.3s;
+  transition: -webkit-transform 0.3s 0.3s;
+  transition: transform 0.3s 0.3s;
+  transition: transform 0.3s 0.3s, -webkit-transform 0.3s 0.3s;
+  -webkit-transform: scale(0.7) translate3d(-106%, -8em, 0);
+          transform: scale(0.7) translate3d(-106%, -8em, 0);
+}
+.app .title .artist {
+  font-weight: 200;
+}
+.app .song {
+  padding: 0.5em;
+  font-size: 0.8em;
+  line-height: 2em;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.app .song .cover {
+  height: 2em;
+  width: 2em;
+  float: left;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  background-color: #000;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/28359/daft.jpg);
+  background-size: 100% auto;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+.app .song .name {
+  font-size: 0.8em;
+  line-height: 1.4em;
+  font-weight: 700;
+  margin-left: 0.5em;
+}
+.app .song .artist {
+  font-size: 0.8em;
+  line-height: 1.4em;
+  font-weight: 200;
+  margin-left: 0.5em;
+}
+.app .track {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  pointer-events: none;
+  z-index: 4;
+  -webkit-transform: scaley(0.7) translate3d(-73%, -80px, 0);
+          transform: scaley(0.7) translate3d(-73%, -80px, 0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  box-shadow: 0 0 0 4px #E57373;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  height: 0;
+  border-radius: 0;
+  padding: 0;
+}
+.app .track:after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  content: '';
+  background: #212121;
+  height: 2em;
+  width: 50%;
+  margin: -1.25em -25%;
+  visibility: hidden;
+}
+.app .controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  font-size: 0;
+  -webkit-transition: -webkit-transform 0.3s;
+  transition: -webkit-transform 0.3s;
+  transition: transform 0.3s;
+  transition: transform 0.3s, -webkit-transform 0.3s;
+}
+.app .controls .control {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 25%;
+  width: 25%;
+  background: #212121;
+}
+.app .controls .control:before {
+  font-size: 1rem;
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  height: 0;
+  width: 0;
+  margin: -10px;
+  border: 10px solid transparent;
+}
+.app .controls .control:after {
+  font-size: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  height: 0;
+  width: 0;
+  margin: -10px;
+  border: 10px solid transparent;
+}
+.app .controls .control.prev:before {
+  border-right-color: #BDBDBD;
+}
+.app .controls .control.next:before {
+  border-left-color: #BDBDBD;
+}
+.app .controls .control.fw:before {
+  border-left-color: #BDBDBD;
+  margin-left: -7px;
+}
+.app .controls .control.fw:after {
+  content: '';
+  border-left-color: #BDBDBD;
+  margin-left: 0;
+}
+.app .controls .control.rw:before {
+  content: '';
+  border-right-color: #BDBDBD;
+  margin-left: -13px;
+}
+.app .controls .control.rw:after {
+  content: '';
+  border-right-color: #BDBDBD;
+  margin-left: -20px;
+}
+.app .play {
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  height: 3em;
+  width: 3em;
+  margin: -1.5em;
+  background: #F44336;
+  border-radius: 100%;
+  -webkit-animation: play-out 0.5s forwards;
+          animation: play-out 0.5s forwards;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.app .play:before, .app .play:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -0.75em -0.4em;
+  border: 0 solid transparent;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+}
+.app .play:before {
+  -webkit-transform: translatex(-50%) translatey(-10%);
+          transform: translatex(-50%) translatey(-10%);
+  border-left-width: 0.8em;
+  border-bottom: 1.5em solid #fff;
+}
+.app .play:after {
+  -webkit-transform: translatex(50%) translatey(-10%);
+          transform: translatex(50%) translatey(-10%);
+  border-right-width: 0.8em;
+  border-bottom: 1.5em solid #fff;
+}
+.app .album {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  padding-bottom: 50%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-radius: 100%;
+  box-shadow: 0 0 0 300px #212121;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  background-color: #000;
+  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/28359/daft.jpg);
+  background-size: 200% auto;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  -webkit-animation: album-out 0.5s forwards;
+          animation: album-out 0.5s forwards;
+}
+.app #play:checked ~ .album {
+  -webkit-animation: album-in 0.15s reverse forwards, album-spin 3s 0.15s ease-in, album-spin 1.8s 3.15s infinite linear;
+          animation: album-in 0.15s reverse forwards, album-spin 3s 0.15s ease-in, album-spin 1.8s 3.15s infinite linear;
+}
+.app #play:checked ~ .throbber {
+  opacity: 0;
+  -webkit-transition-delay: 0;
+          transition-delay: 0;
+}
+.app #play:checked ~ .track {
+  padding-bottom: 60%;
+  border-radius: 100%;
+  -webkit-transform: translate3d(-50%, -50%, 0);
+          transform: translate3d(-50%, -50%, 0);
+}
+.app #play:checked ~ .track:after {
+  visibility: visible;
+}
+.app #play:checked ~ .play {
+  -webkit-animation: play-in 0.15s reverse forwards;
+          animation: play-in 0.15s reverse forwards;
+}
+.app #play:checked ~ .play:before {
+  -webkit-transform: translatex(-100%);
+          transform: translatex(-100%);
+  border-width: 0.75em 0.15em;
+  margin: -0.75em -0.15em;
+  border-color: #fff;
+}
+.app #play:checked ~ .play:after {
+  -webkit-transform: translatex(100%);
+          transform: translatex(100%);
+  margin: -0.75em -0.15em;
+  border-width: 0.75em 0.15em;
+  border-color: #fff;
+}
+.app #play:checked ~ .songlist {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.app #play:checked ~ .songlist .song {
+  padding: 8em 0.5em;
+}
+.app #play:checked ~ .title {
+  -webkit-transition-delay: 0s;
+          transition-delay: 0s;
+  -webkit-transform: scale(1) translate3d(-50%, -12em, 0);
+          transform: scale(1) translate3d(-50%, -12em, 0);
+}
+
+@-webkit-keyframes album-out {
+  0% {
+    width: 50%;
+    padding-bottom: 50%;
+    border-radius: 100%;
+    top: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+  }
+  30% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 100%;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+  60% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 0 0 50% 50%;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 0;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes album-out {
+  0% {
+    width: 50%;
+    padding-bottom: 50%;
+    border-radius: 100%;
+    top: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+  }
+  30% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 100%;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+  60% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 0 0 50% 50%;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 0;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+}
+@-webkit-keyframes album-in {
+  0% {
+    width: 50%;
+    padding-bottom: 50%;
+    border-radius: 100%;
+    top: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+  }
+  30% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 100%;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+  60% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 0 0 50% 50%;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 0;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+}
+@keyframes album-in {
+  0% {
+    width: 50%;
+    padding-bottom: 50%;
+    border-radius: 100%;
+    top: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+  }
+  30% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 100%;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+  60% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 0 0 50% 50%;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    width: 100%;
+    padding-bottom: 70%;
+    border-radius: 0;
+    top: 0%;
+    -webkit-transform: translate3d(-50%, 0, 0);
+            transform: translate3d(-50%, 0, 0);
+  }
+}
+@-webkit-keyframes album-spin {
+  0% {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(0);
+            transform: translate3d(-50%, -50%, 0) rotate(0);
+  }
+  100% {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(360deg);
+            transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}
+@keyframes album-spin {
+  0% {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(0);
+            transform: translate3d(-50%, -50%, 0) rotate(0);
+  }
+  100% {
+    -webkit-transform: translate3d(-50%, -50%, 0) rotate(360deg);
+            transform: translate3d(-50%, -50%, 0) rotate(360deg);
+  }
+}
+@-webkit-keyframes play-out {
+  0% {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  30% {
+    top: 42%;
+    left: 50%;
+  }
+  60% {
+    top: 42%;
+    left: 84%;
+  }
+  100% {
+    top: 42%;
+    left: 84%;
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+}
+@keyframes play-out {
+  0% {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  30% {
+    top: 42%;
+    left: 50%;
+  }
+  60% {
+    top: 42%;
+    left: 84%;
+  }
+  100% {
+    top: 42%;
+    left: 84%;
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+}
+@-webkit-keyframes play-in {
+  0% {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  30% {
+    top: 42%;
+    left: 50%;
+  }
+  60% {
+    top: 42%;
+    left: 84%;
+  }
+  100% {
+    top: 42%;
+    left: 84%;
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+}
+@keyframes play-in {
+  0% {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  30% {
+    top: 42%;
+    left: 50%;
+  }
+  60% {
+    top: 42%;
+    left: 84%;
+  }
+  100% {
+    top: 42%;
+    left: 84%;
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+}

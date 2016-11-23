@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<link rel="stylesheet"  href="CSS/CSS.css"/>
+</head>
+<body>
+	<div id="warp">
+		<div class="Wai">
+			 <div class="arc" id="backG"></div>
+			 <canvas id="canvas"></canvas>
+		</div>
+		 <!--中间光盘部分-->
+		
+		  <!--音乐标题部分-->
+		 <div class="tit">
+			Instant Crush 
+			<span class="cons">- Daft Punk</span>
+		 </div>
+		 
+		  <!--中间播放器-->
+		<label for="play" class="play">
+			<a href="#" class="wShow"></a>
+ 
+		</label>
+		<!--控制音乐左右部分-->
+		<div class="contrl">
+			<a href="#"></a>
+			<a href="#"></a>
+		</div>
+		<ul class="songlist">
+			<li class="song">
+				<p class="covar"></p>
+				<div class="RT">
+					<p class="name">song 1</p>
+					<p class="author">pink dash</p>
+					<audio  src="Sting (史汀) - Shape Of My Heart (心的形状).mp3" id="audio"></audio>
+				</div>
+			</li>
+			<li class="song">
+				<p class="covar"></p>
+				<div class="RT">
+					<p class="name">song 1</p>
+					<p class="author">pink dash</p>
+				</div>
+			</li>
+			<li class="song">
+				<p class="covar"></p>
+				<div class="RT">
+					<p class="name">song 1</p>
+					<p class="author">pink dash</p>
+				</div>
+			</li>
+			<li class="song">
+				<p class="covar"></p>
+				<div class="RT">
+					<p class="name">song 1</p>
+					<p class="author">pink dash</p>
+				</div>
+			</li>
+			<li class="song">
+				<p class="covar"></p>
+				<div class="RT">
+					<p class="name">song 1</p>
+					<p class="author">pink dash</p>
+				</div>
+			</li>
+			<li class="song">
+				<p class="covar"></p>
+				<div class="RT">
+					<p class="name">song 1</p>
+					<p class="author">pink dash</p>
+				</div>
+			</li>
+			
+			
+		</ul>
+	</div>
+	
+</body>
+<script>
+	(function(){
+		var canvas=document.getElementById("canvas")
+		var cxt=canvas.getContext("2d");
+		var warp=document.getElementById("warp")
+		var ul=warp.querySelector(".songlist")//音乐列表的ul
+		var lis=ul.children;//列表下的音乐
+		var auto=document.getElementById("audio");
+		var btna=document.querySelector(".play a")//播放按钮
+		var backG=document.getElementById("backG")//旋转光盘的外框
+		var contrl=document.querySelector(".contrl")
+		var childs=warp.children;
+		
+		
+		/*点击第一首音乐的时候自动播放*/
+		
+		
+
+//-------------------------------------
+//添加播放效果
+ }()
+</script>
+</html>
