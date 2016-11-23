@@ -9,7 +9,7 @@
 	<div id="warp">
 		<div class="Wai">
 			 <div class="arc" id="backG"></div>
-			 <canvas id="canvas"></canvas>
+			 <canvas id="canvas" width="360" height="500"></canvas>
 		</div>
 		 <!--中间光盘部分-->
 		
@@ -83,6 +83,8 @@
 	(function(){
 		var canvas=document.getElementById("canvas")
 		var cxt=canvas.getContext("2d");
+		var w=canvas.width/2;
+		var h=canvas.height/2;
 		var warp=document.getElementById("warp")
 		var ul=warp.querySelector(".songlist")//音乐列表的ul
 		var lis=ul.children;//列表下的音乐
@@ -90,30 +92,102 @@
 		var btna=document.querySelector(".play a")//播放按钮
 		var backG=document.getElementById("backG")//旋转光盘的外框
 		var contrl=document.querySelector(".contrl")
-		console.log(contrl)
+		var childs=warp.children;
+		acrFn("brown",1);
+		acrFn("blue",0.5);
 		
+		  function acrFn(color,scale){
+			  	cxt.beginPath();
+			  	cxt.save();
+			  	cxt.lineWidth=5;
+			  	cxt.strokeStyle=color;
+			  	cxt.arc(w,h,100,0,2*Math.PI*0.9*scale,false);
+			  	cxt.stroke();
+			  	cxt.restore();
+			  	
+			  	
+	  	
+	  	}
 		/*点击第一首音乐的时候自动播放*/
 		var takOFF=false;
-		btna.onclick=function(){
+		btna.addEventListener("click",fnClick)
+		function fnClick(){
+			var span=document.createElement("span")
+			span.className="mack"/*中间的透明层部分*/
+			canvas.style.display="none";
 			if(this.className=="wShow"){
 				this.className="wAfter";
 				backG.className="";
-				backG.parentNode.className="WaiAfter"
+				backG.className="arcChange"
 				ul.style.display="block"
 				this.parentNode.style.transform="translate(130px,-70px)"
-				contrl.style.display="none"
+				canvas.style.display="none"
+//				wai.removeChild(span)
+				childs[1].style.transform="translate(-69%,-400%)"
+				auto.pause();
+				
+				
 			}else{
 				this.className="wShow";
 				this.parentNode.style.transform="translate(0px,0px)"
 				backG.className="arc";
 				backG.parentNode.className="Wai"
 				ul.style.display="none";
-				contrl.style.display="block"
+				contrl.style.display="block";
+//				wai.appendChild(span);
+				canvas.style.display="block"
+				childs[1].style.transform="translate(-50%,-800%)"
+				auto.play();
 			}
 			takOFF=!takOFF;
 		}
-		
-		
-	})()
+//-------------------------------------
+//添加播放效果
+var arr=[
+	{
+		src:"Sting (史汀) - Shape Of My Heart (心的形状).mp3",
+		author:"pink dash"
+	},
+	{
+		src:"Sting (史汀) - Shape Of My Heart (心的形状).mp3",
+		author:"pink dash"
+	},
+	{
+		src:"Sting (史汀) - Shape Of My Heart (心的形状).mp3",
+		author:"pink dash"
+	},
+	{
+		src:"Sting (史汀) - Shape Of My Heart (心的形状).mp3",
+		author:"pink dash"
+	},
+	{
+		src:"Sting (史汀) - Shape Of My Heart (心的形状).mp3",
+		author:"pink dash"
+	},
+	{
+		src:"Sting (史汀) - Shape Of My Heart (心的形状).mp3",
+		author:"pink dash"
+	}
+  ]
+ 
+ 	 for(var i=0;i<lis.length;i++){
+  		lis[i].index=i;
+  		lis[i].addEventListener("click",clkFn);
+  		function clkFn(){
+			auto.src=arr[this.index].src;
+			auto.play();
+			setInterval(function(){
+				
+				
+				
+				
+				
+			},50)
+			
+		} 	 
+ 	 }
+
+	
+  })()
 </script>
 </html>

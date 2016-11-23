@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+		#warp{
+				width: 300px;
+				height: 200px;
+				border: 1px solid #000;
+				margin: 100px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			#list img {
+				width: 300px;
+				height: 200px;
+				vertical-align: top;
+				position: absolute;
+				top: 0;
+				left: 0;
+			
+			}
+			#list{
+				
+				position: absolute;
+				top: 0;
+				left: 0;
+				
+			}
+			#list .img2{
+				z-index:  -1;
+			}
+		</style>
+		<
+	</head>
+	<body>
+		<section id="warp">
+			<div id="list">
+				<img src="img/img0.gif"/>
+				<img src="img/img1.gif" class="img2"/>
+			</div>
+			<script>
+				window.onload=function(){
+					var list=document.getElementById("list")
+					var img=list.children;
+					var num=0;
+					list.takOff=true;//给自定义属性。给开关。避免多次执行
+			//-------------------------------------
+			//键盘事件
+					document.addEventListener("keydown",move)
+					function move(e){
+						var code=e.keyCode;
+						switch(code){
+							case 37:
+							if(list.takOff){//上来先给true，执行下面代码
+								num--;
+								fn(-300,'left');
+							}
+							break;
+							case 38:
+							if(list.takOff){//上来先给true，执行下面代码
+								num--;
+								fn(-200,'top');
+							}
+							break;
+							case 39:
+							if(list.takOff){//上来先给true，执行下面代码
+								num++;
+								fn(300,'left');
+							}
+							break;
+							case 40:
+							if(list.takOff){//上来先给true，执行下面代码
+								num++;
+								fn(200,'top');
+							}
+							break;
+						}
+						
+					}
+					function fn(end,attr){//形参分别是end=300,attr=top
+						list.takOff=false;//停止上面的switch
+						
+						//------------------------------------
+						//清空样式。
+						img[0].style.left=img[1].style.left=0;
+						img[0].style.top=img[1].style.top=0;
+						
+						//------------------------------------
+						//过截处理。
+						if(num>12)num=0;
+						if(num<0)num=12;
+						
+						//------------------------------------
+						//img加样式。让第一个img移到第一个的位置
+						img[1].src='img/img'+num+'.gif';
+						img[1].style[attr]=end+"px";
+						
+						//------------------------------------
+						//整体拉倒-left拉
+						list.style.transition=".3s";
+						list.style[attr]=-end+"px";
+						
+						setTimeout(function(){
+							list.style.transition="none";//清空样式，避免有拉回的效果
+							list.style[attr]=0+"px";
+							img[0].src='img/img'+num+'.gif';
+							list.takOff=true;//
+						},305)
+					}
+				}
+			</script>
+				
+		</section>
+	</body>
+</html>

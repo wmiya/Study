@@ -14,7 +14,6 @@
 				position: relative;
 				list-style: none;
 				
-				
 			}
 			#list li{
 				width: 200px;
@@ -54,6 +53,7 @@
 				var list=document.getElementById("list");
 				var btn=document.getElementById("btn");
 				var lis=list.children;
+				var index=1;
 				//console.log(childs)
 				var listInner='';
 				for(var i=0;i<arr.length;i++){
@@ -67,8 +67,9 @@
 				}
 				for(var i=0;i<lis.length;i++){
 					lis[i].style.position="absolute";
-					//arr[i]=lis[i];
-				//console.log(arr[i])
+					lis[i].style.margin=0;
+					lis[i].zIndex=1;
+					
 				}
 		//-------------------------------------------
 		//布局转换
@@ -87,6 +88,9 @@
 								//当前lis的位置
 								var l=e.pageX-disX;
 								var t=e.pageY-disY;
+								if(lis[now]!=lis[i]){
+									lis[i].style.zIndex=++idx;
+								}
 								
 								//console.log(l,t,r,b)
 //范围限制						

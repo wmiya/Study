@@ -8,18 +8,18 @@
 	<canvas width="700" height="500" id="canvas" style="background:black"></canvas>
 	<input type="file"  id="file">
 	<script type="text/javascript">
-	var f = document.getElementById('file');
-	var canvas = document.getElementById('canvas');
-	var gc = canvas.getContext("2d");
-	var height = canvas.height;
-	gc.fillStyle = '#fff';
-	f.onchange = function(){
-		var file = this.files[0];
+	var f = document.getElementById('file');//获取上传文件的元素
+	var canvas = document.getElementById('canvas');//获取canvas
+	var gc = canvas.getContext("2d");//获取绘画环境
+	var height = canvas.height;//拿变量记录当前的高
+	gc.fillStyle = '#fff';//给画笔填充颜色设置为白色
+	f.onchange = function(){//添加文件发生变化的时候
+		var file = this.files[0];//记录当前是第0个；
 		
-		var fr = new FileReader();
+		var fr = new FileReader();//
 
-		fr.onload = function(ev){
-			var result = ev.target.result;
+		fr.onload = function(ev){//当fr加载完成之后
+			var result = ev.target.result;//
 			var context = new AudioContext();
 			//对音频数据进行解码。
 			context.decodeAudioData(

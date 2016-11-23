@@ -32,14 +32,30 @@
 			width: 355px;
 			
 		}
-		#warp .WaiAfter{
-			width: 355px;
-			background-color: #000;
-			background-image: url(../img/bagd.jpg);
-			background-size:200% auto ;
-			background-position: 50% 50%;
-			background-repeat: no-repeat;
+		#warp .Wai .mack{
+			width: 100%;
+			text-align: center;
+			height: 30px;
+			background: #000;
+			opacity: .4;
+			display: inline-block;
+		}
+		#warp .arcChange{
+			width: 100%;
+			height: 200px;
+			background: url(../img/bagd.jpg) center center no-repeat;
+			transform: translate(-180px,-300px);
+		}
+	#warp #backG{
 			transition: .5;
+			background: url(../img/bagd.jpg) center center no-repeat;
+			background-size:cover;
+			background-color: #000;
+			position: absolute;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			
 		}
 	    #warp .arc{
 			position: absolute;
@@ -48,10 +64,6 @@
 			width: 50%;
 			padding-bottom: 50%;
 			background-color: #000;
-			background-image: url(../img/bagd.jpg);
-			background-size:200% auto ;
-			background-position: 50% 50%;
-			background-repeat: no-repeat;
 			border-radius: 50%;
 			animation: 5s rotate infinite linear;
 			margin: -90px 0 0 -90px;
@@ -60,7 +72,7 @@
 		 .hide{
 		 	display: none;
 		 }
-	 #warp .tit{
+	 	#warp .tit{
 		 	position: absolute;
 		 	top: 50%;
 			left: 50%;
@@ -93,8 +105,10 @@
 		    width: 30px;
 		    height: 30px;
 		   	display: inline-block;
-		   
-			
+		   	
+		  }
+		 #warp  #canvas{
+		  	transform: rotateZ(107deg);
 		  }
 		.wShow{
 			display: inline-block;
@@ -124,10 +138,6 @@
 		    margin: -15px 0 0 -11px;
 		    transition:.5s;
 		    transform: rotateZ(-180)
-		    
-		    
-		   
-		   
 		}
 		#warp .contrl{
 			position: absolute;
