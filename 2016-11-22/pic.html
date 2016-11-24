@@ -93,9 +93,9 @@
 		var oUl=document.getElementById("oUl");
 		var lis=oUl.children;
 		var btn=document.querySelector("input");
-		var arr=[];
-		var zIndex=1;
-		console.log(btn)
+		var arr=[];//存下布局转换时候的top和left值
+		var zIndex=1;//定义层级为一
+		//console.log(btn)
 		/*布局转换*/
 	
 		for(var i=0;i<lis.length;i++){
@@ -121,16 +121,16 @@
 				arr.sort(function(a,b){
 					return Math.random()- 0.5;
 				})
-				
+				//让所有li都从新更变坐标
 				for(var i=0;i<lis.length;i++){
 					lis[i].style.left=arr[i].left+"px";
 					lis[i].style.top=arr[i].top+"px";
-					lis[i].index=i;
+					lis[i].index=i;//然他的层级从新定义
 				}
 			}
 //---------------------------------------------------------
 //点击，鼠标抬起
-		function darg(obj){
+		function darg(obj){//每个li都应该加上的事件
 			var disX=0;
 			var disY=0;
 			var objIndex=null;
@@ -199,7 +199,6 @@
 						}
 					
 				//判断然后交换位置
-				
 					obj.removeEventListener("mousemove",moveFn)
 					obj.removeEventListener("mouseup",upFn);
 				}

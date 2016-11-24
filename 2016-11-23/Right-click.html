@@ -93,80 +93,53 @@
 </html>
 <script>
 	(function(){
+		/*首先获取元素*/
 		var menu=document.getElementById("menu");
 		var h2=menu.getElementsByTagName("h2");
 		var h2s=Array.from(h2);
 		//console.log(h2s)
-		
-		document.addEventListener("click",clik)
-		function clik(){
+		document.addEventListener("click",click)
+		function click(){
 			menu.style.display="none"
 		}
 		document.oncontextmenu=function(e){
-			var disY=e.pageY;
-			var disX=e.pageX;
-			menu.style.top=disY+"px";
-			menu.style.left=disX+"px"
-			menu.style.display="block";
+			var x=e.pageX;
+			var y=e.pageY;
+			menu.style.left=x+"px";
+			menu.style.top=y+"px";
+			menu.style.display="block"
 			return false;
-			
 		}
 		h2s.forEach(function(e,i){
-			e.addEventListener("mouseover",mous)
-		});
-		function mous(){
-			var prent=this.parentNode;//首先拿到他的父级
-			var dad=prent.parentNode;//拿到他父级的父级
-			var li=dad.children;//记得在这里是拿到ul下面几个大的li里面小的li；
-			//console.log(li)li
-			/*mous-下面
-				li-{li,li,li,li}
-				li-{li,li,li,li}
-				li-{li,li,li,li}
-				li-{li,li,li,li}
-				var li=li[i]下面的{li,li,li,li}
-			 */
-			
-			
-//---------------------------------------------------------------------------------------------	
-//让当前以外其他的都不显示
-
-			for(var i=0;i<li.length;i++){//循环所有的li
-				if(li[i]!=prent){//如果当前的 这个li不等于我点击的那个li
-					var ul=li[i].getElementsByTagName("ul")//获取其他所有的ul
-					//console.log(ul)
+			e.addEventListener("mouseover",mouse)
+		})
+		function mouse(){
+			var prent=this.parentNode;//他的父级
+			var dad=prent.parentNode;//父级的父级
+			var li=dad.children;//通过父级拿到所有每个li下面所有小的li
+			for(var i=0;i<li.length;i++){
+				if(li[i]!=prent){
+					var ul=li[i].getElementsByTagName("ul");
 					for(var j=0;j<ul.length;j++){
-						ul[j].style.display="none";
+						ul[j].style.display="none"
 					}
 				}
 			}
-//---------------------------------------------------------------------------------------------	
-//让当前显示	
-
-//大清洗
 			for(var i=0;i<h2.length;i++){
-				h2[i].className=""
+				h2[i].className='';
 			}
-
-
-//---------------------------------------------------------------------------------------------	
-//给当前加上className
-				active(this);//让当前的显示出来
-				function active(h2){//执行函数
-					h2.className="active";
-					if(h2.parentNode.parentNode.previousElementSibling){
-						active(h2.parentNode.parentNode.previousElementSibling)
-					}
-					
-				}
-				
-				if(this.nextElementSibling){
-					this.nextElementSibling.style.display="block"
-				}
 			
+			active(this)
+			function active(h2){
+				h2.className='active';
+				if(h2.parentNode.parentNode.previousElementSibling){
+					active(h2.parentNode.parentNode.previousElementSibling);
+				}
+			}
+			if(this.nextElementSibling){
+				this.nextElementSibling.style.display="block"
+			}
 		}
-		
-		
 		
 	})()
 </script>
