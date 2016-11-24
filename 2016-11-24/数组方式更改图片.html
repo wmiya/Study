@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#wrap {
+			width: 440px;
+			border: 2px solid #000;
+			height: 110px;
+			position: relative;
+			margin: 40px auto;
+		}
+		#wrap input{
+			position: absolute;
+			top: 40px;
+			width: 30px;
+			height: 30px;
+
+		}
+		#wrap input:nth-of-type(1){
+			left: -40px;
+		}
+		#wrap input:nth-of-type(2){
+			right: -40px;
+		}
+		#wrap img {
+			float: left;
+			width: 100px;
+			margin: 5px;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var  warp=document.getElementById("wrap");
+			var prue=warp.children[0];
+			var next=warp.children[1];
+			var img=warp.querySelectorAll("img");
+			var arr=[];
+			/*布局转换*/
+			for(var i=0;i<img.length;i++){
+				arr[i]=img[i].offsetLeft;
+				img[i].style.left=img[i].offsetLeft+"px";
+				img[i].style.top=img[i].offsetTop+"px";
+			}
+			for(var i=0;i<img.length;i++){
+				img[i].style.position="absolute";
+				img[i].style.margin=0;
+			}
+			/**点击事件*/
+			prue.onclick=function(){
+				arr.push(arr.shift());//当点击当前每个左边的按钮时，在他的最后添加一位。就是最左边的第一位
+				for(var i=0;i<arr.length;i++){
+					img[i].style.left=arr[i]+"px";
+				}
+				
+			}
+			next.onclick=function(){
+				arr.unshift(arr.pop());//在最前面添加一位，就是最后一位也是最右边的
+				for(var i=0;i<arr.length;i++){
+					img[i].style.left=arr[i]+"px";
+				}
+			}
+			
+			
+		}
+	</script>
+</head>
+<body>
+	<div id="wrap">
+		<input type="button" value="<">
+		<input type="button" value=">">
+		<img src="img/1.jpg" />
+		<img src="img/2.jpg" />
+		<img src="img/3.jpg" />
+		<img src="img/4.jpg" />
+	</div>
+</body>
+</html>

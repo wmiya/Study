@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet"  href="css/comeBack.css"/>
+	</head>
+	<body>
+		<html>
+			<section id="warp">
+				<a href="javascript:;" id="leftBanner"  btn="run" >《</a>
+				<a href="javascript:;" id="rightBanner" btn="run">》</a>
+				<a href="javascript:;" id="comebackack">
+					<img src="img/comeBack.png"/>
+				</a>
+				
+			</section>
+		</html>
+	</body>
+</html>
+<script>
+	window.onload=function(){
+		btnA();
+		function btnA(){
+			var left=document.getElementById("leftBanner");
+			var right=document.getElementById("rightBanner");
+			var comebackack=document.getElementById('comebackack');
+			var top=(window.innerHeight-left.offsetHeight)/2;
+			left.style.top=right.style.top=top+"px";
+			left.style.left=20+"px";
+			right.style.left = document.documentElement.clientWidth - right.offsetWidth - 20 + "px";
+			window.onhashchange=function(){
+				left.style.transform=right.style.transform="rotateZ(-360deg)";
+				
+				
+			}
+		
+		}
+	}
+</script>
