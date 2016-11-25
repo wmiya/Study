@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		#warp{
+			
+			position: relative;
+		}
+			#warp div{
+				width: 100px;
+				height: 100px;
+				background: red;
+				position: absolute;
+			}
+		
+		</style>
+		<script>
+			/*
+			 left:先自增。后自减
+			 top：一直自增
+			 然后给2个变量，控制变化。
+			 var i=0;
+			 var j=0;
+			 
+			 */
+			window.onload=function(){
+				var divs=document.querySelectorAll("#warp div");
+				var btn=document.getElementById("btn");
+				var now=0;
+				var arr=[""];
+				btn.onclick=function(){
+					arr[now%4]();
+					now++;
+					
+				}
+				
+				arr[0]=fn1;
+				arr[1]=fn2;
+				arr[2]=fn3;
+				arr[3]=fn4;
+				function fn1(){
+			 		var l=0;
+			 		var t=0;
+			 		for(var i=0;i<divs.length;i++){
+			 			divs[i].style.cssText="left:"+(l*100)+"px;top:"+(t*100)+"px";
+			 			if(i<2){
+			 				l++;
+			 			}else{
+			 				l--;
+			 			}
+			 			t++;
+			 		}
+			 	}
+			 		function fn2(){
+			 			var l=0;
+			 			var t=0;
+			 			for(var i=0;i<divs.length;i++){
+			 				divs[i].style.cssText="left:"+(l*100)+"px;top:"+(t*100)+"px";
+				 			if(i<2){
+				 				t++;
+				 			}else{
+				 				t--;
+				 			}
+				 			l++;
+				 		}
+			 		};
+			 		function fn3(){
+			 			var l=2;
+			 			var t=0;
+			 			for(var i=0;i<divs.length;i++){
+			 				divs[i].style.cssText="left:"+(l*100)+"px;top:"+(t*100)+"px";
+				 			if(i<2){
+				 				l--;
+				 			}else{
+				 				l++;
+				 			}
+				 			t++;
+				 		}
+			 		};
+			 		function fn4(){
+			 			var l=0;
+			 			var t=3;
+			 			for(var i=0;i<divs.length;i++){
+			 			
+			 			divs[i].style.cssText="left:"+(l*100)+"px;top:"+(t*100)+"px";
+			 			if(i<2){
+			 				t--;
+			 			}else{
+			 				t++;
+			 			}
+			 			l++;
+			 		}
+			 		};
+			 	}
+			 
+			
+		</script>
+		
+	</head>
+	<body>
+		
+		<div id="text">
+			<input type="button" value="出现吧" id="btn"/>
+			<div id="warp">
+				<div>1</div>
+				<div>2</div>
+				<div>3</div>
+				<div>4</div>
+				<div>5</div>
+			</div>
+		</div>
+	</body>
+</html>

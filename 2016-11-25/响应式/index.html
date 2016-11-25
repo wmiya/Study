@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>响应式</title>
+  <meta name="viewport" content="width=device-width,user-scalable=no" />
+  <link rel="stylesheet" href="css/css.css">
+  <style type="text/css">
+  body {
+    background: #fdfde4 url(img/bg-clouds.jpg) repeat-x right 0;
+  }
+.head {
+  background: url(img/bg-band-top.png) repeat-x;
+}
+.head .wrap {
+  background: url(img/rule-double-dotted.png) repeat-x 0 bottom;
+}
+.wrap {
+  margin: 0 24px;
+}
+.head h1 a {
+    display: block;
+    width: 100%;
+    height: 123px;
+    background: url(img/logo-sc.png) no-repeat center center;
+  }
+ .head .nav a {
+   box-sizing: border-box;
+   padding: 10px 0 0 20px;
+    color: #000;  
+  }
+ .head .nav .cent,
+ .head .nav .fot {
+  font: 12px/14px "微软雅黑";
+ }
+
+
+
+ .banner .wrap {
+  background: url(img/rule-double-dotted.png) repeat-x 0 bottom;
+
+ } 
+.banner img {
+  width: 100%;
+  margin: 20px 0 30px 0;
+}
+.FILE {
+  padding: 27px 0 20px 0;
+  background: url(img/rule-double-dotted.png) repeat-x 0 bottom;
+}
+ .FILE-right img {
+    float: left;
+    margin-right: 7px;
+  }
+  .FILE-right .span {
+    display: block;
+    text-indent: 2em;
+  }
+  /* 最后一块*/
+  .foot {
+    background: url(img/bg-desert.jpg) no-repeat right bottom;
+    padding: 20px 0 50px 0;
+  }
+     .foot .foot-left li {
+      width: 80px;
+      height: 20px;
+      font-size: 0;
+    }
+   .foot .foot-left a:hover img {
+      background: #ffff99; 
+    }
+    .foot .foot-right h2 {
+      height: 30px;
+      font-size: 0;
+      background: url(img/title-copyright.png) no-repeat;
+    }
+    .foot-right p a {
+      color: #000;
+      background: #ffff99;
+    } 
+    .foot-right p a:hover {
+      text-decoration: underline;
+    }
+  .footer {
+    height: 6px;
+    background: url(img/bg-band-bottom.png) repeat-x 0 bottom;
+    }
+@media all and (max-width:464px) {
+    .head .nav a {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    font-weight: bold;
+    border-top: 1px dashed #567670;
+    color: #000;
+    letter-spacing: 5px;
+    padding-top: 0;
+    margin: 0;
+  }
+  .head .nav .cent,
+  .head .nav .fot {
+    display: none;
+  }
+  .top-list {
+    display: none;
+  }
+ .FILE-left {
+  display: none;
+ }
+/*第二个列表右侧*/
+  .FILE h2 {
+    height: 67px;
+  }
+  .FILE .FILE-right {
+    float: right;
+    width: 100%;
+    }
+  .FILE-right p {
+      background: url(img/rule-solid-worn.png) repeat-x 0 top;
+      font: 12px/16px arial;
+      color: #000;
+      padding-top: 24px;
+    }
+/* 底部最后一块*/
+    .foot .foot-left {
+          width: 100%;
+          padding-bottom: 20px;
+          border-bottom: 1px dotted #000;
+        }
+    .foot .foot-left li {
+      float: left;
+      width: 50%;
+    }
+   .foot .foot-right {/*background: red;*/
+      width: 100%;
+      padding: 20px 0 0 2%;
+      margin-bottom: 140px;
+      font-size: 14px;
+     }
+}
+
+@media all and (min-width:465px) and (max-width: 734px){
+  .head .nav {
+    width: 100%;
+  }
+    .head .nav a {
+    float: left;
+    width: 24%;
+    /*padding-left: 20px-20px;*/
+    height: 87px;
+    font-weight: bold;
+    border-left: 1px dashed #567670;
+    margin: 19px 0 13px 0;
+    color: #000;
+  }
+  .head .nav .top{
+    font-size:16px;
+  }
+  .head .nav .cent{
+    font-size:14px;
+  }
+  .head .nav .fot{
+    font-size:12px;
+  }
+  .head .nav .nav-left {
+    border: none;
+  }
+.banner img {
+  width: 100%;
+  }/*第一个列表*/
+.top-list {
+  padding-top: 24px;
+  background: url(img/rule-double-dotted.png) repeat-x 0 bottom;
+  }
+.top-list li {
+  float: left;
+  width: 46.3%;
+  margin: 0 2.2% 22px 0;
+  }
+  .top-list li a {
+  display: block;
+  height: 100px;
+  background: url(img/bg-black-texture.jpg) no-repeat;
+  font: 12px/20px "微软雅黑";
+  padding: 20% 0 0 10%;
+  color: #f1f1d9;
+}
+.top-list li span {
+  font: bold 26px/28px "微软雅黑";
+}
+  .top-list li a:hover {
+    text-decoration: underline;
+  }
+.top-list .last {
+  margin: 0;
+}
+/*第二个列表*/
+.FILE .FILE-left {
+  width: 100%;
+  }
+.FILE h2 {
+  height: 67px;
+}
+.FILE-left .clearFix {
+  padding: 24px 0;
+  background: url(img/rule-solid-worn.png) repeat-x 0 top; 
+}
+.FILE-left .clearFix li {
+  float: left;
+  width: 25%;
+}
+.FILE-left .clearFix p {
+  font: 14px/24px "宋体";
+  color: #000;
+}
+/*第二个列表右侧*/
+.FILE-right {
+  padding-top: 20px;
+  background: url(img/rule-double-dotted.png) repeat-x 0 top;
+}
+.FILE .FILE-right {
+  width: 100%;
+  }
+.FILE-right p {
+    background: url(img/rule-solid-worn.png) repeat-x 0 top;
+    font: 12px/16px arial;
+    color: #000;
+    padding-top: 24px;
+    -moz-column-count:2; 
+    -webkit-column-count:2; 
+     column-count:2;
+  }
+  /* 底部最后一块*/
+    .foot .foot-left {
+          float: left;
+          width: 50%;
+        }
+    .foot .foot-left li {
+      float: left;
+      width: 50%;
+    }
+    .foot .foot-right {/*background: red;*/
+      float: left;
+      width: 47%;
+      padding: 0 0 0 2%;
+      margin-bottom: 120px;
+      border-left: 1px dotted #000;
+      font-size: 14px;
+     }
+}
+@media all and (min-width: 735px) {
+  .wrap {
+  margin: 0 75px;
+  }
+.head h1 {
+    float: left;
+    width: 25%;
+  }
+.head h1 a {
+    display: block;
+    width: 100%;
+    height: 123px;
+    background: url(img/logo-sc.png) no-repeat 0 31px;
+  }
+.head .nav {
+    float: left;
+    width: 70%;
+  }
+.head .nav a {
+    float: left;
+    width: 24%;
+    height: 87px;
+    font-weight: bold;
+    border-left: 1px dashed #567670;
+    margin-top: 19px;
+  }
+ /*第一个列表*/
+.top-list {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  background: url(img/rule-double-dotted.png) repeat-x 0 bottom;
+}
+.top-list li {
+  float: left;
+  width: 23.3%;
+  margin-right: 2.2%;
+}
+.top-list li a {
+  display: block;
+  height: 180px;
+  background: url(img/bg-black-texture.jpg) no-repeat;
+  /*vertical-align: center;*/
+  font: 12px/20px "微软雅黑";
+  padding: 20% 0 0 10%;
+  color: #f1f1d9;
+}
+.top-list li span {
+  font: bold 26px/28px "微软雅黑";
+}
+.top-list li a:hover {
+    text-decoration: underline;
+  }
+.top-list .last {
+  margin: 0;
+  }
+  /*第二个列表*/
+.FILE .FILE-left {
+  float: left;
+  width: 63%;
+  padding-right: 3%;
+  border-right: 1px dotted #000;
+  box-sizing: border-box;
+  }
+.FILE h2 {
+  height: 67px;
+}
+.FILE-left .clearFix {
+  padding: 24px 0;
+  background: url(img/rule-solid-worn.png) repeat-x 0 top;
+}
+.FILE-left .clearFix li {
+  float: left;
+  width: 25%;
+}
+.FILE-left .clearFix p {
+  font: 14px/24px "宋体";
+  color: #000;
+}
+.FILE .FILE-right {/*background: blue;*/
+  float: right;
+  width: 36.8%;
+  padding-left: 20px;
+  box-sizing: border-box;
+  }
+  .FILE-right p {
+    overflow: hidden;
+    /*height: 300px;*/
+    background: url(img/rule-solid-worn.png) repeat-x 0 top;
+    font: 12px/16px arial;
+    color: #000;
+    padding-top: 24px;
+  }
+/*底部最后一块*/
+    .foot .foot-left {
+      float: left;
+      width: 10%;
+      padding-right: 3%;
+    }
+    .foot .foot-left li {
+      float: none;
+    }
+    .foot .foot-right {/*background: red;*/
+      float: left;
+      width: 25%;
+      padding: 0 4% 0 2%;
+      border-left: 1px dotted #000;
+      border-right: 1px dotted #000;
+      font-size: 14px;
+     }
+}
+  </style>
+</head>
+<body>
+    <header class="head">
+        <div class="wrap clearFix">
+            <h1><a href="#"></a></h1>
+            <nav class="nav clearFix">
+                <a href="#" class="nav-left">
+                  <span class="top">POATF0LID</span></br>
+                  <span class="cent">SELECTED WORKS</span></br>
+                  <span class="fot">ON DISPLAY</span>
+                </a>
+                <a href="#">
+                  <span class="top">POATF0LID</span></br>
+                  <span class="cent">SELECTED WORKS</span></br>
+                  <span class="fot">ON DISPLAY</span>
+                </a>
+                <a href="#">
+                  <span class="top">POATF0LID</span></br>
+                  <span class="cent">SELECTED WORKS</span></br>
+                  <span class="fot">ON DISPLAY</span>
+                </a>
+                <a href="#">
+                  <span class="top">POATF0LID</span></br>
+                  <span class="cent">SELECTED WORKS</span></br>
+                  <span class="fot">ON DISPLAY</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+    <div class="banner">
+        <div class="wrap">
+            <img src="img/hero-home.png" alt="">
+        </div>
+    </div>
+    <div class="wrap portfolio">
+        <ul class="top-list clearFix">
+            <li>
+                <a href="###">
+                  <span>Portfolio</span></br>
+                  Selected works</br>on Display
+                </a>
+            </li>
+            <li>
+                <a href="###">
+                  <span>Portfolio</span></br>
+                  Selected works</br>on Display
+                </a>
+            </li>
+            <li>
+                <a href="###">
+                  <span>Portfolio</span></br>
+                  Selected works</br>on Display
+                </a>
+            </li>
+            <li class="last">
+                <a href="###">
+                  <span>Portfolio</span></br>
+                  Selected works</br>on Display
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="wrap FILE clearFix">
+        <div class="FILE-left">
+            <h2><img src="img/title-vitals.gif" alt=""></h2>
+            <ul class="clearFix">
+                <li><img src="img/vitals-001.gif" alt=""></li>
+                <li><img src="img/vitals-file-photo.jpg" alt=""></li>
+            </ul>
+            <ul class="clearFix">
+                <li>
+                    <img src="img/vitals-002.gif" alt="">
+                    <p>STEPHEN</p>
+                </li>
+                <li>
+                    <img src="img/vitals-003.gif" alt="">
+                    <p>CAVER</p>
+                </li>
+                <li>
+                    <img src="img/vitals-004.gif" alt="">
+                    <p>8 DECEMBER</p>
+                </li>
+                <li>
+                    <img src="img/vitals-005.gif" alt="">
+                    <p>CALIFORNIA</p>
+                </li>
+            </ul>
+            <ul class="clearFix">
+                <li>
+                    <img src="img/vitals-006.gif" alt="">
+                    <p>AiCA — OC</p>
+                </li>
+                <li>
+                    <img src="img/vitals-007.gif" alt="">
+                    <p>HAPPY COG</p>
+                </li>
+                <li>
+                    <img src="img/vitals-008.gif" alt="">
+                    <p>DESIGNER/DEVELOPER</p>
+                </li>
+            </ul>
+        </div>
+        <div class="FILE-right">
+            <h2><img src="img/title-intel.gif" alt=""></h2>
+            <p class="clearFix">
+                <img src="img/dropcap-d.gif" alt="">
+                <span>esigner-developer Stephen Caver has been interested in the inner workings of the web since he was a kid. His attention to detail is evident in his site designs, which emphasize clean displays of content while facilitating great user experience. Stephen has experience in information architecture, interaction design, HTML and CSS. He has worked with clients such as the World Wide Web Consortium, Change.org and the Mozilla Creative Collective.</span>
+                <span class="span">When he’s not designing beautiful websites, Stephen can be found passionately following the Los Angeles Dodgers, killing things on Xbox, and spending time watching history and science-based reality shows.</span>
+            </p>
+        </div>
+    </div>
+    <section class="foot">
+        <footer class="wrap clearFix">
+            <ul class="foot-left clearFix">
+                <li><a href="###"><img src="img/so-twitter.gif" alt="">Twitter</a></li>
+                <li><a href="###"><img src="img/so-dribbble.gif" alt="">Dribbble</a></li>
+                <li><a href="###"><img src="img/so-flickr.gif" alt="">Flickr</a></li>
+                <li><a href="###"><img src="img/so-gowalla.gif" alt="">Gowalla</a></li>
+                <li><a href="###"><img src="img/so-tumblr.gif" alt="">Tumlbr</a></li>
+                <li><a href="###"><img src="img/so-facebook.gif" alt="">Facebook</a></li>
+                <li><a href="###"><img src="img/so-lastfm.gif" alt="">Last.fm</a></li>
+                <li><a href="###"><img src="img/so-youtube.gif" alt="">YouTube</a></li>
+                <li><a href="###"><img src="img/so-amazon.gif" alt="">Amazon</a></li>
+            </ul>
+            <div class="foot-right">
+                <h2>© Copyright Stephen Caver</h2>
+                <p>This includes all content and original design work, including the distinctive typographic style, layout and composition of this website.<a href="###">Background sky and desert imagery</a>is gracious released by<a href="###"> Paul Hockett</a> under a<a href="###">Attribution-Noncommercial-Share Alike Creative Commons license</a>. Thanks Paul!
+                </p>
+            </div>
+        </footer>
+    </section>
+    <footer class="footer"></footer>
+</body>
+</html>
