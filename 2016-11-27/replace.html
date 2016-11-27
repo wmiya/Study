@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		替换前<br />
+		<textarea></textarea><br />
+		替换后<br />
+		<textarea></textarea><br />
+		<input type="button" value="确定"/>
+		<script>
+			(function(){
+				//吃死你杰克逊在上次那家开箱子僵尸狂潮你可真行就按开始内存卡
+//				var str="hhh";
+//				var re=/h/g;
+//				alert(str.replace(re,"b"))//
+//				
+				/*
+				 replace:替换
+				 
+				 * 
+				 * */
+				
+				var btn=document.querySelector("input");
+				var txt=document.querySelectorAll("textarea");
+				var re=/吃死|僵尸狂潮|内存卡|上次/g;
+				btn.addEventListener("click",fnClick);
+				function fnClick(){
+//					txt[1].value=txt[0].value.replace(re,"*")
+					txt[1].value=txt[0].value.replace(re,function(str){
+						var val="";
+						for(var i=0;i<str.length;i++){
+							val+='*';
+						}
+					return val;
+					
+					})
+				}
+				
+				
+				
+			})()
+		</script>
+</html>

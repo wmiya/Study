@@ -1,0 +1,31 @@
+- songs = ['Song 1, Daft Punk', 'Song 2, Daft Punk', 'Song 3, Daft Punk', 'Song 4, Daft Punk', 'Song 5, Daft Punk', 'Song 6, Daft Punk', 'Song 7, Daft Punk']
+
+.app
+  input(type="checkbox" id="play" checked)
+  .album
+  .track
+    .progress
+  .title Instant Crush 
+    span.artist - Daft Punk
+  .throbber
+  label.play(for="play")
+  .controls
+    .control.prev
+    .control.rw
+    .control.fw
+    .control.next
+  ul.songlist
+    li.song 
+      .name My favorites
+      .artist 102 songs
+    for song in songs
+      li.song 
+        .cover
+        .name #{song.split(',')[0]}
+        .artist #{song.split(',')[1]}
+        
+.infopanel 
+  h2 Music Player Transition
+  p created from 
+    a(href="https://dribbble.com/shots/1850527-Music-Player-Transition" target="_blank") this dribble shot
+  p click the play/pause button to see the transition

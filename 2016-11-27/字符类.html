@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script>
+		(function(){
+			//字符类：一组相似的元素  【】  中括号的整体就代表一个字符
+//			var str='ard';
+//			var re=/a[ksdc]d/;
+//			alert(re.test(str));
+			//排除：^写在【】里面的话。代表排序的意思；不在里面返回true。在返回false
+//			var str='abd';
+//			var re=/a[^kdc]d/;
+//			alert(re.test(str));
+			var str='acd';
+			var re=/a[^b-v]d/;
+			alert(re.test(str));
+			
+		})()
+	</script>
+	<body>
+	</body>
+</html>

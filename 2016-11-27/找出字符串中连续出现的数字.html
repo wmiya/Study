@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		(function(){
+//			var str="12jjusdigkcbjskzn25sdzc85sdc5215";
+//			var re=/\d+/g;
+//			alert(str.match(re))//写法：字符串.match(正则)
+			/*1正则匹配字符串。成功返回数组。不成功返回null
+			2、注意正则默认是匹配成功后将不在继续匹配，如果需要全局匹配。要加标识，g//var re=/\d/g
+			3、量词：匹配不确定的位置。
+			+：表示至少一次；
+			
+			 */
+			
+			
+//			var str="1235252o55s2";
+//			var re=/35/;
+//			alert(re.test(str))//正则.test(字符串)
+		/*test判断：
+		 * 返回Ttrue。
+		 * 没有false
+		 *
+		 */
+		var str="12jjusdigkcbjskzn25sdzc85sdc5215";
+		var re=/JJ/;
+		alert(str.search(re));
+		/*search：查找
+		 * 有返回找到的位置。默认从第一位开始。和indexof相似
+		 * 没找到返回-1；
+		 正则默认是区分大小写 的。如果想要不区分。加标识i。和g一样。加到后边
+		 * 
+		 * 
+		 * 
+		 * */
+//-------------------------------------------------------		
+		})()
+	</script>
+</html>

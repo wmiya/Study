@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		替换前<br />
+		<textarea></textarea><br />
+		替换后<br />
+		<textarea></textarea><br />
+		<input type="button" value="确定"/>
+		<script>
+			(function(){
+				//<h3></h3>
+				var btn=document.querySelector("input");
+				var txt=document.querySelectorAll("textarea");
+				//var re=/<\w+>/g;
+				var re=/<[^>]+>/g;
+				btn.addEventListener("click",fnClick);
+				function fnClick(){
+					txt[1].value=txt[0].value.replace(re,'');
+				};
+				
+				
+				
+			})()
+		</script>
+</html>

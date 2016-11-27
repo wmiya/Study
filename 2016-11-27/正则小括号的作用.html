@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		/*
+		 匹配子项：小括号（）；还有一个意思就是，分组操作；
+		 1+1*2
+		 （1+1）*2
+		 * 把正则整体看成一个母亲
+		 * 左边第一个小括号里面的正则就叫做第一个让的第一个宝贝
+		 * 第二个括号就是他 第二个宝贝
+		 * */
+		(function(){
+			var str='2016-11-27';
+			var re=/(\d+)(-)/g;
+			str=str.replace(re,function($0,$1,$2){
+//				return $1;
+				return $1+".";
+				
+			});
+			
+			console.log(str)
+		})()
+		</script>
+	</body>
+</html>
