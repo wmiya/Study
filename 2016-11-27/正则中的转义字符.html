@@ -5,5 +5,28 @@
 		<title></title>
 	</head>
 	<body>
-	</body>
+		替换前<br />
+		<textarea></textarea><br />
+		替换后<br />
+		<textarea></textarea><br />
+		<input type="button" value="确定" id="btn"/>
+		<script>
+			window.onload=function(){
+				
+				var btn=document.getElementById("btn");
+				var txt=document.querySelectorAll("textarea");
+				//console.log(btn,txt)
+				var str="和本次速度快哪里呢我开始的健康US好多年健康 ";
+				btn.onclick=function(){
+					txt[1].value=txt[0].value.replace(/速度6|US|本次/g,function($0){
+						
+						var val="";
+						for(var i=0;i<$0.length;i++){
+							val+="*";
+						}
+						return val;
+					})
+				}
+			}
+		</script>
 </html>
