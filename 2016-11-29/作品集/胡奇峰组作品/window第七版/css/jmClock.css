@@ -1,0 +1,16 @@
+
+
+#jm {
+	position: absolute;
+	width:160px;
+	height:160px;
+	border-radius:50%;
+	background: rgba(0,0,0,.2);
+	box-shadow:0px 0px 6px #83def5;
+}
+#mcanvas {
+	position: absolute;
+	top:0;
+	left:0;
+	border-radius:50%;
+}

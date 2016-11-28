@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<style>
+	h4,
+	ul{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.warp{
+		width: 600px;
+		margin: 30px auto;
+		border: 3px solid #ddd;
+		background: #eee;
+		font: 12px/30px "微软雅黑";
+		padding:0 10px;
+		/*overflow: hidden;*/
+		
+	}
+		mark{
+			margin: 3px;
+			border: 1px solid #000;
+			background: pink;
+			padding: 5px 5px 5px 5px;
+		}
+		ul li{
+			
+			height:60px;
+			border-bottom: 1px solid #ddd;
+		}
+		h4{
+				float: left;
+				width: 100px;
+				height: 60px;
+				margin: 0;
+				padding: 0;
+				
+		}
+		span{
+			float: left;
+			margin-left: 10px;
+			
+		}
+		#selet{
+			width: 600px;
+			border-bottom: 1px solid #ddd;
+			font: 12px/60px "微软雅黑";
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var selet=document.getElementById("selet")//获取需要放内容区域
+			var lis=document.querySelectorAll("li")//获取每个li
+			var spans=document.querySelectorAll("span")//获取每个span标签
+			var arr=[];
+			for(var i=0;i<lis.length;i++){
+				lis[i].index=i;
+			}
+			for(var i=0;i<spans.length;i++){
+				spans[i].onclick=function(){
+					var pid=this.parentNode.index;
+					console.log(pid)
+					var mark=document.createElement("mark");
+					var a=document.createElement("a");
+					a.href="javascript:;";
+					a.innerHTML="x"
+					a.onclick=function(){
+						selet.removeChild(mark);
+						arr[pid]="";
+					}
+					mark.innerHTML=this.innerHTML;
+					mark.appendChild(a)
+					arr[pid]=mark;
+					selet.innerHTML="你的选择：";
+					for(var i=0;i<arr.length;i++){
+						if(arr[i]){
+							selet.appendChild(arr[i])
+						}
+					}
+					
+					
+				}
+			}
+
+		}
+	</script>
+	
+</head>
+<body>
+	<section class="warp">
+		<div id="selet">你的选择：</div>
+		<ul>
+			<li>
+				<h4>品牌:</h4>
+				<span>小米</span>
+				<span>苹果</span>
+				<span>华为</span>
+				<span>酷派</span>
+				<span>联想</span>
+				<span>中兴</span>
+				<span>vivo</span>
+				<span>索尼</span>
+				<span>oppo</span>
+				<span>HTC</span>
+				<span>摩托罗拉</span>
+				<span>大显</span>
+				<span>黑莓</span>
+				<span>魅族</span>
+				<span>飞利浦</span>
+				<span>金立</span>
+				<span>索尼爱立信</span>
+			</li>
+			<li>
+				<h4>价格:</h4>
+				<span>499元以下</span>
+				<span>500-999元</span>
+				<span>1000-1999元</span>
+				<span>2000-2999元</span>
+				<span>3000-4999元</span>
+			</li>
+			<li>
+				<h4>手机特色：</h4>
+				<span>学生机</span>
+				<span>智能</span>
+				<span>国产</span>
+				<span>千元机</span>
+				<span>天翼</span>
+				<span>看电影</span>
+				<span>老人机</span>
+				<span>百元</span>
+			</li>
+			<li>
+				<h4>手机配置：</h4>
+				<span>电信3G</span>
+				<span>双核</span>
+				<span>拍照</span>
+				<span>四核</span>
+				<span>双3G</span>
+				<span>移动3G</span>
+				<span>高清</span>
+				<span>1080P高清</span>
+				<span>老人机</span>
+				<span>百元</span>
+			</li>
+		</ul>
+	</section>
+</body>
+</html>

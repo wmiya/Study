@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#list{
+				width: 600px;
+				height: 440px;
+				margin: 50px auto 0;
+				padding: 0;
+				list-style: none;
+				perspective: 400px;
+			}
+			#list li{
+				width: 60px;
+				height: 44px;
+				float: left;
+				background: url(img.jpg) no-repeat;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="list"></ul>
+		<script src="miaov.js"></script>
+		<script>
+			(function(){
+				var list=document.getElementById("list")//首先获取大 的ul
+				var chils=list.children;//获取所有的li
+				var liW=60;//给li宽高
+				var liH=44;			
+				for(var i=0;i<100;i++){//生成li
+					var li=document.createElement("li");
+					li.cells=i%10;//每行就是当前的i取模
+					li.rows=parseInt(i/10);//记得行就parseInt、10
+					li.style.backgroundPosition = -li.cells*liW+"px -"+(li.rows*liH)+"px";//注意在这里字符串拼接的时候不要有空格
+					//这里给li添加背景定位的时候需要是从-的开始每行每列和他的 宽高相乘
+					li.onclick=function(){//点击每个li的时候。循环uli西面所有的子集，记录下当前每个li距离当前点击的li是第几行
+						/*点击拿到当前是第几行，第几列*/
+						for(var i=0;i<chils.length;i++){
+							var disX=chils[i].cells-this.cells;
+							var disY=chils[i].rows-this.rows;
+						    fire(chils[i],disX,disY)//给每个li都加上点击的事件
+						}
+					}
+					
+					
+					list.appendChild(li);//最后天津父级里完成结构
+					
+				}
+				function fire(el,disX,disY){//
+					/*因为有负有正所有取绝对值*/
+					var delay=Math.abs(disX)+Math.abs(disY);//因为文档中所有的都是负数。也就是说负负得正。会影响每个li运动的走向。所以在此需绝对值。
+					//console.log(delay)
+					disX=disX==0?.5:disX;//这里判断等于0，是为了避免2个元素相近。中间li会出现+形状的背景，不发生运动。所以在此给判断。
+					disY=disY==0?.5:disY;
+					var rotateY=disY/Math.abs(disY)*720;
+					//分别旋转X轴和Y轴，旋转的角度同样为绝对值
+					var rotateX=disX/Math.abs(disX)*720;
+					var translateY=disY/Math.abs(disY)*(9-Math.abs(disY))*10;
+					//这里，比如是8；位移Y=8/8*(9-8)*10
+					var translateX=disX/Math.abs(disX)*(9-Math.abs(disX))*10;
+					setTimeout(function(){//开启定时器
+						mTween(el,{//设置的元素
+							opacity:0,//透明度变成0；、、透明度
+							translateX:translateX,//位移的X轴、、位移轴、x
+							translateY:translateY,
+							translateZ: 200,//z轴200
+							rotateY:rotateY,
+							rotateX:rotateX
+						},delay*400+100,"easeOut");
+					},delay*40)
+					
+					
+				}
+				
+			})()
+			
+		</script>
+	</body>
+</html>

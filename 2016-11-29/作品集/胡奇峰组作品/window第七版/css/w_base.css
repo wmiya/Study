@@ -1,0 +1,239 @@
+#w_box{
+		width: 250px;
+		height: 410px;
+		box-shadow: 0 0 10px #000;
+		font-family: "微软雅黑";
+		border-radius: 5px;
+		position: absolute;
+		left: 40%;
+		top: 100px;
+		background: #fff;
+		font-size: 14px;
+		transform:scale(0);
+		opacity: .7;
+	}
+	.w_title{
+		width: 100%;
+		height: 50px;
+		line-height: 50px;
+		background: #212830;
+		color: #fff;
+		font-size: 16px;
+		padding: 0 8px;
+		box-sizing: border-box;
+		cursor: default;
+		border-radius: 5px 5px 0 0 ;
+	}
+	.w_close,.w_aclose{
+		width: 30px;
+		height: 30px;
+		float: right;
+		cursor: pointer;
+		text-align: center;
+		border-radius:50%;
+		margin-top: 10px;
+		line-height: 30px; 
+		
+	}
+	.w_left ul,.w_left li{
+		margin: 0;
+		padding:0;
+		list-style: none;
+	}
+	.w_left h2{
+		margin: 0;
+		cursor: pointer;
+	}
+	.w_left{
+		width: 250px;
+		height: 360px;
+		background: #373b47;
+		float: left;
+		overflow-y: auto;
+		color: #adb5c2;
+		border-radius: 0 0 0 5px;
+	}
+	.w_left>ul>li{
+		border-bottom: #4a4e5a 1px solid;
+		
+	}
+	.w_left>ul>li>h2{
+		height: 45px;
+	    line-height: 45px;
+	    font-weight: 400;
+	    font-size: 14px;
+	    padding-left: 10px;
+	}
+	.w_left ul ul{
+		background: #212830;
+	}
+	.w_left ul ul li h2{
+		height: 40px;
+	    line-height: 40px;
+	    font-weight: 300;
+	    font-size: 14px;
+	    padding-left: 15px;
+	    color: #6e808e;
+	}
+	.w_left ul ul li{
+		height: 40px;
+		line-height: 40px;
+		padding-left: 10px;
+	}
+	.w_left ul ul{
+		/*display: none;*/
+		height: 0;
+		overflow: hidden;
+	}
+	/*.w_left ul ul h2{
+		display: inline-block;
+	}*/
+	.w_left>ul>li>h2>span{
+		float: left;
+		margin-right: 8px;
+		display: inline-block;
+		font-size: 16px;
+	}
+	.w_left ul ul span{
+		float: right;
+		margin-right: 8px;
+		display: inline-block;
+		font-size: 14px;
+	}
+	.w_right{
+		float: left;
+		display: none;
+		padding: 20px 0;
+    	height: 320px;
+    	overflow-y: auto;
+    	background: #fff;
+    	overflow-x: hidden;
+	}
+	.w_right .w_edit,.w_right .w_check{
+		display: none;
+		font-size: 14px;
+	}
+	.w_right .w_edit{
+		font-size: 14px;
+    	font-family: "微软雅黑";
+	}
+	.w_right .w_edit div,.w_right .w_check div{
+		width: 400px;
+		padding: 0 25px;
+		margin-bottom: 10px;
+		word-break: break-all;
+	}
+	.w_right div.w_bian{
+		text-align: right;
+	}
+	.w_rtitle select{
+		width: 100px;
+	    height: 35px;
+	    font-size: 14px;
+	    border-radius: 3px;
+	    border: #242729 1px solid;
+	    box-shadow: 0 0 2px #ccc;
+	}
+	.w_caption input{
+		width: 330px;
+    	height: 35px;
+    	line-height: 35px;
+    	border-radius: 3px;
+	    border: #242729 1px solid;
+	    box-shadow: 0 0 2px #ccc;
+	    padding: 0 5px; 
+	}
+	.w_right .w_time input{
+		width: 47px;
+		height: 25px;
+    	margin-right: 2px;
+    	border-radius: 3px;
+	    border: #242729 1px solid;
+	    box-shadow: 0 0 2px #ccc;
+	    text-align: center;
+	}
+	.w_content textarea{
+		width: 330px;
+	    height: 112px;
+	    resize: none;
+	    border-radius: 3px;
+	    border: #242729 1px solid;
+	    box-shadow: 0 0 2px #ccc;
+	    padding: 5px;
+	}
+	.w_edit div.w_button{
+		width: 180px;
+		margin: 0 auto;
+	}
+	.w_button button{
+		width: 80px;
+		height: 35px;
+		line-height: 35px;
+		background: #58585d;
+	    color: #fff;
+	    border: 0;
+	    margin-right: 10px;
+	    border-radius: 5px;
+	    font-size: 14px;
+    	font-family: "微软雅黑";
+    	cursor: pointer;
+    	opacity: .8;
+	}
+	.w_bian a{
+		color: #000;
+		width: 45px;
+	    display: inline-block;
+	    height: 25px;
+	    line-height: 25px;
+	    border: #000 1px solid;
+	    text-decoration: none;
+	    text-align: center;
+	    border-radius: 3px;
+	    font-size: 12px;
+	}
+	.w_attention{
+		width: 400px;
+		height: 200px;
+		box-shadow: 0 0 10px #000;
+		font-family: "微软雅黑";
+		border-radius: 5px;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		margin: -100px 0 0 -200px;
+		background: #fff;
+		display: none;
+		font-size: 14px;
+	}
+	.w_atitle{
+		height: 40px;
+		line-height: 40px;
+		background: #212830;
+		border-radius: 5px 5px 0 0;
+		color: #fff;
+		text-align: center;
+		font-size: 18px;
+		padding: 0 8px;
+		box-sizing: border-box;
+	}
+	.w_aclose{
+		margin-top: 5px;
+	}
+	.w_acont{
+		padding: 15px 20px;
+	}
+	.w_acont div{
+		margin-bottom: 8px;
+		word-break: break-all;
+	}
+	.w_remain{
+		width: 130px;
+	    height: 0px;
+	    line-height: 40px;
+	    display: inline-block;
+	    background: #56eb56;
+	    text-align: center;
+	    border-radius: 0 0 8px 8px;
+	    color: #fff;
+	    opacity: .5;
+	}

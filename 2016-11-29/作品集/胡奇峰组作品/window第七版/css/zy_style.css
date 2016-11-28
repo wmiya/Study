@@ -1,0 +1,91 @@
+/*清除默认样式*/
+body,p,h1,h2,h3,h4,h5,h6,dl,dd,textarea,select,from,input,a{margin:0;padding:0;font-family:"Helvetica";}
+ol,ul{list-style:none;padding:0;margin:0;}
+a{text-decoration:none;}
+img{border:none;vertical-align:top;}
+.clearFix{zoom:1}
+.clearFix:after{content:"";display:block;clear:both;}
+td,th{padding:0;}
+table{border-collapse:collapse;}
+/*清除默认样式结束*/
+#zy_desktop{
+	position: relative;
+	overflow: hidden;
+	background: url(../img/zy_Bg.jpg);
+	background-size: 1366px 662px;
+}
+.zy_ico{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 72px;
+	height: 92px;
+}
+.zy_ico_act{
+	opacity: 0.7;
+	background-Color: deepskyblue;
+}
+.zy_ico i{
+	display: block;
+	width: 72px;
+	height: 72px;
+	background: url(../img/zy_2.png) no-repeat;;
+}
+.zy_ico p{
+	font-size: 12px;
+	font-family: "微软雅黑";
+	line-height: 20px;
+	text-align: center;
+	color: #fff;
+}
+#zy_clouds i{
+	background: url(../img/zy_5.png) no-repeat;
+}
+#zy_game i{
+	background: url(../img/zy_4.png) no-repeat;
+}
+#zy_game a{
+	color: #fff;
+}
+#zy_photo i{
+	background: url(../img/zy_1.png) no-repeat;
+}
+#zy_music i{
+	background: url(../img/zy_3.png) no-repeat;
+}
+#zy_book i{
+	background: url(../img/zy_6.png) no-repeat;
+}
+#menu{
+	position: absolute;
+}
+#menu li{
+	width: 150px;
+	height: 26px;
+	font-size: 14px;
+	font-family: "微软雅黑";
+	color: #000;
+	text-indent: 30px;
+	line-height: 26px;
+	background: darkgray;
+}
+#menu li:hover{
+	background: darkblue;
+	color: #fff;
+}
+#menu li:nth-child(1){
+	border-bottom: 1px solid #fff;
+}
+#menu li:nth-child(2){
+	border-bottom: 1px solid #fff;
+}
+#menu li:nth-child(3){
+	border-bottom: 1px solid #fff;
+}
+.dheckBox{
+	position: absolute;
+	background: lightblue;
+	opacity: 0.4;
+	border: 1px solid #lightblue;
+}
+

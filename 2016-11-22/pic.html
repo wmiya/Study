@@ -165,7 +165,6 @@
 							}
 							
 							brr.forEach(function(e,i){//e=素组里每一项
-								
 								var a=e.offsetLeft-obj.offsetLeft;
 								var b=e.offsetTop-obj.offsetTop;
 								var sqrt=Math.sqrt(a*a+b*b);
@@ -174,7 +173,7 @@
 									objIndex2=e;//注意，这里的objIndex2是指数组的每一个，也就是最近 的那个
 								}
 							})
-							console.log(objIndex)
+							//console.log(objIndex)
 							if(objIndex){
 								objIndex.className="";
 							}
@@ -202,13 +201,13 @@
 									clearTimeout(objIndex.timer);
 									
 								},501)
-								
+							
 							}else{
 								obj.style.transition=".5s";
-								obj.style.left=arr[i].left+"px";
-								obj.style.top=arr[i].top+"px";
+								obj.style.left=arr[obj.index].left+"px";
+								obj.style.top=arr[obj.index].top+"px";
 							}
-							
+							//console.log(arr[i])
 							document.removeEventListener("mousemove",fnMove);
 							document.removeEventListener("mouseup",fnUp);
 						}

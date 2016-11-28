@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		mark {
+			margin: 0 5px;
+		}
+	</style>
+</head>
+<body>
+<section class="wrap">
+	<div id="selector">
+		你的选择:
+	</div>
+	<ul>
+		<li>
+			品牌：
+				<a href="javascript:;">北京陶然网瘾戒除</a>
+				<a href="javascript:;">山东戒网瘾学校</a>
+				<a href="javascript:;">戒网瘾新未来</a>
+		</li>
+		<li>
+			方法：
+				<a href="javascript:;">电击</a>
+				<a href="javascript:;">杨永信</a>
+		</li>
+		<li>
+			电力：
+				<a href="javascript:;">30v</a>
+				<a href="javascript:;">40v</a>
+				<a href="javascript:;">50v</a>
+				<a href="javascript:;">220v瞬间根治</a>
+		</li>
+	</ul>
+</section>
+<script type="text/javascript">
+(function(){
+	var ul = document.querySelector('ul');//获取当前ul
+	var lis = ul.querySelectorAll('li');//获取当前所有的li
+	var option = ul.querySelectorAll('a');//获取所有的a标签
+	var selector = document.querySelector('#selector');//获取存放声称能的元素
+	var arr = [];//建立空的数组
+	for(var i = 0; i < lis.length; i++){//循环所有的 li，记录下当前的索引
+		lis[i].index = i;
+	}//获取当前
+	/*
+		生成一个节点
+		添加节点中的内容
+		把节点放在数组对应位
+		清除之前的内容
+		根据数组再重新生成
+	*/
+	for(var i = 0; i < option.length; i++){//循环所有的 a标签
+		option[i].onclick = function(){//点击任意一个的时候发生的事情
+			var pid = this.parentNode.index;//找出被点击的元素他父级的索引记录下来
+			var mark = document.createElement("mark");//创建元素
+			var a = document.createElement("a");//创建删除元素
+			var isReplace = false;//给当前开关
+			a.href = "javascript:;";//给发a标签加上#
+			a.innerHTML = "x";//给a标签加上删除按钮
+			a.onclick = function (){//最后点击当前a标签的时候。
+				
+				selector.removeChild(mark);//删除当前内容
+				arr[pid] = "";//清空数组
+			};
+			mark.innerHTML = this.innerHTML;//创建元素的内容就是当前我点击元素的内容
+			mark.appendChild(a);//此时添加a标签
+			arr[pid] = mark;//把pid的徐序列号添加到数组里
+			//console.log(arr);
+			selector.innerHTML = "你的选择:";//这里需要清空存放生辰元素的内容
+			for(var i = 0; i < arr.length; i++){//循环数组。
+				if(arr[i]){//判断数组里有内容的话。就进行添加 
+					selector.appendChild(arr[i]);
+				}
+			}
+		};
+	}
+})();
+</script>
+</body>
+</html>

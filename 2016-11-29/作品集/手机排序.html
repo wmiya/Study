@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+	td{
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+<table width="300" align="center" border="1">
+	<thead>
+		<th>商品</th>
+		<th>价格</th>
+		<th>操作</th>
+	</thead>
+	<tbody>
+		<tr>
+			<td>苹果</td>
+			<td>3700</td>
+			<td>
+				<input type="button" value="上移">
+				<input type="button" value="下移">
+			</td>
+		</tr>
+		<tr>
+			<td>锤子</td>
+			<td>2499</td>
+			<td>
+				<input type="button" value="上移">
+				<input type="button" value="下移">
+			</td>
+		</tr>
+		<tr>
+			<td>小米</td>
+			<td>3299</td>
+			<td>
+				<input type="button" value="上移">
+				<input type="button" value="下移">
+			</td>
+		</tr>
+		<tr>
+			<td>坚果</td>
+			<td>799</td>
+			<td>
+				<input type="button" value="上移">
+				<input type="button" value="下移">
+			</td>
+		</tr>
+		<tr>
+			<td>桔子</td>
+			<td>1799</td>
+			<td>
+				<input type="button" value="上移">
+				<input type="button" value="下移">
+			</td>
+		</tr>
+		<tr>
+			<td>梨子</td>
+			<td>1199</td>
+			<td>
+				<input type="button" value="上移">
+				<input type="button" value="下移">
+			</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<td>价格排序</td>
+		<td><input type="button" value="从高到低"></td>
+		<td><input type="button" value="从低到高"></td>
+	</tfoot>
+</table>
+<script type="text/javascript">
+(function(){
+	var table = document.querySelector('table');//首先获取table；整个表单
+	var tbody = table.tBodies[0];//获取表格内容区域
+	var tFoot = table.tFoot;//获=获取标底
+	var rows = tbody.rows;//获取每行
+	//console.log(rows)
+	
+	var btns = tFoot.querySelectorAll('input');//获取标底的所有input
+	var prevs = document.querySelectorAll('input[value="上移"]');//拿到所有事上移的元素
+	var nexts = document.querySelectorAll('input[value="下移"]');
+	var rowsArr = [];//声明一个空的数组
+	for(var i = 0; i < prevs.length; i++){//循环所有上移的元素都添加到数组中
+		rowsArr.push(rows[i]);//现将没行的
+		prevs[i].onclick = function(){//当点击任意一个上移的时候发生的事件
+			var tr = this.parentNode.parentNode;//声明变量记录当前他父级的父级
+			var prevTr = tr.previousElementSibling;//找打他的上一个兄弟节点
+			//console.log(prevTr);
+			if(prevTr){//如果存在兄弟节点。
+				tbody.insertBefore(tr,prevTr);//就在他添加到他兄弟节点之前
+			} else {
+				tbody.appendChild(tr);//否则直接在表身添加
+			}
+			/*
+			tbody.insertBefore(tr,prevTr);当prevTr为空的时候，在标准下 insertBefore就会把添加进去的元素 放在父级的末尾
+			*/
+		};
+		nexts[i].onclick = function(){//判断他有没有下一个有兄弟节点 
+			var tr = this.parentNode.parentNode;
+			var nextTr = tr.nextElementSibling;
+			if(nextTr){
+				tbody.insertBefore(nextTr,tr);//有。就添加到他下一个兄弟解耦单后边
+			} else {
+				tbody.insertBefore(tr,rows[0]);//否则。添加到第一个。一条龙是循环
+			}
+		};
+	}
+	btns[0].onclick = function(){//排序
+		rowsArr.sort(function(tr1,tr2){
+			var ceils1 = tr1.cells[1].innerHTML;//每行的第2个的内容用变量储存下来。依次相减，最后会形成一个新的数组
+			var ceils2 = tr2.cells[1].innerHTML;
+			return ceils2 - ceils1;
+		});
+		//console.log(rowsArr);
+		for(var i = 0; i < rowsArr.length; i++){//循环得到新的数组。进行从新排序
+			tbody.appendChild(rowsArr[i]);
+			//alert(i);
+		}
+	};
+	btns[1].onclick = function(){
+		rowsArr.sort(function(tr1,tr2){
+			var ceils1 = tr1.cells[1].innerHTML;
+			var ceils2 = tr2.cells[1].innerHTML;
+			return ceils1 - ceils2;
+		});
+		//console.log(rowsArr);
+		for(var i = 0; i < rowsArr.length; i++){
+			tbody.appendChild(rowsArr[i]);
+			//alert(i);
+		}
+	};
+})();
+</script>	
+</body>
+</html>

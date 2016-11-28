@@ -1,0 +1,224 @@
+@charset "utf-8";
+/* CSS Document */
+
+li{list-style:none;}
+body,p,h1,h2,h3,h4,h5,h6,dl,dd{margin:0;padding:0; font-family:"宋体";}
+ol,ul{list-style:none;padding:0;margin:0;}
+a{text-decoration:none;}
+img{border:none;vertical-align:top;}
+
+.clear:after{
+	content:"";
+	clear:both;
+	display:block;
+}
+from {margin:0;}
+input { margin:0;padding:0;outline:none;}
+textarea{margin:0; padding:0; resize:none;overflow:auto;outline:none;}
+.Ybody{
+	height:680px;
+	overflow: hidden;
+}
+#Ytop{
+	margin:100px 500px;
+}
+#Ytop{
+	font:22px/24px "微软雅黑";
+}
+#Ytop p{
+	color:red;
+}
+#Ybox{
+	margin:100px 200px;
+	display:none;
+}
+
+.Yleft{
+	position:relative;
+	float:left;
+	width:137px;
+	height:420px;
+}
+
+.Ycon{
+	width:137px;
+	height:337px;
+	background:#010101;
+	position:relative;
+}
+.Ytd{
+	display:inline-block;
+	position:relative;
+}
+.Ytd li{
+	float:left;
+}
+
+.Yw{
+	width:21px;
+	height:330px;
+	color:#fff;
+}
+.Yb{
+	width:15px;
+	height:330px;
+	color:#fff;
+}
+.Yy{
+	width:22px;
+	height:330px;
+	color:#fff;
+}
+.Yline{
+	position:absolute;
+	left:0;
+	bottom:0;
+	width:135px;
+	height:3px;
+	background:#ad0b18;
+	border:1px solid #65060a;
+	box-shadow: 0px -1px 10px red;
+}
+
+.Ylist{
+	height:33px;
+	width:137px;
+	border-top:2px solid #5d544d;
+	background:#000;
+}
+
+.Ylist li {
+	float:left;
+}
+
+.Ywite{
+	width:21px;
+	height:33px;
+	background:url(../img/wite.png) no-repeat;
+	font:12px/12px arial;
+	text-align: center;
+	padding: 10px 0 0 0 ;
+	opacity: 0.7;
+}
+.Yblue{
+	width:15px;
+	height:33px;
+	background:url(../img/blue.png) no-repeat;
+	background-size:15px 33px;
+	font:12px/12px arial;
+	text-align: center;
+	padding: 10px 0 0 0 ;
+	opacity: 0.7;
+}
+.Yspace{
+	width:23px;
+	height:33px;
+	background:url(../img/yellow.png) no-repeat;
+	font:12px/12px arial;
+	text-align: center;
+	padding: 10px 0 0 0 ;
+	opacity: 0.7;
+}
+.Yright{
+	float:left;
+	width:423px;
+	height:339px;
+	background:url(../img/right.jpg) no-repeat;
+	position:relative;
+}
+.Yrbk{
+	position:absolute;
+	left:0;
+	top:0;
+	width:17px;
+	height:339px;
+	background:url(../img/biankuang.png) no-repeat;
+}
+
+.Yspanw{
+	position:absolute;
+	left:0;
+	top:0;
+	background:url(../img/witeT.png) no-repeat;
+	width:20px;
+	height:5px;
+}
+
+.Yspanb{
+	position:absolute;
+	left:0;
+	top:0;
+	background:url(../img/blueT.png) no-repeat;
+	width:15px;
+	height:5px;
+}
+
+.Yspany{
+	position:absolute;
+	left:0;
+	top:0;
+	background:url(../img/yellowT.png) no-repeat;
+	width:21px;
+	height:5px;
+}
+
+.Yren{
+	position:absolute;
+	width:154px;
+	height:189px;
+	background:url(../img/renwu.png) no-repeat;
+	left:38%;
+	top:70%;
+	background-size:100px 100px;
+}
+
+.Ylife{
+	position:absolute;
+	width:230px;
+	height:10px;
+	left:25%;
+	top:60%;
+	color:deepskyblue;
+}
+
+.Ylife span{
+	color:red;
+}
+
+.Yfen{
+	position:absolute;
+	left:30%;
+	top:30%;
+	font:30px/30px "微软雅黑";
+	color:darkturquoise;
+}
+
+.Ymusic{
+	opacity: 0;
+}
+
+.Ymiss{
+	position:relative;
+	font:12px/12px "微软雅黑";
+	bottom:-310px;
+	left:0;
+}
+
+.Ygood{
+	position:relative;
+	font:12px/12px "微软雅黑";
+	bottom:-310px;
+	left:0;
+}
+
+.Ymiddle{
+	position:absolute;
+	left:34%;
+	top:30%;
+	width:50px;
+	height:24px;
+	background:url(../img/cool.jpg) no-repeat;
+	z-index: 2;
+	background-size:50px 24px;
+	display:none;
+}
