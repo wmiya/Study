@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div{
+				width: 100px;
+				height: 100px;
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div"></div>
+		<script src="jquery-3.1.1.js"></script>
+		<script>
+			var $div=$('#div');
+			$div.css({
+				width:200,
+				height:200,
+				background:'green'
+			})
+		</script>
+	</body>
+</html>
