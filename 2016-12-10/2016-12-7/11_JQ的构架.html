@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	
+	/*
+		无new化操作。（别人在使用这个jquery的时候不用new）
+		
+	*/
+	
+	(function(){
+		function Jquery(){
+			
+//			new Jquery   //自己调用自己就变死循环了
+			return new Jquery.init();//返回这个init方法，避免死循环
+		}
+		
+//		Jquery原型下的方法
+		Jquery.prototype = {//配置参数
+//			constructor:Jquery,//改变他 的构造函数
+			css:function(){
+				console.log(1)
+			},
+			html:function(){
+				
+			}
+			
+		}
+		
+		//Jquery创建一个方法,这个方法的目的是为了无new化操作（不会让自己调用自己）
+		Jquery.init = function(){
+			
+		}
+		
+		//访问Jquery.init实例化对象的方法能直接访问到Jquery下的方法
+		Jquery.init.prototype = Jquery.prototype;//让对象的原型等于当前Jquery的原型
+		
+		//因为闭包了外界是访问不到里面的方法的，通过将对象挂在window下，所有空间都能访问到Jquery对象
+		window.$ = Jquery;
+	})();
+	
+	/*
+		j.css ->  Jquery.init.prototype -> Jquery.prototype
+	*/
+	
+	var j = $();
+
+	//console.log(Jquery);
+	
+</script>
+</body>
+</html>

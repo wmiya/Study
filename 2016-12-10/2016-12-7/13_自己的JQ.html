@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<script src="sizzle.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<ul>
+		<li style="width:100px" id="li">111</li>
+		<li class="li">222</li>
+		<li>333</li>
+		<li class="li">444</li>
+		<li class="li">555</li>
+	</ul>
+<script src="sizzle.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	(function(global,factory){//形参global,factory)
+		factory(global);//调用第一个，第二个就是undefined
+	})(typeof window !== 'undefined'?window:this,function(global,noGlobal){
+		//判断当前是不是window环境下如果不是就让他是window环境。不是就让他是当前的这个，另一个参数就是个函数
+		function jQuery (selector){//引进来一个方法
+			return new jQuery.init(selector);//返回一个参数
+		}
+		
+		jQuery.prototype = {//原型等于一个对象
+			css:function(){
+				var obj = Object.prototype.toString;//是
+//				console.log(obj)
+			
+				if(arguments.length == 1){//判断当前css的属性长度为1的情况下
+					//是对象的情况下批量设置
+					if(obj.call(arguments[0]) === '[object Object]'){//是对象的情况下进行设置
+						for(var i=0;i<this.length;i++){//循环数组的长度
+							for(var attr in arguments[0]){//如果是对象的情况下。再次循环里面的内容
+								this[i].style[attr] = arguments[0][attr]//当前样式的值就是每一项的样式
+							}
+						}
+					}else{
+						//获取
+						//console.log(this)
+						//否则就是获取的时候
+						return this[0].style[arguments[0]];
+					}
+				}
+			}
+		}
+		
+		jQuery.init = function(selector){//selector这里是个对象
+			//判断如果当前如果是个函数。就的dom加载完成之后执行下面的函数
+			if(typeof selector === 'function'){
+				document.addEventListener('DOMContentLoaded',selector)
+			}else{//如果不是一个函数
+				//判断如果是个对象，就用Sizzle获取他，放心数组里。
+				var arr = Sizzle(selector);//就获取这个元素存到对象arr是个对象
+				//
+				for(var i=0;i<arr.length;i++){//循环对象。
+					this[i] = arr[i];//赋值
+				}
+				
+				this.length = arr.length;//把长度和序号给他
+			}
+		}
+		
+		jQuery.init.prototype = jQuery.prototype;//方法赋值
+		
+		window.$ = jQuery;
+		//因为闭包了外界是访问不到里面的方法的，通过将对象挂在window下，所有空间都能访问到Jquery对象
+		
+	});
+	
+$(function(){
+	//console.log($('li'))//.css()
+	/*
+		{
+			0:li,
+			1:li,
+			length:2
+		}
+	*/
+//	console.log($('li'))
+	//console.log()
+	
+//	$('#li').css('width')
+
+//	$('#li').css({
+//		width:'100px',
+//		height:'100px',
+//		background:'red'
+//	})
+
+	$('li').css({
+		width:'100px',
+		height:'100px',
+		background:'red'
+	});
+	
+	//console.log($($('li')[0]).css('width'))
+	
+});
+</script>
+</body>
+</html>

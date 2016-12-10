@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			ul{
+				position: relative;
+			}
+			li{
+				padding: 10px;
+				/*transition:.5s top;*/
+			}
+		</style>
+	</head>
+
+	<body>
+		<ul id="oUl">
+			<li>
+				<span>啦啦啦啦 1</span>
+				<input type="button" value="上移" class="pre">
+				<input type="button" value="下移" class="next">
+			</li>
+			<li>
+				<span>哈哈哈哈 2</span>
+				<input type="button" value="上移" class="pre">
+				<input type="button" value="下移" class="next">
+			</li>
+			<li>
+				<span>嘿嘿额和 3</span>
+				<input type="button" value="上移" class="pre">
+				<input type="button" value="下移" class="next">
+			</li>
+			<li>
+				<span>呱呱呱呱 4</span>
+				<input type="button" value="上移" class="pre">
+				<input type="button" value="下移" class="next">
+			</li>
+			<li>
+				<span>哥哥哥哥 5</span>
+				<input type="button" value="上移" class="pre">
+				<input type="button" value="下移" class="next">
+			</li>
+		</ul>
+<script src="jquery-1.11.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var arr = [];
+	//布局转换
+	$('li').each(function(i,e){
+		arr[i] = {
+			left:$(e).offset().left,
+			top:$(e).offset().top
+		}
+		$(e).css({
+			left:$(e).offset().left,
+			top:$(e).offset().top
+		})
+
+		$(e).attr('index',i);
+
+	});
+	$('li').css({position:'absolute'});
+
+
+	//下移：
+	$('.next').click(function(){
+		var _this = $(this);
+		console.dir(_this)
+		if($(this).parent().next().length){  //如果有下一个兄弟的话
+			var index = $(this).parent().attr('index');  //获取li的index
+			var nIndex = $(this).parent().next().attr('index');  //下一个li的index
+
+			$(this).parent().stop().animate({
+				top:arr[nIndex].top   //当前的这个li的top等于下一个兄弟的li的top
+			},function(){
+				_this.parent().insertAfter(_this.parent().next());//那么就把它添加当下一个兄弟的后面
+			});
+			$(this).parent().next().stop().animate({
+				top:arr[index].top    //下一个兄弟的top值=当前点击的这个li的top值
+			});
+
+			$(this).parent().next().attr('index',index);  //然后在把他们的索引值交换
+			$(this).parent().attr('index',nIndex);
+		}else{
+			//var f = $('li').first().attr('index');   //获取第一个li的index
+			$('#oUl').prepend(_this.parent());    //把当前这个添加添加到ul的开头
+			$('li').each(function(i,e){    //循环所有的li
+				$(e).attr('index',i);     //重新在设置一下li的index
+				(function(i){
+					$(e).stop().animate({
+						top:arr[i].top     //li[i].top=数组中的每一个
+					});
+				})(i);
+			});
+		}
+	});
+
+
+</script>
+</body>
+</html>
