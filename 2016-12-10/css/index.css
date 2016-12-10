@@ -1,0 +1,113 @@
+  body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    dl,
+    dd,
+    p{
+
+      margin:0;
+     /* font-size: 12px;*/
+     /* font-family: arial，"微软雅黑";*/
+     /* color: #666666;*/
+    }
+    ul{
+      margin:0;
+      padding:0;
+      list-style: none;
+    }
+    em,
+    i{
+    	font-style: italic;
+      font-style: normal;
+    }
+    li {
+      vertical-align: top;
+    }
+    a{
+      text-decoration: none;
+    }
+    img{
+      border:none;
+      vertical-align:top;
+    }
+    submit,
+    input{
+    	-webkit-appearance:none;
+    	outline:none;
+    	border:none;
+    	background:none;
+    	margin:0;
+    	padding:0;
+    }
+    .clearfix:after{
+      content: "";
+      clear:both;
+      display: block;
+    }
+   #wrap{
+   	width: 100%;
+   	
+   }
+		#nav{
+				width: 100%;
+				background: #3083eb;
+				height: 57px;
+		}
+			#nav .log{
+				display: inline-block;
+				width: 199px;
+				height: 57px;
+				float: left;
+				background: url(../img/log.png) no-repeat center;
+			}
+    	#nav .list{
+    			float: left;
+    			width: 267px;
+    			font: 18px/55px "微软雅黑";
+    			color: #fff;
+    	}
+			#nav .list li{
+				float: left;
+				width: 87px;
+				text-align: center;
+			}
+				#nav .list li a{
+					color: #fff;
+				}
+				.show{
+					background: #1d74e0;
+					border: 1px solid #1968ca;
+				}
+				#nav	.navRt{
+					width: 280px;
+					float: right;
+					margin-right: 38px;
+					font: 12px/57px "微软雅黑";
+				}
+        #nav	.navRt a{
+        	color: #accdf7;
+        	padding:0 10px ;
+        	display: inline-block;
+        	float: left;
+        }
+        #nav  .user i{
+        	display: inline-block;
+        }
+				 #nav  .user i:nth-of-type(1){
+				      	background:url(../img/2.png) no-repeat center;
+				      	width:32px;
+				      	height: 32px;
+				      	margin-top: 12px;
+				      	
+				   }
+					#nav  .user i:nth-of-type(2){
+				      	background:url(../img/3.png) no-repeat center;
+				      	width:10px;
+				      	height: 6px;
+				      	margin:10px 0 15px 15px;
+				      	
+				 }
