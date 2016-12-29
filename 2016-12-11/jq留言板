@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+body,
+p {
+	margin: 0;
+}	
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+input,
+textarea {
+	border: 1px solid #999;
+	padding: 0;
+	margin: 0;
+	display: block;
+	outline: none;
+}
+textarea {
+	resize: none;
+	overflow: auto;
+}
+#wrap {
+	width: 400px;
+	padding: 10px;
+	background: #ddd;
+	border: 1px solid #999;
+	margin: 30px auto;
+	font: 16px/30px "宋体";
+}
+#message input,
+#message  textarea {
+	width: 100%;
+	height: 30px;
+	padding: 2px 5px;
+	box-sizing: border-box;
+	background: #fff;
+}
+#message  textarea{
+	height: 90px;
+	margin: 10px 0;
+}
+.messageHeader {
+	margin-top: 10px;
+	background: #ccc;
+	padding: 0 5px;
+}
+.list li {
+	background: #fff;
+	border-bottom: 1px solid #999;
+	font-size: 12px;
+}
+.list header {
+	background: #f1f1f1;
+	padding: 0 5px;
+	height: 30px;
+}
+.list span {
+	float: left;
+}
+.list time {
+	float: right;
+}
+.list p {
+	padding: 5px;
+	line-height: 24px;
+}
+#info {
+	background: #fefefe;
+	font: 14px/100px "宋体";
+	text-align: center;
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+	<div id="message">
+		<input type="text" placeholder="请输入您的名字" class="txt">
+		<textarea placeholder="请输入留言内容" class="txtaea"></textarea>
+		<input type="button" value="提交留言" class="btn">
+	</div>
+	<div id="messageList">
+		<header class="messageHeader">显示留言</header>
+		<div id="info">-- 抢沙发了 --</div>
+		<ul class="list">
+		</ul>
+	</div>
+</div>
+<script src="jquery-3.1.1.js"></script>
+<script src="sizzle.js"></script>
+<script>
+	$(function(){
+		$('.btn').click(function(){
+			var txt=$('.txt').val();
+			
+			var txtaea=$('.txtaea').val();
+			console.log(txtaea,txt)
+			if(!$('.txt').val()||!$('.txtaea').val()){
+				alert("留些信息吧！");
+				return;
+			}
+			var src='<li><header><span>'+txt+'</span><time>'+getTime()+'</time></header><p>'+txtaea+'</p></li>';
+//			
+			$('.list').html($('.list').html()+src);
+			$('.txt').val("");
+			$('.txtaea').val("");
+			$('#info').hide()
+			
+		})
+			function setDB(nub){
+				return nub < 10? "0"+nub:""+nub;
+			}
+		
+			
+		function getTime(){
+			var date = new Date();
+			//console.log(date)
+			var year = date.getFullYear();
+			var month = setDB(date.getMonth()+1);
+			var day = setDB(date.getDate());
+			var hours = setDB(date.getHours());
+			var minutes = setDB(date.getMinutes());
+			return year+"-"+month+"-"+day+" "+hours+":"+minutes;
+		
+		}
+	})
+</script>
+</body>
+</html>

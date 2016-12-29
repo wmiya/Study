@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#box{
+				width:100px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100px;
+				background: pink;
+			}
+			#box2{
+				width:100px;
+				position: absolute;
+				top:100px;
+				left: 100px;
+				height: 100px;
+				background: skyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="box2"></div>
+		<script>
+			function Darg(id){
+				this.box=document.querySelector(id);
+				this.disX=0;
+				this.disY=0;
+				this.settings={
+					d:function(){},
+					m:function(){},
+					u:function(){}
+				}
+			}
+			Darg.prototype.init=function(json){
+				var _this=this;
+				for(var attr in json){
+					this.settings[attr]=json[attr];
+				}
+				this.box.addEventListener("mousedown",down)
+				function down(e){
+					_this.settings.d.call(_this);
+					_this.fnDown(e);//,down,
+				}
+			}
+			Darg.prototype.fnDown=function(e){
+				var _this=this;
+				this.disX=e.pageX-this.box.offsetLeft;
+				this.disY=e.pageY-this.box.offsetHeight;
+				document.addEventListener("mousemove",move);
+				document.addEventListener("mouseup",up);
+				function move(e){
+					_this.settings.m.call(_this);
+					_this.fnMove(e);
+				}
+				function up(){
+					_this.settings.u.call(_this);
+					_this.fnUp(move,up);
+				}
+				e.preventDefault();
+			}
+			
+			Darg.prototype.fnMove=function(e){
+				this.box.style.left=e.pageX-this.disX+"px";
+				this.box.style.top=e.pageY-this.disY+"px"
+			}
+			Darg.prototype.fnUp=function(move,up){
+				document.removeEventListener("mousemove",move);
+				document.removeEventListener("mouseup",up);
+			}
+			var t1=new Darg('#box');
+			var t2=new Darg('#box2');
+			t1.init();
+			t2.init({
+				u:function(){
+					this.box.style.border="none"
+				},
+				d:function(){
+					this.box.style.border="3px dashed #000"
+				}
+			})
+		</script>
+	</body>
+</html>

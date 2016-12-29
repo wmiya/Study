@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<!--<form action="php/get.php" method="get">-->
+	用户名:<input name="user" type="text"><span id="s"></span><br /><br />
+	<!--密 码:<input name="pass" type="password"><br />-->
+	<input type="button" value="提交" id="btn"/>
+<!--</form>-->
+<script type="text/javascript">
+
+	var btn = document.getElementById('btn');//获取带年纪i按钮
+	var s = document.getElementById('s');//拿到span的位置
+	var user = document.getElementsByTagName('input')[0];//拿到输入内容的值
+	user.onblur = function(){//当失去焦点的时候
+		var val = user.value;//拿到input的值
+		ajax(//带哦用子集封装的方法。使用
+			'get',//方式就是get获取
+			'php/get.php',//地址
+			'user='+encodeURI(val),//需要修改的内容
+			function(str){//成功后凡湖的函数值
+				console.log(str);
+			},
+			function(err){//没有成功做得事情
+				console.log(err);
+			}
+		);
+	}
+	
+	
+	function ajax(method,url,val,succ,fail){//传参的方式。地址，内容。成功，失败
+		var ajax = new XMLHttpRequest();//创建对象
+		
+		if(method === 'get'){//如果当前get方式
+			ajax.open(method,url+'?'+val);//打开地址
+			ajax.send();//发送
+		}else{
+			ajax.open(method,url);//不是就是post的方式发送
+			ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded');//加上头部。告诉浏览器是什么类型
+			ajax.send(val);//把发送的内容放到发生的内容里
+		}
+		
+		ajax.onreadystatechange = function(){//等待发送的内容
+			if(ajax.readyState === 4){// 0 未连接 1 打开连接 2 发送请求 3 交互 4 完成交互。当4个状态都完成
+				
+				if(ajax.status >=200 && ajax.status <= 206){
+					succ(ajax.responseText);
+					//s.innerHTML = ajax.responseText;
+				}else{
+					fail(ajax.status);
+					//console.log(ajax.status);
+				}
+			}
+		}
+		
+//		if(typeof ajax.onload === 'undefinde'){   //obj   undefinde}
+
+		//console.log(typeof ajax.onload)
+		
+		
+	}
+	
+	
+	
+</script>
+</body>
+</html>

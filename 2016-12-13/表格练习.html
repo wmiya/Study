@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				font-family: "微软雅黑";
+				color: #333;
+			}
+			#form{
+				text-align: center;
+				
+			}
+			#txt{width: 486px;margin:5px auto;text-align: left;}
+			#txt span{																
+				display: inline-block;
+				font-family: "微软雅黑";
+				font-size: 14px;
+				color: #333;
+			}
+			#txt span:nth-of-type(1){
+				width:156px;
+				height:20px;
+			}
+			#txt span:nth-of-type(2){
+				width:120px;
+				height:20px;
+			}
+		    #box{
+		    	margin: 120px auto;
+		    	width: 600px;
+		    }
+			.c1{
+				background: skyblue;
+			}
+			.c2{
+				background: #fff;
+			}
+			.c3{
+				background: #00BFFF;
+			}
+			.c4{
+				background: #00BFFF;
+				color: #fff;
+			}
+			.c5{
+				background:pink;
+				color: #fff;
+			}
+			table {
+				border: 1px solid #000;
+				border-right:0;
+				border-bottom: none;
+			}
+			table thead th,table tbody td{
+				text-align: center;
+				line-height:25px;
+				border-right:1px solid #000;
+			}
+			table thead th,table tbody td{
+				border-bottom: 1px solid #000;
+			}
+			.sortmode{
+				width: 100px;
+				height: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="top">
+				<div id="txt">
+				    <span>请输入姓名</span>
+				    <span>请选择性别</span>
+				    <span>请输入年龄</span>
+				</div>
+				<div id="form">
+				<form id="form1">
+				    <input type="text" name="username" placeholder="姓名" />
+				    <select name="sex">
+				        <!--<option value="">请选择一个性别</option>-->
+				        <option value="男">男</option>
+				        <option value="女">女</option>
+				    </select>
+				    <input type="text" name="age" placeholder="年龄"/>
+				    <input type="button" name="btn" value="提交">
+				</form>
+				<p>
+				    <form id="form2">
+				    	<span>请选择编号：</span>
+				        <select name="orderName" class="sortmode">
+				            <option value="id" >编号</option>
+				            <option value="age">年龄</option>
+				        </select>
+				        <span>请选择排序方式：</span>
+				        <select name="orderBy" class="sortmode">
+				            <option value="asc">升序</option>
+				            <option value="desc">降序</option>
+				        </select>
+				        <input type="button" name="orderButton" value="排序">
+				      <input type="button" value="批量删除">  
+				    </form>
+				</p>
+				</div>
+			</div>
+			<table width="100%" id="tab1" border="0" cellspacing="0" >
+			    <thead>
+				    <tr>
+				        <th>全选 <input type="checkbox" id="checkAll"></th>
+				        <th>编号</th>
+				        <th>姓名</th>
+				        <th>性别</th>
+				        <th>年龄</th>
+				        <th>操作</th>
+				    </tr>
+			    </thead>
+			    <tbody id="tbody">
+			    	 <!--<tr>
+			    		<td><input type="checkbox" id="checkAll"></td>
+			    		<td>1</td>
+			    		<td>大红</td>
+			    		<td>女</td>
+			    		<td>23</td>
+			    		<td>
+			    			<input type="button" value="上移"/>
+			    			<input type="button" value="下移" />
+			    			<input type="button" value="删除"/>
+			    		</td>
+			    	</tr> -->
+			    </tbody>
+			</table>
+		</div>
+	</body>
+<script type="text/javascript" src="jquery-3.1.1.js" ></script>
+<script>
+
+$(function(){
+	 var data = [
+        {
+             'id' : 1,
+            'username' : 'LEO',
+            'age' : 36,
+            'sex' : '男'
+        },
+        {
+            'id' : 2,
+            'username' : 'MOMO',
+            'age' : 16,
+            'sex' : '男'
+        },
+        {
+            'id' : 3,
+            'username' : 'DUODUO',
+            'age' : 29,
+            'sex' : '男'
+        },
+        {
+            'id' : 4,
+            'username' : '勇升',
+            'age' : 46,
+            'sex' : '男'
+        },
+        {
+            'id' : 5,
+            'username' : '小美',
+            'age' : 40,
+            'sex' : '女'
+        }
+    ];
+    /*添加数据*/
+   
+   var tBody = $('#tbody'),//首先获取元素
+   id = data.length,//默认从最后一个开始添加。比如当前是5.再添加就是6
+   checked = [];//声明一个空的数组
+   init()//调用方法
+  function init(){
+  	tBody.html('');//清空表婶的内容
+  	$.each(data,function(i,e){//循环给当前元素加上隔行变色的颜色
+	   		var tr = createTr(e);//给每一项都加上样式
+	   		if(i%2){//如果是2的倍数就加上颜色
+	   			tr.addClass('c1');
+	   		}
+	   		tBody.append(tr);//最后添加到tbody中
+	   });
+  }
+   
+   
+   tBody.on('click',function(ev){
+		var parentTr = $(ev.target).closest('tr');//找到他父级
+		if(ev.target.value === '上移'){//
+			if(parentTr.prev().length){//如果有父级的话
+				parentTr.insertBefore(parentTr.prev());//就添加到他前面
+				clear();//然后重新渲染颜色
+			}
+		}
+		if(ev.target.value === '下移'){//如果右下一个
+			if(parentTr.next().length){
+				parentTr.insertAfter(parentTr.next());//当前就和他下一个换
+				clear();//后重新渲染颜色
+			}
+		}
+		
+		//删除
+		if(ev.target.value === '删除'){
+			removeDate(parentTr.attr('index'));//这句不太明白
+			parentTr.remove();//删除自身
+			clear();//后重新渲染颜色
+		}
+		
+		if(ev.target.type === 'checkbox'){//单选全选
+			if($(ev.target).prop('checked')){//如果当前是选中的状态
+				checked.push(parentTr.attr('index'));//
+			}else{
+				checked.splice($.inArray(checked,parentTr.attr('index')),1);
+			}
+			
+			if(checked.length == tBody.find('tr').length){
+				$('#checkAll').prop('checked',true);
+			}else{
+				$('#checkAll').prop('checked',false);
+			}
+		}
+	});
+   
+
+   	/*
+   	 	提交
+   	*/
+   	
+   	$('#form1').click(function(ev){
+   		if(ev.target.value === '提交'){
+   			var name = $('#form1').find('input[name="username"]').val();
+   			var sex = $('#form1').find('select').val();
+   			if(/^\d+$/.test($('#form1').find('input[name="age"]').val())){
+   				var age = $('#form1').find('input[name="age"]').val();
+   			}else{
+   				alert('喂!喂!喂!');
+   				return;
+   			}
+   			//点击创建一个新一行
+   			
+   			var json = {//给个json，把抱起来的文件写进去
+	            'id' : ++id,
+	            'username' : name,
+	            'age' : age,
+	            'sex' : sex
+	       }
+//   			data.push(json);
+	   		var tr = createTr(json);//调用创建的函数。穿进去新的数据
+	   		tBody.append(tr);//把这些数据添加到文件中
+	   		clear();//清空你过当前的样式
+   		}
+   	});
+   	
+   	
+   	//排序：
+   	$('#form2').on('click',function(ev){//当排序的时候
+   		var orderName = $('#form2').find('select[name="orderName"]');//拿到元素，查看是否是编号排序还是
+   		var orderBy = $('#form2').find('select[name="orderBy"]');//拿到升序还是降序
+   		if(ev.target.value === '排序'){
+   			//console.log(orderName.val())
+   			if(orderBy.val() === 'asc'){//判断如果是升序执行的事件
+   				data.sort(function(a,b){
+	   				return a[orderName.val()] - b[orderName.val()];
+	   			});
+   			}else{
+   				data.sort(function(a,b){
+	   				return b[orderName.val()] - a[orderName.val()];
+	   			});
+   			}
+   			init();//从新渲染。给当前加上隔行变色。添加新内容分
+   		}
+   		
+   		if(ev.target.value === '批量删除'){//判断当前是否是全选
+   			for(var i=0;i<data.length;i++){//为什么这里需要循环数组呢？
+   				for(var j=0;j<checked.length;j++){//看看下里面当前选中的状态有几个
+   					if(data[i]){//如果当前存在选中的
+   						if(data[i].id == checked[j]){//
+	   						data.splice(i,1);
+	   						i--;
+	   					}
+   					}
+   				}
+   			}
+   			checked.length = 0;
+   			init();
+   		}
+   	});
+   	
+   	function removeDate(id){//
+   		$.each(data,function(i,e){//循环数组，如果当前数组的id和当前设置的
+   			if(e.id === id*1){
+   				data.splice(i,1);
+   			}
+   		});
+   	}
+   	
+   	
+   	
+   //全选
+   
+   $('#checkAll').click(function(){//当点击全选的时候
+   		var c = $('#checkAll').prop('checked');//c记录当前有几个是被选中的状态
+   		tBody.find('input[type="checkbox"]').prop('checked',c);//看下tBody里面所有checkbox，然后的都加上宣中
+   		if($('#checkAll').prop('checked')){//如果当前全选是选中的。
+   			//遍历每一项。都加上选中的状态
+   			tBody.find('tr').each(function(i,e){
+   				checked.push($(e).attr('index'));//把他们都放进数组、给每一项加上峰索引
+   			})
+   		}		
+   });
+   
+   
+   
+   
+   function clear(){
+   	//隔行变色。清空表单内容
+   		tBody.find('tr:even').removeClass('c1');
+   		tBody.find('tr:odd').addClass('c1');
+   		
+   		$('#form1').find('input[name="username"]').val('');
+   		$('#form1').find('input[name="age"]').val('');
+   		
+   }
+   
+   
+   
+   
+   
+   function createTr(data){//生成结构
+   		var str = 
+   			`<tr index="${data.id}">
+	    		<td><input type="checkbox"></td>
+	    		<td>${data.id}</td>
+	    		<td>${data.username}</td>
+	    		<td>${data.sex}</td>
+	    		<td>${data.age}</td>
+	    		<td>
+	    			<input type="button" value="上移"/>
+	    			<input type="button" value="下移" />
+	    			<input type="button" value="删除"/>
+	    		</td>
+    		</tr> `;
+    	return $(str);
+   }
+   
+   
+   
+
+})
+</script>
+</html>

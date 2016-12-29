@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			#content{
+				width: 400px;
+				height: 300px;
+				border: 1px solid #000;
+				margin: 100px auto;
+				position: relative;
+				/*overflow: hidden;*/
+			}
+			#inner{
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			#inner img{
+				width: 400px;
+				height: 300px;
+				position: absolute;
+			}
+			#inner .img2{
+				z-index:  -1;
+			}
+		</style>
+	</head>
+	<body>
+<div id="content">
+	<div id="inner">
+		<img src="img/0.jpg"/>
+		<img class="img2" src="img/1.jpg"/>
+	</div>
+</div>
+<input type="button" name="pre" id="pre" value="上一个" />
+	<input type="button" name="next" id="next" value="下一个" />
+<script type="text/javascript" src="jquery-3.1.1.js"></script>
+<script type="text/javascript">
+     var $img= $("img");
+     var  $inner = $("#inner");
+     var $num = 0;
+     $inner.attr("onOff",true);
+     $("input").eq(0).click(function(){
+     	if($inner.attr("onOff")){
+     		$num--;
+     		move(-400);
+     	}
+     });
+     $("input").eq(1).click(function(){
+     	if($inner.attr("onOff")){
+     		$num++;
+     		move(400);
+     	}
+     })
+		function move(end){
+		//四步法
+		$inner.attr("onOff",false);//防止多次点击的bug出现
+		$img.eq(0).css({
+			left:0
+		});
+		$img.eq(1).css({
+			left:0
+		});
+		if($num>5)$num=0;
+		if($num<0)$num=5;
+		
+		$img.eq(1).attr("src",'img/'+$num+'.jpg');//变换第一张的图片
+		$img.eq(1).css("left",end);//变换第一张的位置
+			$inner.animate({
+				left:-end
+			},300);//容器移动
+
+		setTimeout(function(){
+			//inner.style.transition = 'none';
+			$img.eq(0).attr("src",'img/'+$num+'.jpg');//变换第零张，两者同图
+			$inner.css("left",0);//容器位移回原位
+			$inner.attr("onOff",true);
+		},300)
+	}
+	
+	
+	
+	
+	
+</script>
+	</body>
+</html>
+
+

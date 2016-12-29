@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+.divs div{
+	width:200px;
+	height: 200px;
+	border: 1px solid #000;
+}
+.divs div.hide{
+	display: none;
+}
+.divs div.show{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<div class="btns">
+			<input type="button" name="" id="" value="选项一" class="active"/>
+			<input type="button" name="" id="" value="选项二" />
+			<input type="button" name="" id="" value="选项三" />
+		</div>
+		<div class="divs">
+			<div class="show">111111</div>
+			<div class="hide">22222</div>
+			<div class="hide">33333</div>
+		</div>
+	</div>
+	<div id="box2">
+		<div class="btns">
+			<input type="button" name="" id="" value="选项一" class="active"/>
+			<input type="button" name="" id="" value="选项二" />
+			<input type="button" name="" id="" value="选项三" />
+		</div>
+		<div class="divs" >
+			<div class="show">111111</div>
+			<div class="hide">22222</div>
+			<div class="hide">33333</div>
+		</div>
+	</div>
+	<input type="button" name="btn0" id="btn0" value="按钮0" />
+	<input type="button" name="btn1" id="btn1" value="按钮一" />
+	<input type="button" name="btn2" id="btn2" value="按钮二" />
+	<input type="button" name="btn3" id="btn3" value="按钮三" />
+	<input type="button" name="btn4" id="btn4" value="按钮四" />
+<script type="text/javascript">
+	/*
+		1.自动播放  (OK)
+		2.第一个播放，第二个不走 ()
+		3.点击btn1的时候，让第二个走，第一个停
+		4.点击btn2的时候，2个都停
+		5.点击btn3的时候，2个都走
+		6.反向走（走的停，停的走） 
+		
+		面向过程
+			关注实现过程和每一步的实现细节
+		
+		面向对象
+			关注特性和功能
+		
+		面向对象的好处
+		1、代码的层次结构更清晰
+		2、更容易复用
+		3、更容易维护
+		4、更容易扩展
+		5、more...
+
+		
+		
+	*/
+///-----------------------------------------------------------------------------------------------
+	//获取元素
+	function Tab(id){
+		this.box = document.getElementById(id);//首先先获取整个box盒子
+		this.btns = this.box.getElementsByTagName('input');//获取所有的btns
+		this.divs = this.box.getElementsByClassName('divs')[0];//获取所有的div
+		this.divChild = this.divs.getElementsByTagName('div');//获取下面所有的小的div
+		this.timer = null;//给当前定时器一个空的
+		this.num = 0;//声明一个变量。记录从0开始
+		this.events();//点击发生变化
+	}
+///-----------------------------------------------------------------------------------------------	
+
+//事件发生
+	Tab.prototype.events = function(){//发生的事件
+		var _this = this;//先用用变量存一下this
+		for(var i=0;i<this.btns.length;i++){//循环所有的点击按钮
+			(function(index){//给个闭包。传进去index
+				_this.btns[index].onclick = function(){//当前btn点击的时候。
+					//alert(this);
+					_this.num = index;//这时候的num就是每个i
+					_this.change(index);
+				}
+			})(i);
+		}
+	}
+///-----------------------------------------------------------------------------------------------	
+//方法执行
+	Tab.prototype.change = function(index){//方法
+		for(var i=0;i<this.btns.length;i++){//大清晰
+			this.btns[i].className = '';//清空当前的样式
+			this.divChild[i].className = 'hide';
+		}
+		this.btns[index].className = 'active';//给当前加上样式
+		this.divChild[index].className = 'show';
+	}
+///-----------------------------------------------------------------------------------------------	
+
+//自动播放，开启定时器
+	Tab.prototype.autoPlay = function(){//自动播放
+		var _this = this;//记录当前的this就是这个this，
+		clearInterval(this.timer);//开启定时器之后先关闭
+		this.timer = setInterval(function(){//开启定时器
+			_this.num++;//让num++
+			if(_this.num >= _this.btns.length){//过节处理
+				_this.num = 0;
+			}
+			_this.change(_this.num);//_this.num是当前那个要发生变化。
+		},1000);
+	}
+
+///-----------------------------------------------------------------------------------------------	
+
+//关闭定时器
+	Tab.prototype.stop = function(){//关闭定时器
+		clearInterval(this.timer);
+		this.timer = null;//清空当前。
+	}
+
+///-----------------------------------------------------------------------------------------------	
+
+//判断条件
+	Tab.prototype.fanx = function(){
+		return !!this.timer;  //this.timer = null  !null !true false
+	}
+	
+///-----------------------------------------------------------------------------------------------	
+
+//储存变量，执行事件
+	var t1 = new Tab('box');//声明变量记录当前回掉函数
+	var t2 = new Tab('box2');
+	t1.autoPlay();//上来先把t1和t2都先自动播放
+	t2.autoPlay();//
+	//获取元素
+	var btn0 = document.getElementById('btn0');
+	var btn1 = document.getElementById('btn1');
+	var btn2 = document.getElementById('btn2');
+	var btn4 = document.getElementById('btn4');
+	btn0.onclick = function(){
+		t2.stop();
+	}
+	btn1.onclick = function(){
+		t1.stop();
+		t2.autoPlay();
+	}
+	btn2.onclick = function(){
+		t1.stop();
+		t2.stop();
+	}
+	
+	btn4.onclick = function(){//定时器开启就是个数字。数字除0代表是false。剩下是true
+		//null代表的就是false
+		if(t1.fanx()){
+			t1.stop();
+		}else{
+			t1.autoPlay();
+		}
+		if(t2.fanx()){
+			t2.stop();
+		}else{
+			t2.autoPlay();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

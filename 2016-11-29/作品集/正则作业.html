@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#form{
+				width: 400px;
+				height: 250px;
+				margin: 50px auto;
+				background: #eee;
+				text-align: center;
+				
+			}
+			#form	input{
+					margin: 10px;
+					
+			}
+			.hide{
+				border: 3px solid darkred;
+			}
+			.show{
+				border: 3px solid green;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="https://www.baidu.com/" id="form">
+			用户QQ<input type="text"><br />
+			用户邮箱<input type="text"><br />
+			生日<input type="text"><br />
+			<a href="javascript:;">提交</a>
+		</form>
+		<script>
+		(function(){
+			var form = document.getElementsByTagName('form')[0];
+		    var subBtn = document.getElementsByTagName('a')[0];
+		    var input = document.getElementsByTagName('input');
+		    //console.log(subBtn,form,input)
+			subBtn.addEventListener("click",fnClick);
+			function fnClick(){
+				for(var i=0;i<input.length;i++){
+					if(input[i].value==""){
+						input[i].className="hide";
+						
+					}else{
+//						form.submit();
+					}
+				}
+			}
+			for(var i=0;i<input.length;i++){
+				//input[i].addEventListener("blur",fnBlur);
+				input[0].addEventListener("blur",fnBlur);
+				input[1].addEventListener("blur",fnBlur1);
+				input[2].addEventListener("blur",fnBlur2);
+			}
+			function fnBlur(){
+				var val=input[0].value;
+				if(/^[1-9]\d{4,10}$/.test(val.trim())){
+					this.className="show";
+				}else{
+					this.className="hide";
+				}
+			}
+			function fnBlur1(){
+				var val1=input[1].value;
+				if(/^[a-zA-Z]\w{5,17}@[a-z1-9]+.(com|com.cn|cn)$/.test(val1.trim())){
+					this.className="show";
+				}else{
+					this.className="hide";
+				}
+			}
+			function fnBlur2(){
+				var src=input[2].value;
+				var s=src.replace(/(\d+)\D+(\d+)\D+(\d+)\D?/,function($0,$1,$2,$3){
+					// /^(\d{4})-(0\d{1}|1[0-2])$/
+//					/(\d+)\D+(\d+)\D+(\d+)\D?/
+// /^(\d{4})+(0\d{1}|1[0-2])+(0\d{1}|[12]\d{1}|3[01])$/
+				console.log($1+"-"+$2+"-"+$3)
+					return $1+"-"+$2+"-"+$3;
+				
+				})
+				var dateEnd=new Date(s);
+				var d = new Date() - dateEnd;
+				if(d<=0||d>=3153600000000){
+					this.className="hide";
+				}else{
+					this.className="show";
+				}
+				//console.log(d)
+				return s;
+				
+				
+				//console.log(d)
+//           if(){
+//					this.className="show";
+//				}else{
+//					this.className="hide";
+//				}
+				
+			
+			}
+		})()
+		</script>
+	</body>
+</html>

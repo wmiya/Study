@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" name="" id="x" value="开渲" />
+	<ul id="ul">
+		<!--<li>我的名字叫:...,今年18岁，性别:男，我想说:我是一个快乐的逗逼青年</li>-->
+	</ul>
+<script type="text/javascript">
+	/*
+		xhtml/html 区别:请百度
+		
+		在操作xml数据的时候，要用responseXML，会将xml的字符串转成dom节点
+		
+		缓存:
+			如果两次都打开同样的地址，[http://www.baidu.com?图片1,http://www.baidu.com?图片1]
+			第二次就调用第一次缓存中的数据,不会从再次通过地址获取
+			
+		解决缓存问题：
+			只要保证每次的url都不一样即可
+		
+	*/
+	
+	function Ajax(method,url,succ,val){//参数分别为船从的方式，抵制，成否要做得事情需要操作的内容
+		val = val?val:'';//判断当前val值是否是有的。有就走有的。没有就为空
+		var ajax = new XMLHttpRequest();//创建对象XMLHttpRequest
+		ajax.open(method,url+val);//打开地址，就是当前的方式。
+		ajax.send();//发送
+		ajax.onload = function(){//等待回应
+			succ(ajax.responseXML);//返回整个这个值
+		}
+	}
+	
+	
+	function FnkaiX(){
+		this.ul = document.getElementById('ul');//拿到ul
+	}
+	
+	
+	FnkaiX.prototype.xr = function(){//在原型下面加方法
+		var _this = this;//记录this
+		Ajax('get','data.xml?'+new Date(),function(data){//+new Date()改变他的值，让他做法哦每次都发生变化
+			var content = data.getElementsByTagName('content')[0];//获取xhm元素的父级
+			var person = content.children;//拿到他下面的子集
+			var html = ''; //那变量记录字符串
+			for(var i=0;i<person.length;i++){//循环，每次
+				var name = person[i].children[0].innerHTML;//拿到内容
+				var age = person[i].children[1].innerHTML;//拿到年龄
+				var sex = person[i].children[2].innerHTML;
+				var info = person[i].children[3].innerHTML;
+				
+				html += `<li>
+					我的名字叫:${name},今年${age}岁，性别:${sex}，我想说:${info}
+				</li>`
+			}
+			_this.ul.innerHTML = html;//把获取的内容添加到数据中
+			
+		});
+	}
+	
+	var x = document.getElementById('x');//获取点击按钮
+	x.onclick = function(){//当点击的时候。函数实例化
+		var f = new FnkaiX();
+		f.xr();//并调用
+	}
+	
+	
+	
+		
+	
+</script>
+</body>
+</html>

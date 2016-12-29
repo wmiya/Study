@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		window.onload=function(){
+			function techer(name,age){
+				this.neme=name;
+				this.age=age;
+			}
+			Object.prototype.say=function(){
+				alert("我叫"+this.neme+"我的年龄"+this.age+"岁")
+			}
+			var t1=new techer("youzi",18);
+			console.log(t1)
+			//t1.say();
+			
+		}/*对象-链-原型-链-原型*/
+		/* 碰到对象找原型链。对象没有原型。只有链，
+		/* 碰到函数找原型，。。原型只给实例化对象用*/
+		</script>
+	</body>
+</html>

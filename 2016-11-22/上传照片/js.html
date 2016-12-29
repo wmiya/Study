@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			li{
+				list-style: none;
+			}
+			#div1 {
+				width: 900px;
+				margin: 0px auto;
+			}
+			#div1 ul {
+				margin-top: 10px;
+				width: 900px;
+				height: 460px;
+				padding: 10px;
+				border: 5px solid #000;
+				overflow: hidden;
+				position: relative;
+			}
+			#div1 ul li {
+				float: left;
+				margin: 10px;
+				width: 200px;
+				height: 200px;
+				overflow: hidden;
+				z-index: 1;
+				border-radius: 15px;
+			}
+			#div1 ul li {
+				width: 200px;
+				height: 200px;
+				
+			}
+			#div1 ul li.active{
+				border: 5px dashed #000;
+			}
+			#div1 img{
+				width: 200px;
+				height: 200px;
+				vertical-align: top;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="div1">
+			<input type="button" value="随机排序" />
+			<ul id="oUl">
+				
+				<li>
+					<img src="images/c.jpg" />
+				</li>
+				<li>
+					<img src="images/d.jpg" />
+				</li>
+				<li>
+					<img src="images/e.jpg" />
+				</li>
+				
+				<li>
+					<img src="images/g.jpg" />
+				</li>
+				<li>
+					<img src="images/h.jpg" />
+				</li>
+				<li>
+					<img src="images/i.jpg" />
+				</li>
+				<li>
+					<img src="images/j.jpg" />
+				</li>
+				<li>
+					<img src="images/k.jpg" />
+				</li>
+				
+			</ul>
+		</div>
+		<script src="jquery-3.1.1.js"></script>
+	<script>
+		function Darg(obj){
+			var div=obj;
+			
+		}
+	</script>
+</body>
+</html>

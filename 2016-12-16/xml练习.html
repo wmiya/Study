@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	<input type="button" name="" id="x" value="开渲" />
+	<ul id="ul">
+		<!--<li>我的名字叫:...,今年18岁，性别:男，我想说:我是一个快乐的逗逼青年</li>-->
+	</ul>
+<script type="text/javascript">
+	/*
+		xhtml/html 区别:请百度
+		
+		在操作xml数据的时候，要用responseXML，会将xml的字符串转成dom节点
+		
+		缓存:
+			如果两次都打开同样的地址，[http://www.baidu.com?图片1,http://www.baidu.com?图片1]
+			第二次就调用第一次缓存中的数据,不会从再次通过地址获取
+			
+		解决缓存问题：
+			只要保证每次的url都不一样即可
+		
+	*/
+	///请求数据
+	function Ajax(method,url,seec,val){
+		val= val?val:'';
+		var ajax=new XMLHttpRequest();
+		ajax.open(method,url+val);
+		ajax.send();
+		ajax.onload=function(){
+			seec(ajax.responseXML);
+		}
+	}
+	//i安详对象开始操作
+	function FnkaiX(){
+		this.ul=document.getElementById('ul');//获取元素。配置参数
+	}
+	FnkaiX.prototype.xr=function(){
+		var _this=this;
+		Ajax('get','data.xml?'+new Date(),function(data){
+			//这里面写事件。。写结构
+			var content=data.getElementsByTagName('content')[0];
+			var person=content.children;
+			var html='';
+			for(var i=0;i<person.length;i++){
+					var name=person[i].children[0].innerHTML;
+					var age=person[i].children[1].innerHTML;
+					var sex=person[i].children[2].innerHTML;
+					var info=person[i].children[3].innerHTML;
+				html+=`<li>我的名字叫:${name},今年${age}岁，性别:${sex}，我想说:${info}</li>`;
+			_this.ul.innerHTML=html;
+			}
+			
+			
+		})
+	}
+	var x=document.getElementById('x');
+	x.onclick=function(){
+		var f=new FnkaiX();
+		f.xr();
+	}
+	
+	</script>
+</body>
+</html>

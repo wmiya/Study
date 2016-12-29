@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+#list ul{
+	display: none;
+}
+#list>ul{
+	display: block;
+}
+</style>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript">
+
+var data = [
+	{
+		name:"选项一",
+		child: [
+			{
+				name:"选项1",
+				child: [
+					{name: "选项(1)"},
+					{name: "选项(2)"},
+					{name: "选项(3)"}
+				]
+			
+			},
+			{
+				name:"选项2",
+				child: [
+					{name: "选项(1)"},
+					{name: "选项(2)"},
+					{name: "选项(3)"}
+				]
+			},
+			{
+				name:"选项3",
+				child: [
+					{name: "选项(1)"},
+					{name: "选项(2)"},
+					{name: "选项(3)"}
+				]
+			}
+		]
+	},
+	{
+		name:"选项二",
+		child: [
+			{name:"选项2_1"},
+			{name:"选项2_2"},
+			{name:"选项2_3"},
+			{
+				name:"选项2_4",
+				child: [
+					{name: "选项(1)"},
+					{
+						name: "选项(2)",
+						child: [
+							{name: "选项-1"},
+							{name: "选项-2"}
+						]
+					},
+					{
+						name: "选项(3)",
+						child: [
+							{name: "选项-1"},
+							{name: "选项-2"}
+						]
+					}
+				]
+			}
+		]
+	}
+];
+ $(function(){   
+   var inner='';
+	crete(data);
+	$('#list').html(inner);
+//------------------------------------	
+	 $('#list').find('p').click(function(){
+	 	if($(this).next('ul')){
+       		if($(this).next('ul').css('display')=='block'){
+		 		$(this).next('ul').hide();
+		 	}else{
+	 			var $ul=$(this).parent('').parent('').find('ul');
+//	 			console.log($ul)
+		 		if($ul!=$(this).next()){
+		     		$ul.hide();
+		     	}
+		 		$(this).next('ul').show();
+			}
+		}
+	})
+	
+	
+	
+	
+	function crete(obj){
+		inner+='<ul>';
+		for(var i=0;i<obj.length;i++){
+			inner+='<li>';
+			inner+='<p>'+obj[i].name+'</p>';
+			if(obj[i].child){
+				crete(obj[i].child);
+			}
+			inner+='</li>';
+		}
+		
+		inner+='</ul>';
+	}
+})
+</script>
+</head>
+<body>
+<div id="list">
+
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	用户名:<input name="user" type="text"><span id="s"></span><br /><br />
+<script type="text/javascript">
+	/*
+		open的第三个参数：
+			是否异步
+		
+		同步：从上往下依次执行，只有前面那个走完，后面才能走
+		异步：不用从上往下依次执行，不用等前面的执行完，才能执行
+		
+		
+		异步 ：
+			当请求发送完成之后，send() 就会立即返回，继续执行send() 后面的代码。
+
+		同步 ：
+			当请求发送完成之后，send() 会挂起，一直等到服务器返回了相关信息（请求完全结束）之后，才会返回并继续执行后面的代码。
+		
+		
+		
+	*/
+	
+//	var num = 0;
+//	
+//	setTimeout(function(){
+//		num = 10;
+//	});
+//	
+//	alert(num);
+	
+	
+	var btn = document.getElementById('btn');
+	var s = document.getElementById('s');
+	var user = document.getElementsByTagName('input')[0];
+	user.onblur = function(){
+		var val = user.value;
+		var ajax = new XMLHttpRequest();
+		ajax.open('get','php/get_async.php?user='+encodeURI(val),true);
+		ajax.send();
+		console.log(ajax.responseText);
+		alert(1);
+	}
+	
+</script>
+</body>
+</html>

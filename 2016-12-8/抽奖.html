@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#wrap{
+				width: 635px;
+				height: 594px;
+				margin: 40px auto;
+				background: url(images/turntable-bg.jpg);
+				position: relative;
+			}
+			#turn{
+				position: absolute;
+				left: 120px;
+				top: 60px;	
+			}
+			#pointer{
+				position: absolute;
+				left: 260px;
+				top: 160px;	
+			}
+		</style>
+	</head>
+	<body>
+		<section id="wrap">
+			<img id="turn" src="images/turntable.png">
+			</img>
+			 <img id="pointer" src="images/pointer.png">
+             </img>  
+		</section>
+
+		<script type="text/javascript" src="miaov.js"></script>
+		<script type="text/javascript"  src="jquery-3.1.1.js"></script>
+		<script type="text/javascript" src="jquery.rotate.min.js"></script>
+		<script type="text/javascript">
+			(function(){
+				$pointer = $("#pointer");
+				$turn = $("#turn");
+				
+				$pointer.click(function(){
+					$turn.rotate({
+						duration:2000,
+						animateTo:(Math.random()+1)*560,
+						easing: function(x,t,b,c,d){
+				            return -c *(t/=d)*(t-2) + b;
+				        }
+					});
+				})
+			})();
+		</script>
+
+	</body>
+</html>

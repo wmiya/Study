@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+img{
+	width:300px;
+	opacity: 0;
+	transition:.5s;
+}
+div{
+	width:620px;
+	border: 1px solid #000;
+}
+</style>
+</head>
+<body style="height: 3000px;">
+	<input type="button" name="btn" id="btn" value="生成页面" />
+	<div id="div1">
+		<!--<img src="img/1.jpg" alt="" />-->
+	</div>	
+    <script>
+    	window.onload=function(){
+    		var btn=document.getElementById("btn");//首先获取生成元素的按钮
+    		var div1=document.getElementById("div1");//获取生成元素的大框
+    		btn.addEventListener("click",fnClick);//当点击生成按钮时候要做的事件
+    		function fnClick(){
+    			for(var i=0;i<10;i++){//先生10张图片
+	    			var img=document.createElement("img");//生成img图片
+	    			if(i<4){//小于4，就直接生成、、判断当前是否没有的状态，
+	    				img.src='img/'+(i+1)+'.jpg';//给图片机上src
+	    				img.style.opacity=1;//;透明度变成1
+	    			}else{//另一种的情况就是当前有图片的时候
+	    				img.setAttribute('_src','img/'+(i+1)+'.jpg')//给他加上自定义属性
+	    			}
+	    		div1.appendChild(img);//把生成好的元素添加进去
+    			}
+    		}
+    		document.addEventListener("scroll",fnJiaz);//当滚动条发生变化的时候
+    		var img=document.\("img");//拿到当前的这些img
+    		function fnJiaz(){//执行加载的函数
+    			for(var i=0;i<img.length;i++){//循环所有的img
+    				(function(a){//先用闭包抱起来
+    					if(img[i].getBoundingClientRect().top<=window.innerHeight){//判断当前img的top小于等于文档高度
+	    					if(img[i].getAttribute('_src')){//并且有自定义属性的时候
+	    						img[i].src=img[i].getAttribute('_src');
+	    						img[i].removeAttribute('_src');
+	    						setTimeout(function(){
+	    							img[a].style.opacity = 1;
+	    						},505)
+	    					}
+    					}
+    				})(i)
+    			}
+    		}
+    	}
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	用户名:<input name="user" type="text"><span id="s"></span><br /><br />
+<script src="ajax2.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var s = document.getElementById('s');
+	var user = document.getElementsByTagName('input')[0];
+	user.onblur = function(){
+		var val = user.value;
+		
+		ajax({
+			//url:'php/get_json.php',
+			url:'data.xml',
+//			val:'user='+encodeURI(val),
+			type:'xml',
+			succ:function(json){
+				console.log(json);
+			}
+		});	
+	}
+	
+	if(json.code){
+				user.style.borderColor = 'red';
+				s.innerHTML = '哥们,别乱输入';
+			}else{
+				user.style.borderColor = 'green';
+				s.innerHTML = '哥们,真棒，你已经走到了人生巅峰';
+			}
+</script>
+</body>
+</html>

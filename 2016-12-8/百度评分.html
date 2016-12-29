@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<!--
+		1. 需要有5个元素，和一个隐藏的文字元素以及一个显示的提示元素
+
+		2. 添加鼠标移入:
+			1). 隐藏提示元素
+			2). 移入到第几课星 就给他之前的星星切换新背景,在他之后的星星保持原始背景
+					*注意：只移入两颗星，和移入两颗以上的星要切换的背景不一致
+			3). 显示文字元素，根据当前移入的是第几课星，切换文字的内容
+
+		3. 移出:
+			1) 没有点击过:
+				1.还原所有星星的背景
+				2.隐藏文字元素
+				3.显示提示元素
+			2) 发生过点击：
+				1.鼠标移出 保持 点击的元素之前的背景，之后的还原
+
+
+		1. 获取相关元素
+		2. 循环stars，给stars添加移入事件，索引值
+		3. 鼠标移入，循环所有stars，如果在第this.index 之前 切换新背景，在当前个之后，恢复原来背景;
+		4. 在切换新背景的时候，如果移入是前两个，新背景就是showLow，否则新背景就是show
+
+		5. 鼠标移出
+
+	-->
+	<script type="text/javascript" src="jquery-3.1.1.js">
+		
+	</script>
+	<script type="text/javascript">
+		window.onload = function() {
+			$stars = $(".stars a");
+			$text = $(".text");
+			$title = $(".title");
+			$arr = ["很差","较差","还行","推荐","力荐"];
+			$now = -1;
+			$stars.each(function(i,e){
+				(function(i,e){
+					$(e).mouseover(function(){
+						$show = "show";
+						if ($(e).index()<2) {
+							 $show = "showLow";
+						}
+						$this = $(e).index();
+						$stars.each(function(i,e){
+							 if (i<=$this) {
+							 	  $stars[i].className = $show;
+							 } else{
+							 	  $stars[i].className = "";
+							 }
+						});
+						$title.css("display","none");
+						$text.text($arr[$this]);
+						$text.css("display","block");
+					});
+					$(e).click(function(){
+						$now = $(e).index();
+					});
+					$(e).mouseout(function(){
+						$show = "show";
+						if ($now<2) {
+							 $show = "showLow";
+						}
+						$stars.each(function(i,e){
+							 if (i<=$now) {
+							 	  $stars[i].className = $show;
+							 } else{
+							 	  $stars[i].className = "";
+							 }
+						});
+						if($now<0){
+							$title.css("display","block");
+							$text.css("display","none");
+						}
+					})
+				})(i,e)
+			});
+		};
+	</script>
+	<style type="text/css">
+		#wrap {
+			width: 500px;
+			height: 500px;
+			margin: 0 auto;
+			color: blue;
+			padding: 30px;
+		} 
+		#wrap span {
+			float: left;
+			font: 14px/20px "宋体";
+		}
+		.stars {
+			float: left;
+		}
+		.stars a {
+			float: left;
+			width: 20px;
+			height: 22px;
+			background:url(img评分/star1.png);
+			border:  2px solid #fff;
+		}
+		.stars .showLow {
+			background:url(img评分/star3.png);
+		}
+		.stars .show {
+			background:url(img评分/star2.png);
+		}
+		.text {
+			color: red;
+			display: none;
+		}
+		.title{
+			width: 240px;
+			height: 40px;
+		    display: inline-block;
+		    background: url(img评分/pf-bg.gif);
+		}
+	</style>
+</head>
+<body>
+<div id="wrap">
+	<span>总体评价:</span>
+	<nav class="stars">
+		<a href="javascript:;"></a>
+		<a href="javascript:;"></a>
+		<a href="javascript:;"></a>
+		<a href="javascript:;"></a>
+		<a href="javascript:;"></a>
+	</nav>
+	<span class="text">很差</span>
+	<span class="title"></span>
+</div>
+</body>
+</html>

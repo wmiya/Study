@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+*{
+	margin:0;
+	padding:0;
+}
+ul{
+	width:1000px;
+	list-style: none;
+	position: relative;
+	margin: 0 auto;
+}
+ul li{
+	width:240px;
+	float: left;
+	margin:5px;
+}
+/*.continer{
+	height:auto; margin: 10px auto;border:1px solid #000;
+	}*/
+
+.continer div{
+	transition:.5s;
+	margin-bottom:10px;width:240px;
+	}
+.continer div img{width:100%;border:1px solid #ccc;display: block;}
+</style>
+</head>
+<body>
+	<div class="continer" id="div1">
+		<ul>
+			<li>
+				<!--<div>
+					<img src="http://img02.tooopen.com/images/20141229/sl_107003776898.jpg"/>
+				</div>-->
+			</li>
+			<li>
+				<!--<div>
+					<img src="http://img02.tooopen.com/images/20141229/sl_107003776898.jpg" height="80"/>
+				</div>-->
+			</li>
+			<li>
+				<!--<div>
+					<img src="http://img02.tooopen.com/images/20141229/sl_107003776898.jpg" height="150"/>
+				</div>-->
+			</li>
+			<li>
+				<!--<div>
+					<img src="http://img02.tooopen.com/images/20141229/sl_107003776898.jpg" height="300"/>
+				</div>-->
+			</li>
+		</ul>
+	</div>
+<script src="js/jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script>
+	var $li=$('ul').find('li');
+	var page=1;
+	var w=240;
+	var minLi=null;
+	var onOff=false;
+	function cDiv(){
+		$.ajax({
+			url:'http://www.wookmark.com/api/json/popular?callback=?',//跨域获取地址
+			data:{
+				page:page
+			},
+			dataType:'json',
+			success:function(data){//拿到一组数据后，进行循环
+				$.each(data, function(i,e) {
+					var h=(w/e.width)*e.height;
+					h=isNaN(h)?0:h;//这里需要注意。如果有高度有，并且有数字就显示，没有默认高度为0
+						if(h){
+							var div=$('<div><img src="'+e.preview+'" height="'+h+'"/></div>')
+							if(i<4){//这里分2张情况。如果当前是小于4的，就依次添加。
+								$li.eq(i).append(div)//如果当前有照片就按最小的往里添加
+							}else{
+								//执行完在执行下面的东西
+								$(minHeight()).append(div);
+							}
+						onOff=true;
+						minLi=minHeight();
+					}
+				});
+			}
+		});
+	}
+	cDiv();	
+		window.onscroll=function(){
+			if(minLi.getBoundingClientRect().bottom<=window.innerHeight){
+				if(onOff){//如果当前加载完成在执行下面的
+					onOff=false;
+					page++;
+					cDiv();	
+				}
+			}
+		};
+			
+			
+			function minHeight(){
+				var max=Infinity;
+				var el=null;
+				$li.each(function(i,e){
+					if(max>e.scrollHeight){
+						max=e.scrollHeight;
+						el=e;
+					}
+				})
+				return el;
+			}
+		
+		
+	
+</script>
+</body>
+</html>

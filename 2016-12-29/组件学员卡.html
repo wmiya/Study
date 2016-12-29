@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#box div{
+			width:300px;
+			height: 200px;
+			border: 1px solid #000;
+		}
+		#box div.hide{
+			display: none;
+		}
+		#box div.show{
+			display: block;
+		}
+		.active{
+			background: yellow;
+		}
+</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script src="jquery-3.1.1.js"></script>
+		<script>
+			(function(global,factory,$){
+				factory(global,$)
+			})(typeof window!=='undefined'?window:this,function(global,$,noglobal){
+				
+				
+				function Tab(that){
+					this.box=that;
+					this.settings={
+						nav:['新闻','图片','音乐'],
+						content:[
+							'今天很开心',
+							'今天吃了好多包子',
+							'晚上还要吃好多肉'
+						]
+						
+					}
+				}
+				$.extend(true,Tab.prototype,{
+					init:function(opt){
+						$.extend(this.settings,opt);
+						this.creatBtn();
+						this.ceartDiv();
+						this.changs();
+					},
+					creatBtn:function(){
+						var _this=this;
+						$.each(this.settings.nav, function(i,e) {
+							_this.box.append('<input type="button"  class="'+((i===0)?'active':'')+'" value="'+e+'" />')
+						});
+					},
+					ceartDiv:function(){
+						var _this=this;
+						$.each(this.settings.content, function(i,e){
+							_this.box.append('<div class="'+((i===0)?'show':'hide')+'">'+e+'</div>');
+						});
+					},
+					changs:function(){
+						var _this=this;
+						var btns=$(this.box).find('input');
+						var divs=$(this.box).find('div');
+						btns.click(function(){
+							$(this).addClass('active').siblings('input').removeClass('active')
+							divs.eq($(this).index('input')).show().siblings('div').hide();
+						})
+						
+					}
+				})
+			$.fn.extend({
+					tab:function(opt){
+						var t=new Tab(this);//这里this指向是box
+						t.init(opt);//opt这值的是配置的参数。通过上面的方法赋值过去
+						return $(this);
+					}
+					
+			});
+		},jQuery)
+			
+			
+			$('#box').tab()
+		</script>
+	</body>
+</html>

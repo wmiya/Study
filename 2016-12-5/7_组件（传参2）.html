@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	top:0;
+	left:0;
+}
+#div2{
+	width:100px;
+	height: 100px;
+	background:green;
+	position: absolute;
+	top:0;
+	left:110px;
+}
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+<script type="text/javascript">
+	/*
+		组件：
+			提供一个完善的功能的方法或数据的封装
+		
+		组件要求
+			易扩展，易维护
+			
+		当按下的时候让div变色（蓝色）
+		当抬起的时候让div变色（红色）
+		
+	*/
+	
+	function Drag(id){
+		this.div1 = document.getElementById(id);
+		this.disX = 0;
+		this.disY = 0;
+	}
+	Drag.prototype.init = function(d,m,u){//d代表down的扩展函数,m代表move,u代表up
+		var _this = this;//拿变量储存this
+		this.div1.addEventListener('mousedown',down);//事件绑定。当前鼠标按下
+		function down(ev){
+	//		d && typeof d == 'function' && d();//执行按下的时候。需要判断
+			//当前有没有d。并且判断类型是不是函数类型，
+			if(d && typeof d == 'function'){//判断当前没有d的事件，并且是不是类型属于函数
+				d.call(_this);//改变this指向，因为函数名加括号。只想window，所以改变只想，
+				
+			}
+			
+			_this.fnDown(ev,down,_this,m,u);//传参
+		}
+	}
+	
+	Drag.prototype.fnDown = function(ev,down,that,m,u){//鼠标按下要执行的事件
+		this.disX = ev.pageX - this.div1.offsetLeft;
+		this.disY = ev.pageY - this.div1.offsetTop;
+		document.addEventListener('mousemove',move);
+		document.addEventListener('mouseup',up);
+		function move(ev){//判断当前鼠标移动的时候有没有这个事件。
+			that.fnMove(ev);//这里that就相当于当前的Drag；
+			if(m && typeof m == 'function'){
+				m.call(that);//改变this指向
+			}
+			
+		}
+		function up(ev){//鼠标抬起的时候同样做对比。看是否相同
+			that.fnUp(ev,down,move,up);
+			if(u && typeof u == 'function'){
+				u.call(that);
+			}
+		}
+		
+		ev.preventDefault();
+		
+	}
+	
+	Drag.prototype.fnMove = function(ev){
+		this.div1.style.left = ev.pageX - this.disX +'px';
+		this.div1.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	
+	Drag.prototype.fnUp= function(ev,down,move,up){
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+
+	var d1 = new Drag('div1');
+	var d2 = new Drag('div2');
+	
+	d1.init(
+		function(){//改变函数
+			this.div1.style.background = 'blue';
+			d1.div1.style.border = '2px solid #000';
+		},
+		function(){
+			d1.div1.style.background = 'yellow';
+		},
+		function(){
+			d1.div1.style.background = 'red';
+			d1.div1.style.border = 'none';
+		}
+	);
+	
+	/*
+		down的时候加虚线黄色的虚线
+		up的时候去掉虚线
+	*/
+	d2.init(
+		function(){
+			this.div1.style.border = '2px dashed yellow';
+		},
+		function(){
+			
+		},
+		function(){
+			this.div1.style.border = 'none';
+		}
+	);
+	
+</script>
+</body>
+</html>

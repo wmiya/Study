@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<style>
+.wrap {
+	width: 197px;
+	height: 197px;
+	margin: 15% auto;
+	position: relative;
+}
+.wrap div {
+	width: 48px;
+	height: 48px;
+	background: red;
+	border: 1px solid green;
+	position: absolute;
+	color: #fff;
+	font: 14px/48px "微软雅黑";
+	text-align: center;
+}
+.wrap .active {
+	background: greenyellow;
+}
+.wrap div:nth-child(1) {
+	left: 0;
+	top: 0;
+}
+.wrap div:nth-child(2) {
+	left: 49px;
+	top: 0;
+}
+.wrap div:nth-child(3) {
+	left: 98px;
+	top: 0;
+}
+.wrap div:nth-child(4) {
+	left: 147px;
+	top: 0;
+}
+.wrap div:nth-child(5) {
+	right: 0;
+	top: 49px;
+}
+.wrap div:nth-child(6) {
+	right: 0;
+	top: 98px;
+}
+.wrap div:nth-child(7) {
+	right: 0;
+	top: 147px;
+}
+.wrap div:nth-child(8) {
+	right: 49px;
+	top: 147px;
+}
+.wrap div:nth-child(9) {
+	right: 98px;
+	top: 147px;
+}
+.wrap div:nth-child(10) {
+	right: 147px;
+	top: 147px;
+}
+.wrap div:nth-child(11) {
+	left: 0;
+	top: 98px;
+}
+.wrap div:nth-child(12) {
+	left: 0;
+	top: 49px;
+}
+input {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	left: 38%;
+	top: 43%;
+	z-index: 2;
+	width: 50px;
+	height: 30px;
+	font: 14px/30px "微软雅黑";
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+	<div>4</div>
+	<div>5</div>
+	<div>6</div>
+	<div>7</div>
+	<div>8</div>
+	<div>9</div>
+	<div>10</div>
+	<div>11</div>
+	<div>12</div>
+	<input type="button" value="开始" id="btn"/>
+</div>
+<script src="jquery-3.1.1.js"></script>
+<script>
+$(function() {
+	var divs = $('.wrap').eq(0).find('div');
+	var timer = null;
+	var zhong = 8; //中奖
+	var num = 0; //走的个数
+	var t = 200;//起步的时间
+	var r = 0;//加速时走了几圈
+	var n2 = 0;//加速加到30的时候应该还要走多少圈
+	var hmd = 0;
+	
+	
+	$('#btn').click(function(){
+		
+		n2 = (Math.round(Math.random()*2)+3) * divs.length;; //转几圈  ,3-5圈，调多少次函数
+		c();//递归
+	})
+
+	function c(){
+		clearInterval(timer);
+		timer = setTimeout(function(){
+			//清、添加class
+			divs.eq(num%divs.length).addClass('active').siblings().removeClass('active');
+			num++;
+			//console.log(Math.floor(num/divs.length))
+			//速度每次加速
+			t-=10;
+			//当速度小于等于30的时候，速度就一直在30的位置上
+			if(t <= 30){
+				t = 30;
+				//记录回调了多少次
+				r++; 
+			}
+			//当回调的次数等于应该走的步数n2
+			if(r == n2){
+				//减速
+				t+=40;
+				
+				//当减速到300的时候并且也到了中奖的位置，就停止递归
+				hmd = zhong-3<0?(zhong-3)+divs.length:zhong-3;
+				if(t >= 300){
+					if(num%divs.length == hmd){
+						t += 280;
+					}
+					if(num%divs.length == zhong){
+						return;
+					}
+				}
+			}
+			c(t);
+		},t);
+	}
+});
+
+</script>
+</body>
+</html>

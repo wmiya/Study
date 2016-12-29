@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+#list ul{
+	display: none;
+}
+#list>ul{
+	display: block;
+}
+</style>
+<script src="jquery-3.1.1.js"></script>
+<script type="text/javascript">
+
+var data = [
+	{
+		name:"选项一",
+		child: [
+			{
+				name:"选项1",
+				child: [
+					{name: "选项(1)"},
+					{name: "选项(2)"},
+					{name: "选项(3)"}
+				]
+			
+			},
+			{
+				name:"选项2",
+				child: [
+					{name: "选项(1)"},
+					{name: "选项(2)"},
+					{name: "选项(3)"}
+				]
+			},
+			{
+				name:"选项3",
+				child: [
+					{name: "选项(1)"},
+					{name: "选项(2)"},
+					{name: "选项(3)"}
+				]
+			}
+		]
+	},
+	{
+		name:"选项二",
+		child: [
+			{name:"选项2_1"},
+			{name:"选项2_2"},
+			{name:"选项2_3"},
+			{
+				name:"选项2_4",
+				child: [
+					{name: "选项(1)"},
+					{
+						name: "选项(2)",
+						child: [
+							{name: "选项-1"},
+							{name: "选项-2"}
+						]
+					},
+					{
+						name: "选项(3)",
+						child: [
+							{name: "选项-1"},
+							{name: "选项-2"}
+						]
+					}
+				]
+			}
+		]
+	}
+];
+
+</head>
+<body>
+<div id="list">
+
+</div>
+</body>
+</html>

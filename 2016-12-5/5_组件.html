@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+#div1{
+	width:100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+	top:0;
+	left:0;
+}
+#div2{
+	width:100px;
+	height: 100px;
+	background:green;
+	position: absolute;
+	top:0;
+	left:110px;
+}
+</style>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+<script type="text/javascript">
+	/*
+		组件：
+			提供一个完善的功能的方法或数据的封装
+		
+		组件要求
+			易扩展，易维护
+			
+		当按下的时候让div变色（蓝色）
+		当抬起的时候让div变色（红色）
+		
+	*/
+	
+	function Drag(id){//首先构造函数，初始化对象
+		this.div1 = document.getElementById(id);//拿到元素，初始化变量
+		this.disX = 0;
+		this.disY = 0;
+	}
+	Drag.prototype.init = function(){//事件话对象
+		var _this = this;//拿变量储存当前this
+		this.div1.addEventListener('mousedown',down);//给当前加上按下事假
+		function down(ev){//按下执行的方法
+			_this.div1.style.background = 'blue';//首先改变颜色
+			_this.fnDown(ev,down,_this);//传参数
+		}
+	}
+	
+	Drag.prototype.fnDown = function(ev,down,that){//按下时候执行的方法
+		this.disX = ev.pageX - this.div1.offsetLeft;//拿到按下的left和top
+		this.disY = ev.pageY - this.div1.offsetTop;
+		document.addEventListener('mousemove',move);//分别加上移动事件
+		document.addEventListener('mouseup',up);//抬起事件
+		function move(ev){
+			that.fnMove(ev);
+		}
+		function up(ev){
+			that.fnUp(ev,down,move,up);
+			
+			
+		}
+		
+		ev.preventDefault();
+		
+	}
+	
+	Drag.prototype.fnMove = function(ev){
+		this.div1.style.left = ev.pageX - this.disX +'px';
+		this.div1.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	
+	Drag.prototype.fnUp= function(ev,down,move,up){
+		this.div1.style.background = 'red';
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+
+	var d1 = new Drag('div1');
+	var d2 = new Drag('div2');
+	
+	d1.init();
+	d2.init();
+	
+</script>
+</body>
+</html>

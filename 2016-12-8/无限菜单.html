@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="wrap"></div>
+		<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript" src="data.js">
+			
+		</script>
+		<script type="text/javascript">
+			
+		</script>
+		<script type="text/javascript">
+			(function(){
+		function setLayout(data){
+					var ul = document.createElement("ul");
+					ul.className = "list"+(data.pid);
+					for(var s in data){
+						if(s != "pid"){
+							var li = document.createElement("li");
+							var span = document.createElement("span");
+							var p = document.createElement("p");
+							p.innerHTML += data[s].name;
+							li.appendChild(p);
+							if(data[s].list){
+								var child = setLayout(data[s].list);
+								li.appendChild(child);
+							}
+							ul.appendChild(li);
+						}
+					}
+					return ul;
+		};
+		var list = document.querySelector('#wrap');
+		var l = setLayout(data.l);
+	    list.appendChild(l);
+	    $("p").click(function(){
+	    	//$("ul").hide();
+	    	if ($("ul")!=$(this).next("ul")) {
+	    		$("ul").hide();
+	    	}
+	    	$("ul").first().show();
+	    	$(this).parents().show();
+	    	if ($(this).next("ul").css("display") =="block") {
+	    			$(this).next("ul").hide();
+	    	} else{
+	    			$(this).next("ul").show();
+	    	}
+
+	    	
+	    	console.log($(this).next("ul").css("display"))
+	    });
+	    	
+//	    var list0 = document.getElementsByClassName("list0");
+//	    list0[0].id = "left";
+//		var p = list.getElementsByTagName("p"); 
+//		      for (var i = 0; i < p.length; i++) {
+//		          p[i].onclick =function(){		          	
+//		          	  var next = this.nextElementSibling;
+//		          	  var ul = this.parentNode.parentNode.getElementsByTagName("ul");
+//		          	  for(var i = 0; i < ul.length; i++){
+//						if(ul[i] != next){
+//							ul[i].style.display = "none";
+//						}
+//					  }
+//		          	  if(next){
+//							if(next.style.display == "block") {
+//								next.style.display = "none";
+//							} else {
+//								next.style.display = "block";
+//							}
+//					  }
+//		          }
+//		      }
+		
+	}	
+	)();
+		</script>
+	</body>
+</html>

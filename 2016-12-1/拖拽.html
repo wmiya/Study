@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			div{
+				width: 100px;
+				height: 100px;
+			}
+			#box{
+				position: absolute;
+				left: 0;
+				top: 0;
+				background: lightskyblue;
+			}
+			#box2{
+				position: absolute;
+				left: 200px;
+				top: 200px;
+				background: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<div id="box2"></div>
+		<script>
+		//*类*/
+			function Tab(id){
+				this.box=document.getElementById(id);
+				this.disX=0;
+				this.disY=0;
+			}
+			/*事件*/
+			Tab.prototype.events=function(){
+				var _this=this;
+				this.box.addEventListener("mousedown",function(e){
+					_this.fnDown(e);
+				})
+			}
+			/*方法*/
+			Tab.prototype.fnDown=function(e){
+				var _this=this;
+				this.disX=e.pageX-this.box.offsetLeft;
+				this.disY=e.pageY-this.box.offsetTop;
+				document.addEventListener("mousemove",Move);
+				/*方法挂在原型上面*/
+				function Move(e){
+					_this.fnMove(e);
+				}
+				document.addEventListener("mouseup",Up);
+				function Up(){
+					_this.fnUp(Move,Up);
+				}
+			}
+			Tab.prototype.fnMove=function(e){
+				this.box.style.left=e.pageX-this.disX+"px";
+				this.box.style.top=e.pageY-this.disY+"px";
+			}
+			Tab.prototype.fnUp=function(Move,Up){
+				document.removeEventListener("mousemove",Move);
+				document.removeEventListener("mouseup",Up);
+			}
+			var d1=new Tab('box');
+			var d2=new Tab2('box2');
+			function  Tab2(id){
+				Tab.call(this,id);
+			}
+			for(var attr in Tab.prototype){
+				if(Tab.prototype.hasOwnProperty(attr)){
+					Tab2.prototype[attr]=Tab.prototype[attr];
+				}
+			}
+			Tab2.prototype.fnMove=function(e){
+				var l=e.pageX-this.disX;
+				var t=e.pageY-this.disY;
+				if(l<0){
+					l=0;
+				}
+				if(l>document.documentElement.clientWidth-this.box.clientWidth){
+					l=document.documentElement.clientWidth-this.box.clientWidth;
+				}
+			}
+			d1.events();
+			d2.events();
+		</script>
+	</body>
+</html>

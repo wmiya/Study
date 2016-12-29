@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+}
+html,body{
+	overflow:hidden;
+}
+#wrap{
+	transition:1s;
+	position: relative;
+	top:0;
+	left:0;
+}
+
+</style>
+</head>
+<body>
+	<section id="wrap">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</section>
+<script type="text/javascript">
+
+	var arr = ['green','yellow','pink','skyblue'];//首先给个数组、、分别记录当前的颜色
+	
+	var wrap = document.getElementById('wrap');//获取元素
+	var divs = wrap.children;//获取下面子集
+	var iW = document.documentElement.clientWidth;//拿到文档可视区的宽高
+	var iH = document.documentElement.clientHeight;
+	
+	var lis = Array.prototype.slice.call(divs);//将 类数组 转化为真正的数组
+	var num = 0;//声明一个变量。丛0开始
+	lis.forEach(function(e,i){//循环拿到的每一项
+		e.style.cssText = 'width:'+iW+'px;height:'+iH+'px;background:'+arr[i];
+		//给当前的加上样式，
+	});
+//	console.log(lis)
+	
+	//方便给人使用：为了绑定事件函数，往数组中push函数
+	wrap.onOff = true;//给个开关。
+	addEvent(wrap,'下滚',function(){//参数分别为对象。事件，和函数
+		if(!wrap.onOff){return};//如果对象是未开启的状态就返回。。
+		wrap.onOff = false;//在这里给他false，让他执行
+		num++;//然后加加
+		if(num > divs.length-1){//过截处理。大于div长度。。就等于div长度
+			num = divs.length-1;
+		}
+		wrap.style.top = -num * iH + 'px';//变化的样式。改变top值。
+		setTimeout(function(){//开启延迟定时器、开启后再给他开始
+			wrap.onOff = true;
+		},1010);
+	});
+	
+	
+	addEvent(wrap,'上滚',function(){
+		if(!wrap.onOff){return};
+		wrap.onOff = false;
+		num--;
+		if(num < 0){
+			num = 0;
+		}
+		wrap.style.top = -num * iH + 'px';
+		setTimeout(function(){
+			wrap.onOff = true;
+		},1010);
+	});
+	
+	
+	addEvent(wrap,'下滚',function(){//改变他的透明度
+		divs[num].style.opacity = '.5';
+	});
+	
+	
+	
+	
+	/*
+		{
+			'下滚':[
+				function(){},
+				function(){}
+			],
+			
+		}
+		
+		
+		
+		触发器：
+			依次调用这个事件的这些方法
+			
+	*/
+	
+	function addEvent(obj,events,fn){//这里自定义事件。对象。事件。函数
+		obj.zdy = obj.zdy || {};//如果当前存在这个自定义属性的话。就执行。没有就给一个空的对象
+		obj.zdy[events] = obj.zdy[events] || [];//判断自定义事件上有没有这个事件。如果有距执行这个数组
+		/*如果这个对象的这个属性下有这个事件名，说明之前绑定过，从之前的数组中push新的函数就可以了，否则创建一个空白数组
+		*/
+		obj.zdy[events].push(fn);
+	}
+	
+	function trigger(obj,events){//触发器
+		if(!obj.zdy[events]){return null};//当前如果这个对象没有这个事件名，就返回空
+		for(var i=0;i<obj.zdy[events].length;i++){//如果有。就循环自定义事件的每一项，
+			obj.zdy[events][i]();//调用下面的每一项
+		}
+	}
+	
+	function addWheel(obj,fn){//加上滚轮事件
+		obj.addEventListener('mousewheel',fnW);
+		function fnW(ev){
+			var down = 0;
+			down = ev.wheelDelta>0?true:false;
+			fn && typeof fn === 'function' && fn(down);
+		}
+		
+	}
+	
+	
+	addWheel(document,function(down){
+		//上滚的时候触发这个事件
+		if(down){
+			trigger(wrap,'上滚');
+		}else{
+		//下滚的时候触发这个事件
+			//alert(1)
+			trigger(wrap,'下滚');
+		}
+	})
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

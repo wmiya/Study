@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+	var obj = {
+		
+		user:'王松松',
+		pass:'123456',
+		act:'add'
+	};
+	
+	var arr = [];
+	for(var attr in obj){
+		arr.push(attr+'='+obj[attr]);
+		
+	}
+//	console.log(arr)
+	var data = arr.join('&');
+	console.log(data);
+	
+	//url + data
+	//user.php?act=add&user=王松松&pass=123456
+	
+</script>
+</body>
+</html>

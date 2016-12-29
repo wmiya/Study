@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			html,
+			body{
+				margin: 0;
+				height: 100%;
+			}
+			#box{
+				width: 300px;
+				height: 200px;
+				position: absolute;
+				background: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<!--写登陆框的时候注意。
+			给html和body100%的height；
+			登陆框本身也必须是绝对定位
+			可以不给top和left
+			稍后在js中加进去；
+			通过getBoundingClientRect获取登陆框本身高度和宽度。
+			获取登陆框父级的getBoundingClientRect本身高度和宽度
+			(父级减去自己)除以2就是当前登陆的的top和left
+			
+			
+			
+		-->
+		<script>
+			(function(){
+				var box=document.getElementById("box");
+				var parent=box.offsetParent;
+				var parenRect=parent.getBoundingClientRect();
+				var boxRect=box.getBoundingClientRect()
+				//console.log(parenRect,boxRect)
+				box.style.left = (parenRect.width - boxRect.width)/2+"px";
+				box.style.top = (parenRect.height - boxRect.height)/2+"px";
+
+				
+			})()
+		</script>
+	</body>
+</html>

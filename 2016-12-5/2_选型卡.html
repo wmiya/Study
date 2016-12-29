@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+.divs div{
+	width:200px;
+	height: 200px;
+	border: 1px solid #000;
+}
+.divs div.hide{
+	display: none;
+}
+.divs div.show{
+	display: block;
+}
+#box{
+	position: absolute;
+	top:0;
+	left:0;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<div class="btns">
+			<input type="button" name="" id="" value="选项一" class="active"/>
+			<input type="button" name="" id="" value="选项二" />
+			<input type="button" name="" id="" value="选项三" />
+		</div>
+		<div class="divs">
+			<div class="show">111111</div>
+			<div class="hide">22222</div>
+			<div class="hide">33333</div>
+		</div>
+	</div>
+<script type="text/javascript">
+	/*
+		1.自动播放  (OK)
+		2.第一个播放，第二个不走 ()
+		3.点击btn1的时候，让第二个走，第一个停
+		4.点击btn2的时候，2个都停
+		5.点击btn3的时候，2个都走
+		6.反向走（走的停，停的走） 
+		
+		面向过程
+			关注实现过程和每一步的实现细节
+		
+		面向对象
+			关注特性和功能
+		
+		面向对象的好处
+		1、代码的层次结构更清晰
+		2、更容易复用
+		3、更容易维护
+		4、更容易扩展
+		5、more...
+
+		
+		
+	*/
+	/*初始化变量*/
+	function Drag(id){
+		this.div1 = document.getElementById(id);//首先获取元素
+		this.disX = 0;//声明变量
+		this.disY = 0;
+	}
+	Drag.prototype.init = function(){//事件函数
+		var _this = this;//拿变量储存
+		this.div1.addEventListener('mousedown',down);//给div1加按下事件
+		function down(ev){
+			_this.fnDown(ev,down,_this);//给当前加样式，传参ev，down.
+		}
+	}
+	
+	Drag.prototype.fnDown = function(ev,down,that){//给按下事件加方法。
+		this.disX = ev.pageX - this.div1.offsetLeft;//拿到当前的的left。top值
+		this.disY = ev.pageY - this.div1.offsetTop;
+		document.addEventListener('mousemove',move);//分别加上事件
+		document.addEventListener('mouseup',up);
+		
+		
+		function move(ev){
+			that.fnMove(ev);
+		}
+		function up(ev){
+			that.fnUp(ev,down,move,up);
+		}
+		
+		ev.preventDefault();
+		
+	}
+	
+	Drag.prototype.fnMove = function(ev){
+		this.div1.style.left = ev.pageX - this.disX +'px';//鼠标移动的时候要记录下当前的值
+		this.div1.style.top = ev.pageY - this.disY + 'px';
+	}
+	
+	
+	Drag.prototype.fnUp= function(ev,down,move,up){//当鼠标抬起的时候要执行的事件
+		document.removeEventListener('mousemove',move);
+		document.removeEventListener('mouseup',up);
+	}
+	
+	function Tab(id){//选项卡 的初始化函数，也就是构造函数
+		this.box = document.getElementById(id);//拿到元素
+		this.btns = this.box.getElementsByTagName('input');//和拿到点击按钮
+		this.divs = this.box.getElementsByClassName('divs')[0];//拿到对应下面的内容
+		this.divChild = this.divs.getElementsByTagName('div');//拿到他下面的子项
+		this.timer = null;//给个定时器
+		this.num = 0;	//初始化变量。稍后图片转化的时候让他加加
+	}
+	
+	Tab.prototype.init = function(){//事件调用
+		this.over();
+		this.out();
+		this.events();
+		this.autoPlay();
+	}
+	
+	Tab.prototype.events = function(){//
+		var _this = this;//给this存一下
+		for(var i=0;i<this.btns.length;i++){//循环所有的按钮
+			(function(index){//用自执行包起来
+				_this.btns[index].onclick = function(){
+				//_this.btns指向的是Tab，index就是每一个点击的小按钮，给他们都加上事件
+					_this.num = index;//当前在最开始设置的变量就是当前点击的这个
+					_this.change(index);//这个点击改变样式的时候就是当前的每一项
+				}
+			})(i);
+		}
+	}
+	
+	Tab.prototype.over = function(){//当鼠标移入的时候执行的事件
+		var _this = this;//还是那变量记录
+		this.box.addEventListener('mouseover',function(){
+			//当鼠标移入的时候就关闭定时器
+			_this.stop();
+		});
+	}
+	
+	Tab.prototype.out = function(){//当鼠标移出的时候要执行的事件
+		var _this = this;
+		this.box.addEventListener('mouseout',function(){
+			_this.autoPlay();//鼠标移入的还原自动播放
+		});
+	}
+	
+	Tab.prototype.change = function(index){//因为在上面传参是index。所以这里传参也应相应
+		for(var i=0;i<this.btns.length;i++){
+			this.btns[i].className = '';//大清洗
+			this.divChild[i].className = 'hide';
+		}
+		this.btns[index].className = 'active';//给当前加上样式
+		this.divChild[index].className = 'show';
+	}
+	
+	Tab.prototype.autoPlay = function(){//定时器自动播放
+		var _this = this;
+		clearInterval(this.timer);//开启定时器之前先关闭
+		this.timer = setInterval(function(){
+			_this.num++;//_this指向Tab
+			if(_this.num >= _this.btns.length){//过截处理
+				_this.num = 0;
+			}
+			_this.change(_this.num);//执行的时候让他们的样式也有变化
+		},1000);
+	}
+	
+	Tab.prototype.stop = function(){//鼠标移入的时候。关闭定时器。让他为空
+		clearInterval(this.timer);
+		this.timer = null;
+	}
+	
+	Tab.prototype.fanx = function(){
+		return !!this.timer;  //this.timer = null  !null !true false
+	}
+	
+	
+	var t1 = new Tab('box');
+	var d1 = new Drag('box');
+	t1.init();
+	d1.init();
+	
+	
+	
+	
+	
+	
+	
+	
+</script>
+</body>
+</html>

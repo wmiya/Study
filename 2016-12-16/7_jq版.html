@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+	用户名:<input name="user" type="text"><span id="s"></span><br /><br />
+<script src="jquery-3.1.1.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	var s = document.getElementById('s');//获取span
+	var user = document.getElementsByTagName('input')[0];//获取内容
+	user.onblur = function(){
+		var val = user.value;//拿到内容值
+		
+		$.ajax({//发送
+			url:'php/get.php',//输入地址
+//			url:'data.xml',
+			data:'user='+encodeURI(val),//写上内容
+//			dataType:'json',
+//			type:'xml',
+			success:function(json){//成功之后要做的事情
+				console.log(json);
+			}
+		});	
+	}
+	
+</script>
+</body>
+</html>

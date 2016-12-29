@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+
+		/*
+			1.要有个手机      ------->   创建一个ajax对象
+			2.输入号码（010,123456）  -----> 填写地址
+			3.拨号  --->    发送请求
+			4.等待对方的回应  --->   等待服务器响应
+			5.聊天   ----->  接收数据
+			
+			
+			1.get
+			2.true
+			3.地址
+			
+			
+			1.创建ajax对象
+				var ajax = new XMLHttpRequest()
+			2.填写地址
+				ajax.open('get','接口地址+'encodeURI(拼写),true);  
+				ajax.open('post','接口地址',true);
+			3.发送请求
+				
+				ajax.send();
+				ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+				ajax.send(拼写);
+			4.等待服务器响应
+				
+				ajax.onload
+				
+			5.会话
+				ajax.responseText
+
+			
+		*/
+	
+</script>
+</body>
+</html>

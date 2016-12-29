@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        #wrap {
+            width: 500px;
+            margin: 0 auto;
+        }
+        h2 {
+             border-bottom: 1px solid #000;
+        }
+        .message {
+            padding: 20px;
+            border-bottom: 1px solid #000;
+            font: 14px/30px "宋体";
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            border: 1px solid #000;
+            overflow: auto;
+            resize: none;
+            box-sizing: border-box;
+        }
+        input {
+            width: 100%;
+            height: 40px;
+            margin-top: 10px;
+        }
+        .red {
+        	background: red;
+        }
+        .blue {
+        	background: blue;
+        }
+        .green {
+        	background: green;
+        }
+        .yellow {
+        	background: yellow;
+        }
+        .gray {
+        	background: gray;
+        }
+    </style>
+    <script type="text/javascript" src="jquery-3.1.1.js">
+    	
+    </script>
+    <script type="text/javascript">
+                            /*
+                          判断当前是否是被点击过
+                           如果被点击过
+                                class = 初始颜色
+                            否则
+                                class = gray  
+                             
+
+                           1. 如何判断 当前元素 是否被点击过
+                               1. click的时候，已经发生了 over事件 所有的class 都变成了 “yellow”,所以不能
+                               用 this.className来进行判断
+                               2. 在鼠标移入的时候，我们会用oldColor来记录鼠标移入之前的颜色,如果元素被点击过，oldColor就会记录这个 gray
+                               3. 通过以上分析 我们 可以判断 oldColor，去查看鼠标移入之前元素是什么颜色
+
+                           
+                           2. 如何拿到初始颜色  
+
+                                1)我们设置颜色的规则:根据当前是第几个 通过取模 给加上数组的第几位颜色
+                                2)点击之后，我们通过索引获取当前是第几个
+                                3）利用规则1 就可以拿到初始颜色       
+
+                        */
+    	window.onload = function() {
+           
+            var $message = $(".message");
+            var $textarea = $("textarea")
+            var $but= $("#up");
+            var $del= $("#del");
+            var $p = $(".message p");
+            var $arr = ["red","blue","green"];
+            var $now = 0;
+            var $oldColor = "";
+            
+            setEvent();
+    		$but.click(function() {
+    			$val = $textarea.val();
+    			$message.html($message.html()+'<p class="'+$arr[$now%$arr.length]+'">'+$val+'</p>');
+				$now++;
+                setEvent();
+    		});
+    		$del.click(function(){
+    			var $p = $(".message p"); 
+                $p.each(function(i,e){
+                	if($(e).attr("class")=="gray") {
+							$(e).remove();
+	                }
+                })
+            })
+            function setEvent(){
+            	var $p = $(".message p"); 
+            	$p.each(function(i,e){
+            		(function(i,e){	
+            			$(e).mouseover(function(){
+            			    $oldColor = $(e).attr("class");            				
+            				$(e).attr("class", "yellow");
+            			})
+            			$(e).click(function(){
+            				if($oldColor == "gray") {
+                            	$oldColor = $arr[($(e).index())%($arr.length)];
+                            	$(e).attr("class", $arr[($(e).index())%($arr.length)]);
+	                        } else {
+	                            $oldColor = "gray";
+	                            $(e).attr("class", "gray");
+	                        }
+            			})
+            			$(e).mouseout(function(){
+            				$(e).attr("class",$oldColor);
+            			})
+            		})(i,e)
+            	})
+            }
+    	};
+    </script>
+</head>
+<body>
+    <section id="wrap">
+        <h2>留言板</h2>
+        <div class="message">
+        </div>
+        <h3>请输入留言内容</h3>
+        <textarea></textarea>
+        <input type="button" value="发表留言" id="up">
+        <input type="button" name="" id="del" value="删除留言"  />
+    </section>
+</body>
+</html>

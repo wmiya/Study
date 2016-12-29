@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+.divs div{
+	width:200px;
+	height: 200px;
+	border: 1px solid #000;
+}
+.divs div.hide{
+	display: none;
+}
+.divs div.show{
+	display: block;
+}
+#box{
+	position: absolute;
+	top:0;
+	left:0;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<div class="btns">
+			<input type="button" name="" id="" value="选项一" class="active"/>
+			<input type="button" name="" id="" value="选项二" />
+			<input type="button" name="" id="" value="选项三" />
+		</div>
+		<div class="divs">
+			<div class="show">111111</div>
+			<div class="hide">22222</div>
+			<div class="hide">33333</div>
+		</div>
+	</div>
+<script>
+	function Tab(id){
+		this.box=document.getElementById("box");
+		this.btns=this.box.getElementsByTagName("input");
+		this.divs=this.box.getElementsByClassName('divs')[0];
+		this.child=this.divs.children;
+		this.timer=null;
+		this.num=0;
+	}
+	Tab.prototype.init=function(){
+		
+		
+	}
+	Tab.prototype.envent=function(){
+		var _this=this;
+		
+		
+	}
+</script>
+</body>
+</html>

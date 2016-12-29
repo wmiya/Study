@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#oUl{
+				
+				height: 200px;
+				width: 250px;
+				margin: 50px  auto;
+				overflow: hidden;
+				border: 5px solid #000;
+				position: relative;
+			}
+			#div1{
+				position: absolute;
+				left: 0;
+				top: 0;
+				width:100000px;
+				height: 200px;
+			
+			}
+			#div1 img{
+				float: left;
+				width: 250px;
+				height: 200px;
+				position: relative;
+			}
+			input{
+				margin:20px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" id="prev" value="上一个"/>
+		<input type="button" id="next" value="下一个"/>
+		<div id="oUl">
+			<div id="div1">
+				<img src="img/1.jpg" />
+			
+				<img src="img/2.jpg" />
+				<!--<img src="img/3.jpg" />
+			
+				<img src="img/4.jpg" />
+				<img src="img/5.jpg" />
+			
+				<img src="img/6.jpg" />
+				<img src="img/7.jpg" />
+				<img src="img/8.jpg" />-->
+			
+			</div>
+		</div>
+		<script src="jquery-3.1.1.js"></script>
+		<script src="sizzle.js"></script>
+		<script>
+		   $(function(){
+		   	var num=0;
+		   	$('#prev').click(function(){
+		   		num--;
+		   		move(-250)
+		    })
+		   	$('#next').click(function(){
+		   		num++;
+		   		move(250)
+		    })
+		   	function move(end){
+		   		$('img').eq(1).css('left',0);
+		   		$('img').eq(0).css('left',0);
+		   		if(num>0)num=6;
+		   		if(num<6)num=0;
+		   		$('img').eq(1).src="img/"+num+".jpg";
+		   		$('img').eq(1).css('left','end');
+		   		$('#oUl')[0].style.left=-end+"px";
+		   		$('img').eq(0).src="img/"+num+".jpg";
+	   			$('#oUl')[0].style.left=0;
+		   			
+		   			
+		   		
+		   	}
+		   	
+		   	
+		   	
+		   })
+	
+		</script>
+	</body>
+</html>
