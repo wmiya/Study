@@ -40,33 +40,36 @@
 		3.排错。
 		99%都死在this上
 	*/
-	function tab(){
+	function Tab(){
 		this.box=document.getElementById("box");
 		this.btns=document.getElementById("btns");
 		this.divs=document.getElementById("divs");
 		this.inpt=this.btns.getElementsByTagName("input");
 		this.div=this.divs.getElementsByTagName("div");
-		//console.log(inpt,div)
+		//console.log(this.inpt,this.div);
 		this.init();
 	}
-	tab.prototype.init=function(){
+	Tab.prototype.init=function(){
 		var _this=this;
-		for(var i=0;i<this.btns.length;i++){
-			this.btn[i].index=i;
-			this.btn[i].onclick=function(){
-				_this.change(this);
+		//alert("1")
+		for(var i=0;i<this.inpt.length;i++){
+			this.inpt[i].index=i;
+			this.inpt[i].onclick=function(){
+				
+				_this.change(this);//this是指文档中的每一样
+				//注意这里的_this就是指的Tab
 			}
 		}
 	}
-	tab.prototype.change=function(_this){
-		for(var i=0;i<this.btns.length;i++){
-			this.btns[i].className="";
-			this.div[_this.index].className="hide";
+	Tab.prototype.change=function(that){
+		for(var i=0;i<this.inpt.length;i++){
+			this.inpt[i].className="";
+			this.div[i].className="hide";
 		}
-		_this.className="active";
-		this.div[_this.index].className="show"
+		that.className="active";
+		this.div[that.index].className="show";
 	}
-	new Tab();
+	new Tab;//注意这里Tab()的()是可以不用加上的，写了new就是自己执行。写括号是为了传参
 	
 </script>
 </body>

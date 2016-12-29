@@ -14,4 +14,27 @@
 	<natures>
 		<nature>com.aptana.projects.webnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>js总结/2016-11-28</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/class/2016-8-29/2016-11-28</locationURI>
+		</link>
+		<link>
+			<name>snake/2016-11-28</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/class/classOne/2016-8-29/2016-11-28</locationURI>
+		</link>
+	</linkedResources>
+	<filteredResources>
+		<filter>
+			<id>1480297663694</id>
+			<name></name>
+			<type>26</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-node_modules</arguments>
+			</matcher>
+		</filter>
+	</filteredResources>
 </projectDescription>

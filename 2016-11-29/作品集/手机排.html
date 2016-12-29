@@ -87,7 +87,7 @@
 				//再次存放一次，因为下面需要进行排序。排序必须是数组
 				pure[i].onclick=function(){
 					var tr=this.parentNode.parentNode;
-					var pureTr=this.previousElementSibling;
+					var pureTr=tr.previousElementSibling;
 					if(pureTr){
 						tbody.insertBefore(tr,pureTr)
 					}else{
@@ -96,7 +96,7 @@
 				};
 				next[i].onclick=function(){
 					var tr=this.parentNode.parentNode;
-					var nextTr=this.nextElceementSibling;
+					var nextTr=tr.nextElceementSibling;
 					if(nextTr){
 						tbody.insertBefore(nextTr,tr)
 					}else{
@@ -104,18 +104,30 @@
 					}
 				}
 			}
-			btn[0].addEventListener("click",fnUp);
-			function fnUp(){
-				rowsArr.sort(function(tr1,tr2){
-					var cellsA=tr1.cells[1].innerHTML;
-					var cellsB=tr1.cells[1].innerHTML;
-					return cellsB-cellsA;
+		
+			btn[0].onclick=function(){
+				rowsArr.sort(function(t1,t2){
+					var cells1=t1.cells[1].innerHTML;
+					var cells2=t2.cells[1].innerHTML;
+					return cells2-cells1;
 				})
 				for(var i = 0; i < rowsArr.length; i++){
 					tbody.appendChild(rowsArr[i]);
-				//alert(i);
+					//alert(i);
 				}
 			}
+			btn[1].onclick=function(){
+				rowsArr.sort(function(t1,t2){
+					var cells1=t1.cells[1].innerHTML;
+					var cells2=t2.cells[1].innerHTML;
+					return cells1-cells2;
+				})
+				for(var i = 0; i < rowsArr.length; i++){
+					tbody.appendChild(rowsArr[i]);
+					//alert(i);
+				}
+			}
+			
 		})(document)
 	</script>
 </body>

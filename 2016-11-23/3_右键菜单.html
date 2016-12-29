@@ -129,7 +129,7 @@ window.onload = function(){
 		var parent = this.parentNode;//li、、当前点击h2的父级
 		var pp = parent.parentNode;//ul、、他父级 的父级
 		var li = pp.children;//ul li*、、获取他父级下面的子集
-		console.log(li)//ul下面的大的几个li
+//		console.log(li)//ul下面的大的几个li
 		for(var i=0;i<li.length;i++){//循环所有的这些li
 			if(li[i]!=parent){//如当前的点击的这个的父级不等于他的父级
 				var ul = li[i].getElementsByTagName('ul');//获取除他之外所有的ul

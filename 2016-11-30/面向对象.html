@@ -1,26 +1,48 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-		<script>
-		window.onload=function(){
-			function techer(name,age){
-				this.neme=name;
-				this.age=age;
-			}
-			Object.prototype.say=function(){
-				alert("我叫"+this.neme+"我的年龄"+this.age+"岁")
-			}
-			var t1=new techer("youzi",18);
-			console.log(t1)
-			//t1.say();
-			
-		}/*对象-链-原型-链-原型*/
-		/* 碰到对象找原型链。对象没有原型。只有链，
-		/* 碰到函数找原型，。。原型只给实例化对象用*/
-		</script>
-	</body>
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+<style>
+.active{
+	background: yellow;
+}
+#divs div{
+	width:200px;
+	height: 200px;
+	border: 1px solid #000;
+}
+#divs div.hide{
+	display: none;
+}
+#divs div.show{
+	display: block;
+}
+</style>
+</head>
+<body>
+	<div id="box">
+		<div id="btns">
+			<input type="button" name="" id="" value="选项一" class="active"/>
+			<input type="button" name="" id="" value="选项二" />
+			<input type="button" name="" id="" value="选项三" />
+		</div>
+		<div id="divs">
+			<div class="show">111111</div>
+			<div class="hide">22222</div>
+			<div class="hide">33333</div>
+		</div>
+	</div>
+<script>
+	function Tab(){
+		this.box=document.getElementById("box");
+		this.btns=document.getElementById("btns");
+		this.divs=document.getElementById("divs");
+		this.inpt=this.btns.getElementsByTagName("input");
+		this.div=this.divs.getElementsByTagName("div");
+		console.log(this.inpt,this.div)
+		
+	}
+</script>
+</body>
 </html>

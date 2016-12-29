@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				font-family: "微软雅黑";
+				color: #333;
+			}
+			#form{
+				text-align: center;
+				
+			}
+			#txt{width: 486px;margin:5px auto;text-align: left;}
+			#txt span{																
+				display: inline-block;
+				font-family: "微软雅黑";
+				font-size: 14px;
+				color: #333;
+			}
+			#txt span:nth-of-type(1){
+				width:156px;
+				height:20px;
+			}
+			#txt span:nth-of-type(2){
+				width:120px;
+				height:20px;
+			}
+		    #box{
+		    	margin: 120px auto;
+		    	width: 600px;
+		    }
+			.c1{
+				background: skyblue;
+			}
+			.c2{
+				background: #fff;
+			}
+			.c3{
+				background: #00BFFF;
+			}
+			.c4{
+				background: #00BFFF;
+				color: #fff;
+			}
+			.c5{
+				background:pink;
+				color: #fff;
+			}
+			table {
+				border: 1px solid #000;
+				border-right:0;
+				border-bottom: none;
+			}
+			table thead th,table tbody td{
+				text-align: center;
+				line-height:25px;
+				border-right:1px solid #000;
+			}
+			table thead th,table tbody td{
+				border-bottom: 1px solid #000;
+			}
+			.sortmode{
+				width: 100px;
+				height: 25px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box">
+			<div id="top">
+				<div id="txt">
+				    <span>请输入姓名</span>
+				    <span>请选择性别</span>
+				    <span>请输入年龄</span>
+				</div>
+				<div id="form">
+				<form id="form1">
+				    <input type="text" class="username"  name="username" placeholder="姓名" />
+				    <select name="sex">
+				        <!--<option value="">请选择一个性别</option>-->
+				        <option value="男">男</option>
+				        <option value="女">女</option>
+				    </select>
+				    <input type="text" class="age" name="age"  placeholder="年龄"/>
+				    <input type="button" class="btn" value="提交">
+				</form>
+				<p>
+				    <form id="form2">
+				    	<span>请选择编号：</span>
+				        <select name="orderName" class="sortmode">
+				            <option value="id" >编号</option>
+				            <option value="age">年龄</option>
+				        </select>
+				        <span>请选择排序方式：</span>
+				        <select name="orderBy" class="sortmode">
+				            <option value="asc">升序</option>
+				            <option value="desc">降序</option>
+				        </select>
+				        <input type="button" class="orderButton" value="排序">
+				      <input type="button" value="批量删除">  
+				    </form>
+				</p>
+				</div>
+			</div>
+			<table width="100%" id="tab1" border="0" cellspacing="0" >
+			    <thead>
+				    <tr>
+				        <th>全选 <input type="checkbox" id="checkAll" class="all"></th>
+				        <th>编号</th>
+				        <th>姓名</th>
+				        <th>性别</th>
+				        <th>年龄</th>
+				        <th>操作</th>
+				    </tr>
+			    </thead>
+			    <tbody id="tbody">
+			    	<tr>
+			    		<td><input type="checkbox" id="checkAll"></td>
+			    		<td>1</td>
+			    		<td>大红</td>
+			    		<td>女</td>
+			    		<td>23</td>
+			    		<td>
+			    			<input type="button" value="上移"/>
+			    			<input type="button" value="下移" />
+			    			<input type="button" value="删除"/>
+			    		</td>
+			    	</tr>
+			    </tbody>
+			</table>
+		</div>
+	</body>
+<script src="jquery-3.1.1.js"></script>
+<script src="sizzle.js"></script>
+<script>
+
+	 var data = [
+        {
+             'id' : 1,
+            'username' : 'LEO',
+            'age' : 36,
+            'sex' : '男'
+        },
+        {
+            'id' : 2,
+            'username' : 'MOMO',
+            'age' : 16,
+            'sex' : '男'
+        },
+        {
+            'id' : 3,
+            'username' : 'DUODUO',
+            'age' : 29,
+            'sex' : '男'
+        },
+        {
+            'id' : 4,
+            'username' : '勇升',
+            'age' : 46,
+            'sex' : '男'
+        },
+        {
+            'id' : 5,
+            'username' : '小美',
+            'age' : 40,
+            'sex' : '女'
+        }
+    ];
+function Tab(){
+	this.init();
+	id=data.length;
+	this.checked=[];//用于储存当前有几个是选中的
+}
+Tab.prototype.init=function(){
+	var _this=this;
+	_this.reset();
+	_this.upMove();
+	_this.allClick();
+	_this.newCreat();
+    _this.arrSort();	
+	
+}
+/*重置数据*/
+Tab.prototype.reset=function(){
+	var _this=this;
+	$('#tbody').html('');
+	$.each(data, function(i,e) {
+		var tr=_this.creat(e);
+		if(i%2){
+			tr.addClass('c1');
+		}
+		$('#tbody').append(tr);
+		_this.clear();
+		
+	});
+}
+/*上移下移*/
+Tab.prototype.upMove=function(){
+	var _this=this;
+	$('#tbody').on('click',function(ev){
+		var parentTr=$(ev.target).closest('tr');//距离最近的父级
+		if(ev.target.value==="上移"){
+			if(parentTr.prev().length){
+				parentTr.insertBefore(parentTr.prev());
+				_this.clear();
+			}
+		}
+		if(ev.target.value==="下移"){
+			if(parentTr.next().length){
+				parentTr.insertAfter(parentTr.next());
+				_this.clear();
+			}
+		}
+		if(ev.target.value==="删除"){
+			parentTr.remove();
+			_this.clear();
+			
+		}
+		if(ev.target.type==="checkbox"){//判断当前的如果是选中的状态
+			
+			if($(ev.target).prop('checked')){
+				_this.checked.push(parentTr.attr('index'));//就放进数组并且加上索引
+			}else{
+				
+				_this.removeData(_this.checked,parentTr.attr('index'));
+			}
+		}
+		$(data).each(function(i,e){//循环数组，
+			if(e.id===parentTr.attr('index')){//判断当前数组里的id和当前自定义的索引一致时
+				e.checked=$(ev.target).prop('checked');//就把当前的状态赋值给每一个索引相等的
+			}
+		})
+		/*一些类操作之后。因为数组会发生变化，所以判断当前的全选全选留下来的问题*/
+		_this.ischecked();
+		
+	})
+}
+
+/*查看是否是全选的状态*/
+Tab.prototype.ischecked=function(){
+	var _this=this;
+	//数组中选中的和tbody一样，就全选，没有就不选
+	if(_this.checked.length==$('#tbody').find('tr').length){
+		
+		$('#checkAll').prop('checked',true);
+	}else{
+		
+		$('#checkAll').prop('checked',false);
+	}
+	/*如果当前就没有被选中的默认走fals*/
+//	alert(1)
+	if(!this.checked.length)$('#tbody').prop('checked',false);
+	
+}
+
+
+/*删除数组*/
+Tab.prototype.removeData=function(){
+	var _this=this;
+	$.each(data, function(i,e) {
+		if(e){//这里循环每一项，如果当前有被删除的
+			if((e.id===id*1)||(e===id)){//这里需要注意。应为加上去的id是个字符串乘1是为了转化数字的格式
+				data.splice(i,1);//把对应的数据删除
+			}
+		}
+	});
+}
+/*点击全选的时候要做的事情*/
+Tab.prototype.allClick=function(){
+	var _this=this;
+	$('#checkAll').click(function(){
+//		console.log($('#checkAll'))
+		_this.checked.length=0;
+		var c=$('#checkAll').prop('checked');
+		$('#tbody').find('input[type="checkbox"]').prop('checked',c);
+		if($('#checkAll').prop('checked')){
+			$('#tbody').find('tr').each(function(i,e){
+				_this.checked.push($(e).attr('index'));
+				data[i].checked=true;
+				
+				
+			})
+		}else{
+			
+			$('#tbody').find('tr').each(function(i,e){
+				
+   				data[i].checked = false;
+   				
+   			});
+		}
+		
+	})
+}
+/*点击生成新的按数据*/
+Tab.prototype.newCreat=function(){
+	var _this=this;
+	$('#form1').click(function(ev){
+		if(ev.target.value==="提交"){
+			var name=$('#form1').find('input[name="username"]').val();
+			var sex=$('#form1').find('select').val();
+			if(/^\d+$/.test($('#form1').find('input[name="age"]').val())){
+				var age=$('#form1').find('input[name="age"]').val();
+			}else{
+				alert('请输入正确年龄吧');
+             return;
+			}
+			var json={
+				'id':++id,
+				'username':name,
+				'age':age,
+				'sex':sex
+			}
+			data.push(json);
+			var tr=_this.creat(json);
+			$('#tbody').append(tr);
+			_this.clear();
+			_this.ischecked();
+		}
+	})
+	
+	
+}
+/*点击排序*/
+Tab.prototype.arrSort=function(){
+	var _this=this;
+	$('#form2').on('click',function(ev){
+		
+		var orderName=$('#form2').find('select[name="orderName"]');
+		var orderBy=$('#form2').find('select[name="orderBy"]');
+		
+		
+		if(ev.target.value==="排序"){
+			if(orderBy.val()==='asc'){
+				data.sort(function(a,b){
+					return a[orderName.val()]-b[orderName.val()];
+				});
+			}else{
+				data.sort(function(a,b){
+					return b[orderName.val()]-a[orderName.val()];
+				});
+			}
+			_this.reset();
+		}
+	})
+}
+
+
+/*生成html*/
+Tab.prototype.creat=function(data){
+	var _this=this;
+		//数据中如果有checked为true那么说明选中的
+		/*加上这句话的意思就是避免全部删除后在在添加*/
+   		data.checked = data.checked?'checked':'';//**
+	var str=
+		`<tr index="${data.id}">//加上自定义属性是为了查看当前的id和数组的id是一致
+	    		<td><input type="checkbox" ${data.checked}></td>
+	    		<td>${data.id}</td>
+	    		<td>${data.username}</td>
+	    		<td>${data.sex}</td>
+	    		<td>${data.age}</td>
+	    		<td>
+	    			<input type="button" value="上移"/>
+	    			<input type="button" value="下移" />
+	    			<input type="button" value="删除"/>
+	    		</td>
+    		</tr>`;
+		return $(str);
+}
+
+
+/*隔行变色初始化*/
+Tab.prototype.clear=function(){
+	var _this=this;
+	$('#tbody').find('tr:even').removeClass('c1');
+	$('#tbody').find('tr:odd').addClass('c1');
+	$('#form1').find('input[name="username"]').val('');
+	$('#form1').find('input[name="age"]').val('');
+}
+var t=new Tab();
+</script>
+
+</html>

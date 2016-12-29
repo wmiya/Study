@@ -34,32 +34,33 @@
 		</div>
 	</div>
 <script type="text/javascript">
-	function Tab(){
+	function Tab(){//构造函数
+		//获取元素。最后把事件调用的函数结果赋给他
 		this.box = document.getElementById('box');
 		this.divs = document.getElementById('divs');
 		this.btns = this.box.getElementsByTagName('input');
 		this.divChild = this.divs.getElementsByTagName('div');
 		this.init();
 	}
-	Tab.prototype.init = function(){
-		var _this = this;
-		for(var i=0;i<this.btns.length;i++){
-			this.btns[i].index = i;
-			this.btns[i].onclick = function(){
-				_this.change(this);
+	Tab.prototype.init = function(){//循环所有的元素
+		var _this = this;//申明变量。就当前
+		for(var i=0;i<this.btns.length;i++){//玄幻所有的点击按钮
+			this.btns[i].index = i;//给当前索引。记录当前
+			this.btns[i].onclick = function(){//当点击任意一个的时候发生事件
+				_this.change(this);//把给他调用的这个函数
 			}
 		}
 	}
-	Tab.prototype.change = function(_this){
-		for(var i=0;i<this.btns.length;i++){
-			this.btns[i].className = '';
-			this.divChild[i].className = 'hide';
+	Tab.prototype.change = function(_this){//事件发生变化的时候
+		for(var i=0;i<this.btns.length;i++){//循环点击的按钮
+			this.btns[i].className = '';//让当前的元素样式清空，大清洗
+			this.divChild[i].className = 'hide';//
 		}
-		_this.className = 'active';
+		_this.className = 'active';//给当前的加上演示
 		this.divChild[_this.index].className = 'show';
 	}
 	
-	var t = new Tab();
+	var t = new Tab();//构造函数，
 	
 	
 </script>
