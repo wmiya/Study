@@ -1,5 +1,5 @@
 
-var index = -1;
+var index = -1;//index，默认从-1开始生成，所以这里先给一个固定的生成结构。后面可以调用这个函数
 var aId = [];
 var aData = JSON.parse(JSON.stringify(Data));
 var cn =  0;
@@ -9,18 +9,18 @@ var fids = [];
 
 /////////////////////////////////////////////////////////////////////////////////////
 
-setFile(index);
+setFile(index);//生成机构
 
-setAsideHeight();
+setAsideHeight();//自适应高度
 
-setTreePosition()
+setTreePosition()//移动弹窗的固定定位
 
-fileTree($('#tree-list'),index)
+fileTree($('#tree-list'),index)//生成树状结构父级就是当前移动的总父级
 
 
-$(window).resize(function(){
-	setAsideHeight();
-	setTreePosition()
+$(window).resize(function(){//这里是当窗口发生执行的函数
+	setAsideHeight();//获取header的高度侧边栏高度。完成自适应结构
+	setTreePosition()//移动弹窗的位置
 })
 
 $('#movement').click(function(){
@@ -60,11 +60,11 @@ $('#tree-list').delegate('p','click',function(){
 
 
 $('.tree-yes').click(function(){
-	var id = null;
-	var fid = [];
-	fids = [];
+	var id = null;//首先上来id是没有的
+	var fid = [];//建立一个空数组
+	fids = [];//存下来
 	
-	$('#tree-list p').each(function(i,ele){
+	$('#tree-list p').each(function(i,ele){//循环所有p
 		if($(ele).attr('class') == 'tree-active'){
 			id = $(ele).parent().attr('"id');
 		}
@@ -196,11 +196,11 @@ $('.file-titer-nozerp').delegate('a','click',function(){
 		setFile(thisId);
 		rmoveCrumbs(thisId);	
 	}
-	if($(this).attr('id') == 'back'){
-		if(index == -1){
-			return;
+	if($(this).attr('id') == 'back'){//点击的时候判断是否上返回上一级
+		if(index == -1){//如果当前index就是最开始的那个级别的话
+			return;//就直接返回
 		}
-		getFlistFather(index);
+		getFlistFather(index);//直接找到他的父级
 	}
 	if($(this).attr('id') == 'all'){
 		getAll();
@@ -378,23 +378,23 @@ function crash(obj){
 }
 */
 function setAsideHeight(){
-	var h = $(window).height() - 57;	
-	$('.sidebar').css('height',h);
-	$('.file-area').css('height',h);
+	var h = $(window).height() - 57;//文件区域的高度就是当前可视区的高度减去header高度	
+	$('.sidebar').css('height',h);//重新设置侧边栏的高度
+	$('.file-area').css('height',h);//重新设置隐藏的头部边缘的高度
 }
 
-function setTreePosition(){
+function setTreePosition(){//生成移动文件夹的时候中间出现的弹框。是在文档中的居中的
 	var l = ($(window).width() - $('.tree').outerWidth())/2;
 	var t = ($(window).height() - $('.tree').outerHeight())/2;
-	$('.tree').css('top',t).css('left',l)
+	$('.tree').css('top',t).css('left',l)//设置高度和宽度
 }
 
-function setFile(index){
-	var arr = [];
-	$('.folder').html('');
-	for(var i=0; i<aData.length; i++){
-		if(aData[i]['pid'] == index){
-			$('.folder').append(
+function setFile(index){//生成结构
+	var arr = [];//先声明个数组
+	$('.folder').html('');//然后清空。重新添加
+	for(var i=0; i<aData.length; i++){//循环数组。
+		if(aData[i]['pid'] == index){//如果当前数组中的pid等于当前点击的调用的这个
+			$('.folder').append(//就往内容呢里添加结构
 				'<div class="folder-file"'+ 'id='+ aData[i]['id'] +'><i class="ico"></i><div class="text"><p>'+ aData[i]['name'] +'</p><input type="text" value="'+ aData[i]['name'] +'"></div></div>'
 			);
 		}
@@ -403,25 +403,25 @@ function setFile(index){
 
 //生成树状表
 
-function fileTree(father,index){
-	var tIndex = index;
-	var c = null;
-	for(var i=0; i<aData.length; i++){
-		if(aData[i]['pid'] == tIndex){
-			cn = 0;
-			cn = getNumberOfPlies(tIndex);
-			var aLi = $('<li "id="'+ aData[i]['id'] +'"></li>')
-			var left = cn * 15;
-			var oP = $('<p>').css('margin-left',left)
-			aLi.append(oP.append('<i></i><em></em><span>'+ aData[i]['name'] +'</span>'))
-			father.append(aLi)
-			var id = aData[i]['id']
-			var off = isChild(id);
-			if(off){
-				var ul = $('<ul>');
-				var thisIndex = id;
-				fileTree(ul,thisIndex);
-				aLi.append(ul);
+function fileTree(father,index){//生成树形菜单、、参数。是父级和当前的是那个
+	var tIndex = index;//这里记得就给索引
+	var c = null;//先给变量
+	for(var i=0; i<aData.length; i++){//循环数组
+		if(aData[i]['pid'] == tIndex){//如果当前的这个数组等于当前先中的这个 
+			cn = 0;//先给设置 变量
+			cn = getNumberOfPlies(tIndex);//当前的在第几层
+			var aLi = $('<li "id="'+ aData[i]['id'] +'"></li>')//生成结构
+			var left = cn * 15;//生成树形结构。父级与子集之间有个margin值
+			var oP = $('<p>').css('margin-left',left)//给每个p标签父级都加上left的距离
+			aLi.append(oP.append('<i></i><em></em><span>'+ aData[i]['name'] +'</span>'))//把生成的p标签和下面的结构都添加到li里面
+			father.append(aLi)//最后把li添加到他的父级里面
+			var id = aData[i]['id']//此时的id就是当前的数据中的每一项
+			var off = isChild(id);//调用查看当前有没有子集有过就是当前这个的开关
+			if(off){//如果有
+				var ul = $('<ul>');//就生成ul
+				var thisIndex = id;//这时的id也就是当前的id
+				fileTree(ul,thisIndex);//如果有继续地柜
+				aLi.append(ul);//最后添加到父级
 			}
 		}
 	}
@@ -429,67 +429,67 @@ function fileTree(father,index){
 
 
 //获得在第几层
-function getNumberOfPlies(c){
-	for(var i=0; i<aData.length; i++){
-		if(aData[i]['id'] == c){
-			cn++;
-			c = aData[i]['pid'];
-			if(c == -1){
-				return cn;
+function getNumberOfPlies(c){//判断在第几层
+	for(var i=0; i<aData.length; i++){//循环所有的数据
+		if(aData[i]['id'] == c){//如果当前的数据中的id等于当前的这个id
+			cn++;//变量就加加，就让他的id不断向上加
+			c = aData[i]['pid'];//当前的pid就加加
+			if(c == -1){//如果当前的pid等于-1
+				return cn;//就返回这个cn，当前是第几个
 			}
-			getNumberOfPlies(c);
+			getNumberOfPlies(c);//递归。一直到没有就是返回
 			break;
 		}
 	}
-	return cn;
+	return cn;//拿到当前是第几个
 }
 
-function isChild(id){
-	var off = false;
-	for(var i=0; i<aData.length; i++){
-		if(aData[i]['pid'] == id){
-			off = true;	
+function isChild(id){//判断下他还有没有子集
+	var off = false;//上来先默认没有子集
+	for(var i=0; i<aData.length; i++){//循环数组，
+		if(aData[i]['pid'] == id){//如果当前的pid等于当前的id就证明他是一级的
+			off = true;	//返回这个值
 		}
 	}
 	return off;
 }
 
-function crumbs(id){
+function crumbs(id){//添加头部区域导航拿到当前是不是这个文件夹下的名字。有就添加内容
 	 $('.file-titer-nozerp').append('<a href="javascript:;" id="'+ id +'">'+ getNowName(id) +'</a><i>></i>')
 }
 
-function getName(index){
-	var arrName = [];
-	var arrNumber = [];
-	var num = [];
-	var re1 = new RegExp('^新建文件夹$','gi');
-	var re2 = new RegExp('^新建文件夹\\(1\\)$','gi');
-	var re3 = new RegExp('^新建文件夹\\(|\\)$','gi');
-	var onoff1 = true;
-	var onoff2 = true;
+function getName(index){//新建文件夹。
+	var arrName = [];//给个空数组，存名字
+	var arrNumber = [];//然后在存个数字的数组
+	var num = [];//给个空的数组
+	var re1 = new RegExp('^新建文件夹$','gi');//运用正则匹配全局，开头有结尾必须是新建文件夹并且不区分大小写
+	var re2 = new RegExp('^新建文件夹\\(1\\)$','gi');//开头是新建文件夹结尾是以1结束
+	var re3 = new RegExp('^新建文件夹\\(|\\)$','gi')//新建文件夹 ;
+	var onoff1 = true;//开关。
+	var onoff2 = true;//开关
 	var onoff3 = true;
 	var name = '';
-	for(var i=0; i<aData.length; i++){
-		if(aData[i]['pid'] == index){
-			if(re1.test(aData[i]['name'])){
-				onoff1 = false;
+	for(var i=0; i<aData.length; i++){//循环数组。
+		if(aData[i]['pid'] == index){//判断当前的数组中的pid是不是等于当前的这个名字
+			if(re1.test(aData[i]['name'])){//如果是当前拿到就是新建文件夹
+				onoff1 = false;//就停止下面的任务执行
 			}
 		}
 	}
-	if(onoff1){
+	if(onoff1){//如果这个
 		return "新建文件夹"
 	}
-	for(var i=0; i<aData.length; i++){
-		if(aData[i]['pid'] == index){
-			if(re2.test(aData[i]['name'])){
+	for(var i=0; i<aData.length; i++){//循环数组
+		if(aData[i]['pid'] == index){//判断当前的pid是不是就是当前的元素的这个 
+			if(re2.test(aData[i]['name'])){//如果当前成功 情况下就走
 				onoff2 = false;
 			}
 		}
 	}
-	if(onoff2){
-		return "新建文件夹(1)"
+	if(onoff2){//如果当前
+		return "新建文件夹(1)"//返回这值
 	}
-	for(var i=0; i<aData.length; i++){
+	for(var i=0; i<aData.length; i++){//如果当前 
 		if(aData[i]['pid'] == index){
 			if(re3.test(aData[i]['name'])){
 				var str = aData[i]['name'].replace(re3,'');
@@ -529,31 +529,31 @@ function getName(index){
 }
 
 function rmoveCrumbs(index){
-	crumbshtml = '';
-	$('.file-titer-nozerp').html('');
-	$('.file-titer-nozerp').html('<a href="javascript:;" id="back">返回上一级</a><i>|</i><a href="javascript:;" id="all">所有文件</a><i>></i>')
-	getFather(index)
+	crumbshtml = '';//首先上来先清空
+	$('.file-titer-nozerp').html('');//应为每次上来每层都不一样的所以需要从新渲染
+	$('.file-titer-nozerp').html('<a href="javascript:;" id="back">返回上一级</a><i>|</i><a href="javascript:;" id="all">所有文件</a><i></i>')
+	getFather(index)//从新拿到他的父级
 }
 
-function repeatCrumbs(){
+function repeatCrumbs(){//所有文件显示，下一项隐藏
 	$('.file-titer-zero').css('display','block');
 	$('.file-titer-nozerp').css('display','none')
-	$('.file-titer-nozerp').html('');
+	$('.file-titer-nozerp').html('');//清空内容，给当前的从新加上、、恢复最初始化的内容
 	$('.file-titer-nozerp').html('<a href="javascript:;" id="back">返回上一级</a><i>|</i><a href="javascript:;" id="all">所有文件</a><i>></i>')
 }
 
 function getFather(thisId){
-	var off = true;
-	var thisPid = null;
-	var html = '';
-	var index = null;
-	for(var i=0; i<aData.length; i++){
-		if(aData[i]['id'] == thisId){
-			thisPid = aData[i]['pid'];
-			index = i;
+	var off = true;//开关
+	var thisPid = null;//默认当前的pid是没有的
+	var html = '';//清空内容。重新渲染
+	var index = null;//索引页清空
+	for(var i=0; i<aData.length; i++){//循环数据。判断
+		if(aData[i]['id'] == thisId){//当前的id是否等于当前点击的这个
+			thisPid = aData[i]['pid'];//如果等于，那么这个就是当前的pid
+			index = i;//当前的索引就是每一项I
 		}
 	}
-	html = crumbshtml
+	html = crumbshtml//html的内容就是
 	crumbshtml = '';
 	crumbshtml += '<a href="javascript:;" id="'+ aData[index]['id'] +'">'+ aData[index]['name'] +'</a><i>></i>' 
 	crumbshtml += html;
@@ -570,14 +570,14 @@ function getFather(thisId){
 }
 
 function getFlistFather(id){
-	var pid = getNowPid(id)	
-	setFile(pid);
-	index = pid;
-	if(pid == -1){
-		repeatCrumbs()
+	var pid = getNowPid(id)	//拿到当前是那个pid
+	setFile(pid);//重巡根据当前的pid渲染数据
+	index = pid;//索引也是当前的这个
+	if(pid == -1){//当前的如果pid是从-1开始的话
+		repeatCrumbs()//每一集都显示
 		return;
 	}
-	rmoveCrumbs(pid);	
+	rmoveCrumbs(pid);//恢复原来	
 }
 
 function getAll(){
@@ -594,18 +594,18 @@ function getId(id){
 	}
 }
 
-function getNowName(id){
-	for(var i=0; i<aData.length; i++){
-		if(aData[i]['id'] == id){
-			return aData[i]['name'];
+function getNowName(id){//获取当前的id名字
+	for(var i=0; i<aData.length; i++){//循环数组
+		if(aData[i]['id'] == id){//如果当前的数组中的某一项的id等于当前的id
+			return aData[i]['name'];//就拿到这个id的名字
 		}
 	}
 }
 
-function getNowPid(id){
+function getNowPid(id){//首先循环所有。判断当前的id和传进来id是不是一样的
 	for(var i=0; i<aData.length; i++){
 		if(aData[i]['id'] == id){
-			return aData[i]['pid'];
+			return aData[i]['pid'];//判断这个pid
 		}
 	}
 }
@@ -627,5 +627,6 @@ function getActive(index){
 			aId.push(aData[i]['id']);
 		}
 	}
+
 }
 
