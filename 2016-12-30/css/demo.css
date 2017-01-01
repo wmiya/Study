@@ -98,3 +98,11 @@ section div.active{
 #upload:active{
 	color:red;
 }
+#loading{
+	height: 4px;
+}
+#loading div {
+    height: 4px;
+    background-color: #77B6FF;
+    width:0;
+}

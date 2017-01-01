@@ -18,10 +18,10 @@
 			$.extend(this.settings,opt);
 			
 			//选择图片
-			if(this.settings.fileInpit){//如果点击的这个元素存在
-				this.settings.fileInpit.change(function(){//并且发生变化的时候
+			if(this.settings.fileInpit){
+				this.settings.fileInpit.change(function(){
 //					_this.arr.push(this.files[0]);
-					_this.addData(this.files[0]);//调用这个函数
+					_this.addData(this.files[0]);
 					//_this.fileReader(_this.obj)
 					_this.settings.viewFn(_this.obj);
 					//console.log(this.files[0]);
@@ -49,7 +49,7 @@
 		},
 		//转二进制数据的
 		fileReader:function(data,callback){
-			var data = [];
+			var data1 = [];
 			
 			//[1,2,3,4] -> 1,2,3
 			//1,2,3,4    -> 1,2,3,4
@@ -68,7 +68,7 @@
 				var f = new FileReader();
 				f.onload = function(ev){
 					//console.log(ev);
-					data.push(ev.target.result);
+					data1.push(ev.target.result);
 //					if(当数据被转换完成时){
 //						callback(data);
 //					}
@@ -92,7 +92,7 @@
 			*/
 			
 			//把不重名的数据，存入this.obj中
-			if(data.name && !this.obj[data.name]){//如果
+			if(data.name && !this.obj[data.name]){
 				this.obj[data.name] = data;
 				
 			}
