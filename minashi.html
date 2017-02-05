@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>1、你做页面页面在那些浏览器测试过？</title>
+</head>
+<body>
+<div id="wmd-preview" class="wmd-preview"><div class="md-section-divider"></div><p data-anchor-id="t8jm">面试题</p><p data-anchor-id="2kvr"><code>未分类</code></p><hr><p data-anchor-id="qotq">HTML和css</p><div class="md-section-divider"></div><h3 data-anchor-id="xek2" id="1你做页面页面在那些浏览器测试过">1、你做页面页面在那些浏览器测试过？</h3><ol data-anchor-id="ngqq">
+<li>IE：trident内核</li>
+<li>Firefox：gecko内核</li>
+<li>opera：presto内核</li>
+<li>chrome：Blink(基于webkit)</li>
+</ol><div class="md-section-divider"></div><h3 data-anchor-id="r5af" id="2每个html文件里面开头都有个重要的东西doctype知道这个干什么吗">2、每个html文件里面开头都有个重要的东西。DOCtype,知道这个干什么吗？</h3><p data-anchor-id="nac9">告诉浏览器以何种规范去解析页面</p><div class="md-section-divider"></div><h3 data-anchor-id="kp52" id="3quirks模式是什么它和standards模式有什么区别">3.Quirks模式是什么？它和Standards模式有什么区别</h3><p data-anchor-id="rvni">从IE6开始,引入Standards模式，标准模式，但在他之前。浏览器对css支持很差。因为很多页面是基于旧的布局去写的。在不破坏原有页面，有提供新功能的情况下。他将DTD当成一个参数。因为之前大家不会去写DTD，所以IE就假定，如果写了。就意味着可以更好地支持css,没有就采用兼容以前的布局方式 。这个是Quirks是属于怪异模式 <br>
+  区别：</p><p data-anchor-id="d02q">1.在标准下设置一个元素的宽高。指的就是元素内容的宽度和高度， 而在 Quirks模式下，ie 的宽高包含padding和border；</p><ol data-anchor-id="50be">
+<li>在Standards的模式下，给span等行内元素设置height、width是不会生效的。但是在Quirks可以生效</li>
+<li>margin:0 auto；水平居中，在standard模式是水平居中。在 Quirks模式下，则不会生效</li>
+</ol><div class="md-section-divider"></div><h3 data-anchor-id="8vwl" id="3divcss布局较table布局有什么优点">3.div+css布局较table布局有什么优点？</h3><ol data-anchor-id="zo5l">
+<li>改版的时候更方便，只需要修改css</li>
+<li>加载速度更快，结构化清晰。页面显示简介</li>
+<li>表现与结构相分离</li>
+<li>易于搜索殷勤更友好。排名更容易靠前。</li>
+</ol><div class="md-section-divider"></div><h3 data-anchor-id="ff2l" id="5img的alt与title区别strong与em的区别">5、img的alt与title区别？strong与em的区别？</h3><ol data-anchor-id="5xr0">
+<li>img的alt是用于图片没显示时在图片显示区域显示一个说明文字。</li>
+<li>title当鼠标在图片上停留的时候，会出现一个弹框，其中显示的文字；</li>
+</ol><p data-anchor-id="ofzu">strong加粗强调标签，标示内容的重要性 <br>
+em斜体强调标签。标示内容的强调性</p><div class="md-section-divider"></div><h3 data-anchor-id="0d6l" id="6你能描述一下渐进增强和优雅降级之间的不同吗">6.你能描述一下渐进增强和优雅降级之间的不同吗?</h3><p data-anchor-id="cczf"><strong>渐进增强</strong>：针对低版本浏览器进行构造页面。在保证最基本的功能，然后针对高级浏览器进行效果，交互等改进和追加，达到更好的用户体验， <br>
+<strong>优雅降级</strong>：一开始就构造完整的功能，然后针对低版本浏览器进行兼容；</p><pre data-anchor-id="n5p7"><code>**区别**
+</code></pre><ul data-anchor-id="eipk">
+<li>优雅降级是从复杂的现状开始,试图减少用户体验,渐进增强是从一个非常基础的,不断扩充.增加用户体验,</li>
+</ul><div class="md-section-divider"></div><h3 data-anchor-id="iopf" id="7为什么利用多个域名来储存网站会更有效">7.为什么利用多个域名来储存网站会更有效?</h3><ul data-anchor-id="kq3g">
+<li>cdn缓存更方便</li>
+<li>突破浏览器并发限制</li>
+<li>节约cookie带宽</li>
+<li>节约主域名的链接数，优化页面相应速度。</li>
+<li>防止不必要的安全问题</li>
+</ul><div class="md-section-divider"></div><h3 data-anchor-id="gtx6" id="8请谈一下你对页面网页标准和标准制定机构重要性的理解">8、请谈一下你对页面网页标准和标准制定机构重要性的理解？</h3><p data-anchor-id="pu77">网页标准和标准的制定机构都是为了能让web发展的更健康，开发者遵循统一的标准，降低开发难度。开发成本，SEO也会更好做，几页不会因为滥用代码造成个中bug安全问题，提高网站的易用性。</p><hr><p data-anchor-id="o10o">###9、请描述一下cookies，sessionStorage和localStorage的区别？ <br>
+ sessionStorage当页面关闭就挂了，localStorage是用于持久化的本地存储。除非主动删除数据。否则数据永远不会过期。可以使用其中的一个storage事件，当storage发生改变时，相应的兄弟页面也会发生变化。</p><p data-anchor-id="kl3s">如何做到离线存储？</p><p data-anchor-id="q9kz">1、将本地文件变成服务器文件</p><ul data-anchor-id="9ac6">
+<li>创建一个html标签</li>
+<li>服务器需要配置manifest</li>
+<li>创建一个manifest文件</li>
+<li>my。manifest配置需要离线的文件</li>
+</ul><div class="md-section-divider"></div><h3 data-anchor-id="7p6b" id="web-storage和cookie的区别">web storage和cookie的区别</h3><ul data-anchor-id="lqo7">
+<li>storaged和cookie相似。区别是他是为了更大容量储存设计的，cookie的大小是受限的，并且每次请求新的页面的时候cookie都会被发送过去，会浪费带宽，另外cookie还需要制定作用域，不可以跨域调用；</li>
+<li>storage拥有setitem，getitem.removerItem,clear等方法。但是cookie的作用是与服务器进行交换，作为http规范的一部分存在。storage是为了本地储存而生的</li>
+</ul><div class="md-section-divider"></div><h3 data-anchor-id="8lur" id="简述src与href的区别">简述src与href的区别?</h3><ol data-anchor-id="7ekz">
+<li>src是用于替换当前元素，href用于当前文档和引用资源之间确立联系；</li>
+<li>src指向外部资源位置，指向的内容将会嵌入文档中当前位置。，在请求src资源时，会将其指向的资源下载并应用到文档中去。例如js脚本。img图片。frame等元素；</li>
+<li>当浏览器解析到该元素时，会暂停其他资源的下载和处理，直到将该资源加载、编译、执行完毕，图片和框架等元素也如此，类似于将所指向资源嵌入当前标签内。这也是为什么将js脚本放在底部而不是头部。</li>
+</ol><p data-anchor-id="02nl">href指向网络资源所在位置建立和当前元素的之间的链接，如果在文当中添加css样式表，href指向当前网络资源所在的位置。建立和当前元素的链接。浏览器会识别该文档为css文件，会并行下载资源并且不会停止对当前文档的处理，</p><div class="md-section-divider"></div><h3 data-anchor-id="76lb" id="11网页制作会用到的图片格式有哪些">11、网页制作会用到的图片格式有哪些？</h3><p data-anchor-id="m17p">png-8,png-24.gif.svg ,jpeg <br>
+科普一下Webp：WebP格式，谷歌（google）开发的一种旨在加快图片加载速度的图片格式。图片压缩体积大约只有JPEG的2/3，并能节省大量的服务器带宽资源和数据空间。Facebook Ebay等知名网站已经开始测试并使用WebP格式。 <br>
+在质量相同的情况下，WebP格式图像的体积要比JPEG格式图像小40%</p><div class="md-section-divider"></div><h3 data-anchor-id="akrf" id="13在cssjs代码上线之前开发人员经常进行性能优化从用户刷新网页一次js请求会在哪写地方出现缓存">13、在css/js代码上线之前开发人员经常进行性能优化，从用户刷新网页，一次js请求，会在哪写地方出现缓存？</h3><p data-anchor-id="i9vv">dns缓存、cdn缓存、浏览器缓存，服务器缓存</p><div class="md-section-divider"></div><h3 data-anchor-id="m4s9" id="14一个电商网站加载很慢有哪些方法可以进行图片的优化给用户更好的体验">14、一个电商网站，加载很慢。有哪些方法可以进行图片的优化，给用户更好的体验?</h3><ul data-anchor-id="x31v">
+<li>图片懒加载，在页面的可视区添加滚动条事件，判断图片的位置与浏览器顶端距离与页面的距离。如果前者小于后者。优先加载</li>
+<li>如果为幻灯片。。相册等。可以使用css精灵，svg精灵，iconfont。base64等技术。</li>
+<li>如果图片过大。可以使用特殊编码的图片。加载是会先夹在一张压缩的特别厉害的浓缩图。提高用户体验。</li>
+</ul><div class="md-section-divider"></div><h3 data-anchor-id="qgde" id="17有哪项方式可以对一个dom设置它的css样式">17.有哪项方式可以对一个DOM设置它的CSS样式？　</h3><p data-anchor-id="2dex">外部样式表。引入css文件 <br>
+内部样式表。把css代码放在《head&gt;有标签内部 <br>
+内联样式，内联样式，将css样式直接定义在&nbsp;HTML&nbsp;元素内部</p><div class="md-section-divider"></div><h3 data-anchor-id="0mon" id="18选择器都有哪些">18.选择器都有哪些？</h3><p data-anchor-id="hxvn">派生选择器（用HTML标签申明） <br>
+id选择器（用DOM的ID申明） <br>
+类选择器（用一个样式类名申明） <br>
+属性选择器（用DOM的属性申明，属于CSS2，IE6不支持，不常用，不知道就算了）</p><p data-anchor-id="n4ce">###22.行内元素和块级元素的具体区别是什么？行内元素的padding和margin可设置吗？</p><p data-anchor-id="p5ti">块级元素(block)特性： <br>
+     独占一行 <br>
+    height。width。paddig、margin都可以控制</p><pre data-anchor-id="l6vg"><code>内联元素：
+与相邻元素可以在同一行
+height和width。padding-top.padding-bottom.margin-top.margin-bottom是不可改变，padding-right。padding-left.margin -left.margin-righ可以设置，里面文字和图片是可是设置大小，
+</code></pre><div class="md-section-divider"></div><h3 data-anchor-id="pl8x" id="浏览器还有默认的天生inline-block元素拥有内在尺寸可设置高宽但不会自动换行有哪些">浏览器还有默认的天生inline-block元素（拥有内在尺寸，可设置高宽，但不会自动换行），有哪些？</h3><p data-anchor-id="dr9w">input .img、button/ textarea/label</p><p data-anchor-id="bba3">###24.rgba()和opacity的透明效果有什么不同？</p><p data-anchor-id="3rqo">rgba()只是作用与元素的颜色或背景色。设置rgba()元素的子元素则不会继承透明度、</p><p data-anchor-id="z4mf">opacity作用与元素以及元素内的所有 内容的透明度</p><p data-anchor-id="s866">25.css中可以让文字在垂直和水平方向上重叠的两个属性是什么？ <br>
+ 垂直方向：line-height <br>
+ 水平方向：letter-spacing、、可以消除inline-block元素间换行符空格间隙问题</p><div class="md-section-divider"></div><h3 data-anchor-id="yy71" id="26如何垂直居中一个浮动元素">26.如何垂直居中一个浮动元素？</h3><p data-anchor-id="rdbj">方法一:已知元素的高宽：</p><div class="md-section-divider"></div><h1 data-anchor-id="c6wk" id="div">div{</h1><p data-anchor-id="oblp">position:absolute; <br>
+top:50%; <br>
+left:50% <br>
+margin:-10 <br>
+方法二：未知元素的高宽：</p><div class="md-section-divider"></div><h1 data-anchor-id="rseo" id="div-1">div{</h1><p data-anchor-id="zg5l">position:absolute; <br>
+top:0 <br>
+left:0 <br>
+right:0 <br>
+bottom:0 <br>
+margin:auto </p><p data-anchor-id="dr5z">} <br>
+那么问题来了，如何垂直居中一个?（用更简便的方法。）</p><div class="md-section-divider"></div><h1 data-anchor-id="tf6a" id="div-2">div{</h1><p data-anchor-id="zjfv">display:table-cell; <br>
+text-aglign:center; <br>
+vertical-aglign:middle; <br>
+}</p><div class="md-section-divider"></div><h3 data-anchor-id="v0dj" id="29sassless是什么大家为什么要使用他们">29.Sass、LESS是什么？大家为什么要使用他们？</h3><p data-anchor-id="84t9">他们是css预处理器，、例如less，是一种动态式语言，将css赋予了动态语言的特性，如变量，继承，运算，函数，less即可以在客户端上运行，也可以在服务端运行，借助node.js; <br>
+为什么要使用他们呢？ <br>
+结构清晰，便于扩展。 <br>
+可以方便规避浏览器私有语法差异，这个不用多说，封装对浏览器语法差异的重复处理，减少无意义的机械劳动。 <br>
+可以轻松实现多重继承，完全兼容css代码</p><p data-anchor-id="734j">30.display:none与visibility:hidden的区别是什么？ <br>
+display:隐藏对应的元素，但不挤占元素原来的空间 <br>
+visibility：隐藏对应的空间，并且挤占元素原来空间；</p><div class="md-section-divider"></div><h3 data-anchor-id="zyne" id="34bfc是什么">34.BFC是什么?</h3><p data-anchor-id="pbai">块级格式化上下文BFC在浏览器中创建了一个独立的渲染区域，该区域内所有元素的布局不会影响到区域外元素的布局，这个渲染区域只对块级元素起作用    </p></div>
+</body>
+</html>
