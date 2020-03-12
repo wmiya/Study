@@ -1,0 +1,251 @@
+# 基础晋级
+
+## js
+
+### 内置类型
+
+JS 中分为七种内置类型，七种内置类型又分为两大类型:基本类型和对象(Object)。
+
+- 基础类型
+
+  null,undefined,string,number,Boolean,symbol
+  NaN属于number类型
+  NaN不等于自身
+
+- 对象
+
+  对象(Object)是引用类型，在使用过程中会遇到浅拷贝和深拷贝的问题。
+
+### typeof
+
+对于基础类型返回正确显示，除了null返回object
+原因：早期的js使用32位系统，为了性能开绿使用低位储存变量的类型信息，其中000开头代表对象，null刚好全是000，所以错误的认为是对象
+
+### 类型转换
+
+- 转布尔
+
+  除了null，underfind，0，-0，“”，false,NaN都都转为false。其他都是true，包括对象
+  判断object.proytype.toString.call()
+  [object string]
+
+- 对象转基础类型
+
+  首先会调用valueof
+  其次会调用tostring的方法
+  最后这两者都可被自定义
+
+- 四则运算
+
+  “a”+ +"b"=aNaN
+
+	- 加法运算
+
+	  一方位字符串，另一方转为字符串
+
+		- 会触发类型转换
+
+			- 转基础类型
+			- 转数字
+			- 转换字符串
+
+	- 其他运算
+
+	  一方位数字，另一方也转为数字
+
+### ==
+
+### 比较运算符
+
+### 原型
+
+- 对象
+
+  每个对象都有一个__proto__的属性，他指向创建该对象的构造函数的原型，
+  对象可以通过 __proto__ 来寻找不属于该对象的属性，__proto__ 将对象连接起 来组成了原型链。
+
+- 函数
+
+  每个函数都有个prototype，
+  除了Function.prototype.bind
+
+### new
+
+- 原理
+
+  创建一个对象
+  将这对象的__proto__指向其构造函数的prototype
+  绑定this
+  返回这个对象
+
+- 实现
+
+  ```
+   function news() {
+              let obj = new Object()
+              let fn = [...arguments].shift()
+              obj.__proto__ = fn.prototype
+              let result = fn.apply(obj, arguments)
+              return typeof result === 'object' ? result : obj
+          }
+  ```
+
+### call
+
+接受2个参数（this,多个参数）
+
+- 实现原理
+
+  接受2个参数（this,多个参数）
+
+- 实现
+
+  ```
+   Function.prototype.myCall = function (content) {
+              if (typeof this !== 'function') {
+                  throw new Error('error')
+              }
+              context = context || window
+              content.fn = this
+              let agr = [...arguments].slice(1)
+              let result = content.fn(...agr)
+              delete content.fn
+              return result
+          }
+  ```
+
+### apply
+
+也是改变this指向，接受2个参数
+第一个是this。第二个是数组
+
+- 实现
+
+  ```
+  
+   Function.prototype.myApplay = function (content, arr) {
+              if (typeof this !== 'function') {
+                  throw new Error('error')
+              }
+              context = context || window
+              content.fn = this
+              let result;
+              result = arr ? content.fn(arr) : content.fn()
+              delete content.fn
+              return result
+          }
+  
+  
+  ```
+
+### bind
+
+返回一个函数
+这个函数接受参数
+返回的这个函数的this是第一个传进来参数
+
+- 实现
+
+  ```
+  
+   Function.prototype.myBind = function (content) {
+              if (typeof this !== 'function') {
+                  throw new Error('error')
+              }
+              let self = this
+              let arg = [...arguments].slice(1)
+              return function F() {
+                  if (this instanceof F) {
+                      return new self(...arg, ...arguments)
+                  }
+                  return self.apply(content, arg.concat(...arguments))
+              }
+          }
+  ```
+
+### instanceof
+
+原理是根据对象的原型琏中是不是能找到类型的prototype
+
+- 实现
+
+  ```
+    function instanceofs(left, right) {
+              let prototype = right.prototype
+              left = left.__proto__
+              while (1) {
+                  if (left == null || left == undefined) {
+                      return false
+                  }
+                  if (left == prototype) {
+                      return true
+                  }
+                  left = left.__proto__
+              }
+          }
+  ```
+
+### this
+
+- 全局this
+
+  指向window
+
+- 函数中的this
+
+  对象调用，则指向这个对象
+  独立调用，指向window
+
+- 使用call，apply显示指定this
+
+  动态改变this
+
+- 构造函数与原型方法上的this
+
+  指向实例化之后的对象
+
+- 箭头函数中的this
+
+  调用箭头函数外层第一个普通函数的this
+
+### 执行上下文
+
+全局执行上下文（global）
+函数执行上下文（fn，函数调用栈）
+evel执行上下文
+
+- 创建执行上下文
+
+	- 创建变量对象
+
+		- 变量对象
+
+			- 创建arguments
+			- 检查function创建声明的属性
+			- 检查var创建声明的属性
+
+	- 创建作用域链
+	- 确认this指向
+
+- 执行执行上下文
+
+	- 变量赋值
+
+		- 活动对象
+
+	- 函数引用
+	- 执行相关代码
+
+### 闭包
+
+在函数执行上下文A
+在执行上下文A中的函数B
+调用了A中的变量。闭包产生
+
+- 即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）
+- 在代码中引用了自由变量
+- 为什么执行上下文中都已经销毁，还能调用其内部的变量？
+
+  当被返回的函数执行时，上下文会维护一个作用域链，将父函数保存在内存中，子函数就可以通过作用域链找到他，因为这个，创建了闭包
+
+### 深浅拷贝
